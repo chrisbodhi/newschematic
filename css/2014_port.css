@@ -1,27 +1,17 @@
 /* Started 16 February 2011 for this year's revision of the website located at http://newschematic.org */
-/* Revised & reviewed & responsified after MKS, February 2014 */
+/* Revised & reviewed & responsified after MKS, March 2014 */
 
-@font-face {
-	font-family: Fontin; 
-	src: url('Fontin-Regular.ttf');
-	}
-
-@font-face {
-	font-family: Fontin;
-	font-weight: bold; 
-	src: url('Fontin-Bold.ttf');
-	}
-
-@font-face {
-	font-family: Fontin;
-	font-style: italic;
-	src: url('Fontin-Italic.ttf');
-	}
-
-#development, #comics, #interact, #gamewrite, #design {
-	display: none;
-	}
+/*@import url(http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300);*/
 	
+#dev-header {
+	border: 3px solid black;
+  display: inline-block;
+}
+
+.date {
+	
+}
+
 a {
 	color: black;
 	font-weight: bold;
@@ -110,14 +100,14 @@ aside img:hover {
 	
 body { 
 	clear:both;	
-	background-color: #cccccc;
+	background-color: #AD8851;
+	background-image: url(../images/bg.jpg);
 	color: #333333; 
-	font-family: "Lucida Grande", Fontin, Verdana, Arial, sans-serif; 
 	margin-left:auto;
 	margin-right:auto;
 	text-align: justify; 
 	text-overflow: clip; 	
-	text-shadow: 0px 1px 3px white; 
+	text-shadow: 0px 1px 1px #342818; 
 	word-wrap: normal; 
 	word-break: normal; 
 	}
@@ -129,36 +119,23 @@ footer {
 	font-style: italic;
 	font-size: .75em;
 	}
-
-h4 {
-	/*margin-bottom: -10px;*/
-	margin-left: 25px;
-	position: absolute;	
-	z-index: 1;
-	font-size: 2em;
-	font-family: 'Fontin', Verdana, Arial, sans-serif;
-	color: AliceBlue;
-	cursor: pointer;
-	text-shadow: 0px 1px 3px black;
-}
 	
 header { 
-	font-family: 'Fontin', Verdana, Arial, sans-serif;
+	font-family: 'Futura', Verdana, Arial, sans-serif;
 	margin: 20px auto;
 	padding: 20px auto;
 	text-align: center;
 	width: 80%;	
-	/*-moz-box-shadow: 10px 10px 5px #888888; /* Firefox */
-	/*-webkit-box-shadow: 10px 10px 5px #888888; /* Safari and Chrome */
-	/*box-shadow: 10px 10px 5px #888888;*/	
 	}
 
 header h1 { 
+	font-family: 'Futura', Verdana, Arial, sans-serif;
 	font-size: 2.5em;
 	font-weight: bold; 
 	}
 
 header h2 {
+	font-family: 'Futura', Verdana, Arial, sans-serif;
 	font-size: 1.5em;
 	font-weight: bold; 
 	margin-top: -25px;
@@ -193,125 +170,7 @@ li {
 	font-size: 1em;
 }
 
-/*nav {
-	float: right;
-	margin-right: 15%;
-	margin-left: 10px;
-	text-align:right;
-	position:fixed;
-	top:5%;
-	left:75%;
-	width: 180px;	
-	}
-nav a {
-	font-weight: normal;
-	text-transform: lowercase; 
-	text-shadow: 0px 1px 3px white; 
-	color: black; 
-	padding: 2px;
-	text-decoration: none; 
-	transition: color 1s;
-	-webkit-transition: color 1s;
-	-moz-transition: color 1s;
-	-o-transition: color 1s;
-	transition: text-shadow 1s;
-	-webkit-transition: text-shadow 1s;
-	-moz-transition: text-shadow 1s;	
-	-o-transition: text-shadow 1s;
-	}
-nav a:hover {
-	color: white;
-	text-shadow: 0px 1px 3px black;
-	}
-nav ul {list-style: none;}
-nav ul li {font-style: normal; 
-	font-weight: normal; 
-	text-transform: lowercase; 
-	text-decoration: none; 
-	list-style-position: outside; 
-	margin-top: 10px; 
-	margin-bottom: 10px; 
-	}
-	*/
 ul {list-style-type: square;}	
-
-#graphic p {
-	clear:both;
-	margin-top: 20px;
-	margin-bottom: 20px;
-	}
-	
-#ongoing p {
-	clear:both;
-	margin-top: 20px;
-	margin-bottom: 20px;
-	}
-
-#resume p {
-	clear:both;
-	margin-top: 20px;
-	margin-bottom: 20px;
-	}
-
-#tweet ul {
-	list-style-type: none;
-	font-size: .6em;
-	}
-
-#tweet a {
-	font-style: italic;
-	font-weight: normal;
-	}
-			
-#written p {	
-	clear:both;
-	margin-top: 20px;
-	margin-bottom: 20px;
-	}
-
-/* CONTACT STUFFS - sort of a mess.com */
-input, textarea {
-	padding: 10px;
-	/*border: solid 1px #E5E5E5;*/
-	outline: 0;
-	font: normal 1.0em "Lucida Grande", Fontin, Verdana, Arial, sans-serif;
-	width: 200px;
-	background: #cccccc;
-	box-shadow: 0px 1px 3px white;
-	-moz-box-shadow: 0px 1px 3px white;
-	-webkit-box-shadow: 0px 1px 3px white;
-	text-color: black;
-	}
-
-textarea {
-	width: 200px;
-	max-width: 200px;
-	height: 75px;
-	line-height: 150%;
-	box-shadow: 0px 1px 3px white;
-	-moz-box-shadow: 0px 1px 3px white;
-	-webkit-box-shadow: 0px 1px 3px white;
-	text-color: black;
-	}
-
-input:hover, textarea:hover,
-input:focus, textarea:focus {
-	border-color: #C9C9C9;
-	}
-
-.form label {
-	margin-left: 10px;
-	color: #999999;
-	}
-
-.submit input {
-	width: 20px;
-	padding: 5px;
-	background: #617798;
-	border: 0;
-	font-size: 14px;
-	color: #FFFFFF;
-	}
 
 @media only screen 
 and (min-device-width : 320px) 
