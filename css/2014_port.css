@@ -9,7 +9,7 @@
 }
 
 .date {
-	
+
 }
 
 a {
@@ -141,9 +141,8 @@ header h2 {
 	margin-top: -25px;
 	}
 
-header h3 { /*For important notes and updates*/
-	color:red; 
-	font-size: .75em;
+header h3 { 
+	font-size: 1.2em;
 	}
 
 i {
