@@ -1,0 +1,162 @@
+/* Started 16 February 2011 for this year's revision of the website located at http://newschematic.org */
+/* Revised & reviewed & responsified after MKS, March 2014 */
+
+/*@import url(http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300);*/
+
+#top h1 {
+	font-family: 'Futura', Arial, Helvetica, sans-serif;
+	font-size: 2em;
+	font-weight: 800;
+}
+
+#top h3 {
+	font-family: 'Futura', Arial, Helvetica, sans-serif;
+	font-size: 1.5em;
+}
+
+.date {
+
+}
+
+.project-title {
+  font-family: 'Futura', Arial, Helvetica, sans-serif;
+  font-size: 1.5em;
+  text-shadow: 0px 1px 1px #342818;
+  margin-bottom: -15px;
+  background-image: url(../images/bg.jpg);
+}
+
+.project-container {
+  border: 2px solid black;
+  width: 100%;
+}
+
+.tagline {
+  font-size: 1em;
+  border-bottom: 2px dotted black;
+  margin-top: 10px;
+}
+
+.screenshot {
+  width: 300px;
+  height: 75px;
+  filter: grayscale(100%) sepia(100%);
+  -webkit-filter: grayscale(100%) sepia(100%);
+  -moz-filter: grayscale(100%) sepia(100%);
+  overflow: hidden;
+}
+
+.screenshot img {
+  width: 100%;
+  border: 1px solid black;
+}
+
+.tech {
+	text-align: justify;
+	border-bottom: 2px dotted black;
+	padding-bottom: 10px;
+}
+
+.writeup {
+  text-align: justify;
+  border-bottom: 2px dotted black;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.role {
+  border-right: 2px solid black;
+  text-align: right;
+}
+
+.role li {
+  list-style: none;
+}
+
+.links {
+	text-align: left;
+}
+
+.links a {
+  color: black;
+}
+
+.links a:hover {
+  border-bottom: 1px dotted black;
+}
+
+.links li {
+  list-style: none;
+	margin-left: -17px;
+}
+
+.links .strike {
+	text-decoration: line-through;
+}
+
+acronym {
+	border-bottom: dotted 1px white; 
+	color: #333333;
+	}	
+
+body { 
+  background-color: #AD8851;
+  background-image: url(../images/bg.jpg);
+  color: #333333; 
+}
+
+footer {
+	color: black;
+	font-family: 'Futura', Arial, Helvetica, sans-serif;
+	font-size: .85em;
+	font-style: italic;
+	margin: 20px auto;
+	text-align: center;
+	width: 100%;
+	}
+
+footer a {
+	color: white;
+}
+
+header #top {
+	border-bottom: 2px dotted black;
+	margin-bottom: 20px;
+}
+	
+/* For the Foundation icons in the page footer */
+i {
+	color: black;
+	font-size: 2em;
+}
+
+i:active {
+	color: white;
+}
+
+i:hover {
+	text-shadow: -2px -2px 4px white; 
+}
+
+i:visited {
+	color: gray;
+}
+
+
+@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 480px) {
+	/* Datetime */
+	.date {display: none;}
+	hgroup h1 {font-size: 4em;}
+	hgroup h2 {font-size: 3em;}
+	h4 {font-size: 4em;
+			position: static;
+			margin-bottom: 10px;
+			color: FireBrick;
+		}
+	img {display: none;}
+	li {font-size: 3em;
+			text-align: left;}
+	footer {font-size: 2em;}
+	}
