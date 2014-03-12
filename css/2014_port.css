@@ -24,7 +24,6 @@
   text-shadow: 0px 1px 1px #342818;
   margin-bottom: -15px;
   background-image: url(../images/bg.jpg);
-  /*border: 1px solid red;*/
 }
 
 .project-container {
@@ -52,14 +51,22 @@
   border: 1px solid black;
 }
 
+.tech {
+	text-align: justify;
+	border-bottom: 2px dotted black;
+	padding-bottom: 10px;
+}
+
 .writeup {
   text-align: justify;
   border-bottom: 2px dotted black;
   padding: 10px;
+  margin-bottom: 10px;
 }
 
 .role {
   border-right: 2px solid black;
+  text-align: right;
 }
 
 .role li {
@@ -67,6 +74,7 @@
 }
 
 .links {
+	text-align: left;
 }
 
 .links a {
@@ -79,6 +87,11 @@
 
 .links li {
   list-style: none;
+	margin-left: -17px;
+}
+
+.links .strike {
+	text-decoration: line-through;
 }
 
 acronym {
@@ -97,7 +110,7 @@ footer {
 	font-family: 'Futura', Arial, Helvetica, sans-serif;
 	font-size: .85em;
 	font-style: italic;
-	margin: 10px auto;
+	margin: 20px auto;
 	text-align: center;
 	width: 100%;
 	}
@@ -113,8 +126,20 @@ header #top {
 	
 /* For the Foundation icons in the page footer */
 i {
-	font-size: 2em;
 	color: black;
+	font-size: 2em;
+}
+
+i:active {
+	color: white;
+}
+
+i:hover {
+	text-shadow: -2px -2px 4px white; 
+}
+
+i:visited {
+	color: gray;
 }
 
 
