@@ -52,20 +52,17 @@
 }
 
 .tech {
-	text-align: justify;
 	border-bottom: 2px dotted black;
 	padding-bottom: 10px;
 }
 
 .writeup {
-  text-align: justify;
   border-bottom: 2px dotted black;
   padding: 10px;
   margin-bottom: 10px;
 }
 
 .role {
-  border-right: 2px solid black;
   text-align: right;
 }
 
@@ -75,6 +72,7 @@
 
 .links {
 	text-align: left;
+  border-left: 2px solid black;
 }
 
 .links a {
@@ -135,7 +133,7 @@ i:active {
 }
 
 i:hover {
-	text-shadow: -2px -2px 4px white; 
+	text-shadow: 2px 0px 4px white; 
 }
 
 i:visited {
