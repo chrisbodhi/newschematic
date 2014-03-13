@@ -8,6 +8,7 @@
 
 	<title>New Schematic</title>
   
+  <!-- foundation icon stylesheet added at the end -->
   <link rel="stylesheet" 
     href="css/foundation.min.css" 
     type="text/css" />
@@ -25,9 +26,9 @@
     type="image/png" 
     href="images/2014-favicon.png" />
        
-  <script src="js/modernizr.js"></script>   
+  <script src="js/vendor/modernizr.js"></script>  
 
-  <script type="text/javascript"><!--For the Touch Typist, taken from ETC project site, written by Patrick, I think: http://etc.cmu.edu/projects/context/proto.html -->
+  <script type="text/javascript"><!--For the Touch Typist, taken from ETC project site, written by Patrick, I think: etc.cmu.edu/projects/context/proto.html -->
   var newwindow;
   function touch(url)
   {
@@ -64,20 +65,20 @@
 <!-- CODING PROJECT CARDS -->
 
 
-<div class="row">
+<div class="row" data-equalizer>
 
   <!-- Markov -->
   <div class="medium-4 columns">
     <header class="small-11 small-centered columns">
       <h3 class="project-title small-6 medium-12 small-centered medium-centered columns">Markov Q. Aurelius</h3>
     </header>
-    <div class="project-container">
-      <h5 class="tagline small-11 small-centered columns">A Philosopher for the 21st Century</h5>
+    <div class="project-container" data-equalizer-watch>
+      <h5 class="tagline small-6 medium-11 small-centered medium-centered columns">Philosopher for the 21st Century</h5>
       <div class="screenshot small-8 small-centered columns">
         <img src="images/mqa-b.png" />
       </div>
-      <p class="writeup small-10 small-centered columns">Uses Marcus Aurelius's "Meditations" and a Markov Chain to generate new quotes that are both displayed on a website and posted to Twitter once every morning.</p>
-      <p class="tech small-10 small-centered columns">Ruby &amp; Sinatra; Twitter &amp; marky_markov Ruby gems; deployed to Heroku; daily post through rake task on Heroku Scheduler</p>
+      <p class="writeup small-10 small-centered columns text-justify">Uses Marcus Aurelius's "Meditations" and a Markov Chain to generate new quotes that are both displayed on a website and posted to Twitter once every morning.</p>
+      <p class="tech small-10 small-centered columns text-justify">Ruby &amp; Sinatra; Twitter &amp; marky_markov Ruby gems; deployed to Heroku; daily post through a Rake task via Heroku Scheduler</p>
       <div class="row">
         <div class="role small-6 columns">
           <ul>
@@ -101,13 +102,13 @@
     <header class="small-11 small-centered columns">
       <h3 class="project-title small-5 medium-9 small-centered medium-centered columns">Mars Attracts!</h3>
     </header>
-    <div class="project-container">
-      <h5 class="tagline small-11 small-centered columns">Book a Flight to Mars! (Not Really)</h5>
+    <div class="project-container" data-equalizer-watch>
+      <h5 class="tagline small-6 medium-11 small-centered medium-centered columns">Book a Flight to Mars! (Not Really)</h5>
       <div class="screenshot small-8 small-centered columns">
         <img src="images/mars.png" />
       </div>
-      <p class="writeup small-10 small-centered columns">A speculative fiction flight reservation app set in the near future, facilitating relocation to a newly colonized Mars. Built in around 2 weeks while on a team of 3.</p>
-      <p class="tech small-10 small-centered columns">Angular.js frontend, Ruby on Rails backend; ForecastIO &amp; MAAS Mars Weather APIs; Foundation &amp; Simple_Form Ruby gems; Haml &amp; Sass templating; PostgreSQL database; deployed to Heroku</p>
+      <p class="writeup small-10 small-centered columns text-justify">A speculative fiction flight reservation app set in the near future, facilitating relocation to a newly colonized Mars. Built over 2+ weeks as part of a team of 3.</p>
+      <p class="tech small-10 small-centered columns text-justify">Angular.js frontend, Ruby on Rails backend; ForecastIO &amp; MAAS Mars Weather APIs; Foundation &amp; Simple_Form Ruby gems; Haml &amp; Sass templating; PostgreSQL database; deployed to Heroku</p>
       <div class="row">
         <div class="role small-6 columns">
           <ul>
@@ -129,13 +130,13 @@
     <header class="small-11 small-centered columns">
       <h3 class="project-title small-4 medium-8 small-centered medium-centered columns">Textspiration</h3>
     </header>
-    <div class="project-container">
-      <h5 class="tagline small-11 small-centered columns">Daily Inspirational Texts Messages</h5>
+    <div class="project-container" data-equalizer-watch>
+      <h5 class="tagline small-5 medium-9 small-centered medium-centered columns"> Inspiration to Your Pocket</h5>
       <div class="screenshot small-8 small-centered columns">
         <img src="images/texts.png" />
       </div>
-      <p class="writeup small-10 small-centered columns">A service to send daily inspirational messages to subscribers. Built for a weekend hackathon as part of a team of 3.</p>
-      <p class="tech small-10 small-centered columns">Ruby on Rails; Twilio API; deployed to Heroku</p>
+      <p class="writeup small-10 small-centered columns text-justify">A service to send daily inspirational messages to subscribers. Built for a weekend hackathon as part of a team of 3.</p>
+      <p class="tech small-10 small-centered columns text-justify">Ruby on Rails; Twilio Ruby gem; PostgreSQL database; deployed to Heroku</p>
       <div class="row">
         <div class="role small-6 columns">
           <ul>
@@ -159,7 +160,7 @@
 <div class="row">
   <div class="small-12 medium-10 small-centered medium-centered large-centered columns">
     <footer>
-      <small class="date">Updated on or around <time datetime="2014-03-11" pubdate="pubdate">11 March 2014</time>. All content is &copy;2014 by this site's author.</small>
+      <small class="date">Updated on or around <time datetime="2014-03-11" pubdate="pubdate">13 March 2014</time>. All content is &copy;2014 by this site's author.</small>
       <br />
       <a href="https://github.com/chrisbodhi?tab=activity" alt="Link to GitHub" target="_new"><i class="fi-social-github"></i></a>
       <a href="https://twitter.com/chrisbodhi" alt="Link to Twitter" target="_new"><i class="fi-social-twitter"></i></a>
@@ -168,6 +169,16 @@
     </footer>
   </div>
 </div>
+
+  <!-- Getting the project cards to the same height -->
+  <script src="js/vendor/jquery.js"></script>
+  <script src="js/vendor/fastclick.js"></script>
+  <script src="js/foundation/foundation.js"></script>
+  <script src="js/foundation/foundation.equalizer.js"></script>
+
+  <script>
+    $(document).foundation();
+  </script> 
 
 </body>
 </html>
