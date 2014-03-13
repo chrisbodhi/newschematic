@@ -1,5 +1,5 @@
-==== README
+###README
 
-Just my website stuff, now with source control.
+Just my website stuff, now with source control!
 
-http://newschematic.org
+[New Schematic](http://newschematic.org)
