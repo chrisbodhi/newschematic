@@ -14,10 +14,6 @@
 	font-size: 1.5em;
 }
 
-.date {
-
-}
-
 .project-title {
   font-family: 'Futura', Arial, Helvetica, sans-serif;
   font-size: 1.5em;
@@ -40,15 +36,12 @@
 .screenshot {
   width: 300px;
   height: 75px;
-  filter: grayscale(100%) sepia(100%);
-  -webkit-filter: grayscale(100%) sepia(100%);
-  -moz-filter: grayscale(100%) sepia(100%);
   overflow: hidden;
 }
 
 .screenshot img {
   width: 100%;
-  border: 1px solid black;
+  border: 2px solid black;
 }
 
 .tech {
