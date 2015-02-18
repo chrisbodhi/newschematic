@@ -13,21 +13,44 @@ var Card = React.createClass({
           <p className="writeup small-10 small-centered columns text-justify">{this.props.data.description}</p>
           <p className="tech small-10 small-centered columns text-justify">{this.props.data.techStack}</p>
           <div className="row">
-            <div className="role small-6 columns">
-              <ul>
-                <li>developer</li>
-                <li>designer</li>
-              </ul>
-            </div>
-            <div className="links small-6 columns">
-              <ul>
-                <li><a href="https://markovqaurelius.herokuapp.com/" target="_new">live project</a></li>
-                <li><a href="https://github.com/chrisbodhi/stoic_generator" target="_new">source code</a></li>
-                <li><a href="https://twitter.com/markovQaurelius" target="_new">on twitter</a></li>
-              </ul>
-            </div>
+            <Roles roles={this.props.data.roles} />
+            <Links links={this.props.data.links} />
           </div>
         </div>
+      </div>
+    );
+  }
+});
+
+var Roles = React.createClass({
+  render: function() {
+    var allRoles = this.props.roles.map(function(role){
+      return (
+        <li>{role}</li>
+      );
+    });
+    return (
+      <div className="role small-6 columns">
+        <ul>
+          {allRoles}
+        </ul>
+      </div>
+    );
+  }
+});
+
+var Links = React.createClass({
+  render: function() {
+    var projectLinks = this.props.links.map(function(link){
+      return (
+        <li><a href={link.url} target="_new">{link.text}</a></li>
+      );
+    });
+    return (
+      <div className="links small-6 columns">
+        <ul>
+          {projectLinks}
+        </ul>
       </div>
     );
   }

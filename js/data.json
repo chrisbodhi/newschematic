@@ -1,14 +1,18 @@
 [
   {
     "title": "Markov Q. Aurelius",
-    "subtitle": "A Philosopher for the 21st Century",
+    "subtitle": "Philosopher for the 21st Century",
     "link": "https://markovqaurelius.herokuapp.com/",
     "alt": "Hosted on Heroku: Markov Aurelius, the Philosopher King",
     "image": "images/mqa-b.png",
     "description": "Uses Marcus Aurelius's \"Meditations\" and a Markov Chain to generate new quotes that are both displayed on a website and posted to Twitter once every morning.",
     "techStack": "Ruby & Sinatra; Twitter & marky_markov Ruby gems; deployed to Heroku; daily post through a Rake task via Heroku Scheduler",
-    "roles": "",
-    "links": ""
+    "roles": ["developer", "designer"],
+    "links": [
+      {"text": "live project", "url": "https://markovqaurelius.herokuapp.com/"}, 
+      {"text": "source code", "url": "https://github.com/chrisbodhi/stoic_generator"},
+      {"text": "on twitter", "url": "https://twitter.com/markovQaurelius"}
+    ]
   },
   {
     "title": "Mars Attracts!",
@@ -17,20 +21,26 @@
     "alt": "Book a [Fake] Trip to Mars!",
     "image": "images/mars.png",
     "description": "A speculative fiction flight reservation app set in the near future, facilitating relocation to a newly colonized Mars. Built over 2+ weeks as part of a team of 3.",
-    "techStack": "Angular.js frontend, Ruby on Rails backend; ForecastIO & MAAS Mars Weather APIs; Foundation & Simple_Form Ruby gems; Haml &amp; Sass templating; PostgreSQL database; deployed to Heroku",
-    "roles": "",
-    "links": ""
+    "techStack": "Angular.js frontend, Ruby on Rails backend; ForecastIO & MAAS Mars Weather APIs; Foundation & Simple_Form Ruby gems; Haml & Sass templating; PostgreSQL database; deployed to Heroku",
+    "roles": ["front-end", "design &", "development"],
+    "links": [
+      {"text": "live project", "url": "http://marsattracts.com"}, 
+      {"text": "source code", "url": "https://github.com/bensbigolbeard/marsattracts"}
+    ]
   },
   {
     "title": "Textspiration",
-    "subtitle": "Inspirational Messages to your Phone Daily",
+    "subtitle": "Inspiration to your Pocket",
     "link": "https://github.com/RollWave07/Textspiration",
     "alt": "Project Source Code on GitHub",
     "image": "images/texts.png",
     "description": "A service to send daily inspirational messages to subscribers. Built for a weekend hackathon as part of a team of 3.",
     "techStack": "Ruby on Rails; Twilio Ruby gem; PostgreSQL database; deployed to Heroku",
-    "roles": "",
-    "links": ""
+    "roles": ["back-end", "development", "Twilio wrangler"],
+    "links": [
+      {"text": "on hiatus", "url": "http://newschematic.org"},
+      {"text": "source code", "url": "https://github.com/RollWave07/Textspiration"}
+    ]
   }
 
 ]
