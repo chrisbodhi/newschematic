@@ -2,27 +2,33 @@
   {
     "title": "Markov Q. Aurelius",
     "subtitle": "A Philosopher for the 21st Century",
-    "image": "",
-    "description": "",
-    "techStack": "",
+    "link": "https://markovqaurelius.herokuapp.com/",
+    "alt": "Hosted on Heroku: Markov Aurelius, the Philosopher King",
+    "image": "images/mqa-b.png",
+    "description": "Uses Marcus Aurelius's \"Meditations\" and a Markov Chain to generate new quotes that are both displayed on a website and posted to Twitter once every morning.",
+    "techStack": "Ruby & Sinatra; Twitter & marky_markov Ruby gems; deployed to Heroku; daily post through a Rake task via Heroku Scheduler",
     "roles": "",
     "links": ""
   },
   {
     "title": "Mars Attracts!",
     "subtitle": "Book a Flight to Mars! (Not Really)",
-    "image": "",
-    "description": "",
-    "techStack": "",
+    "link": "http://marsattracts.com",
+    "alt": "Book a [Fake] Trip to Mars!",
+    "image": "images/mars.png",
+    "description": "A speculative fiction flight reservation app set in the near future, facilitating relocation to a newly colonized Mars. Built over 2+ weeks as part of a team of 3.",
+    "techStack": "Angular.js frontend, Ruby on Rails backend; ForecastIO & MAAS Mars Weather APIs; Foundation & Simple_Form Ruby gems; Haml &amp; Sass templating; PostgreSQL database; deployed to Heroku",
     "roles": "",
     "links": ""
   },
   {
     "title": "Textspiration",
     "subtitle": "Inspirational Messages to your Phone Daily",
-    "image": "",
-    "description": "",
-    "techStack": "",
+    "link": "https://github.com/RollWave07/Textspiration",
+    "alt": "Project Source Code on GitHub",
+    "image": "images/texts.png",
+    "description": "A service to send daily inspirational messages to subscribers. Built for a weekend hackathon as part of a team of 3.",
+    "techStack": "Ruby on Rails; Twilio Ruby gem; PostgreSQL database; deployed to Heroku",
     "roles": "",
     "links": ""
   }
