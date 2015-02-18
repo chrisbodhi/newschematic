@@ -35,7 +35,10 @@
     newwindow=window.open(url,'name','height=640,width=800');
     if (window.focus) {newwindow.focus()}
   }
-  </script>      
+  </script>
+  <script src="js/vendor/react.js"></script>
+  <script src="js/vendor/JSXTransformer.js"></script>
+  <script type="text/jsx" src="js/react-card.js"></script>      
 
 <!--Compatibility Scripts--> 
 
@@ -61,6 +64,11 @@
     </div>
   </hgroup>
 </header>
+
+<!-- React bits -->
+
+<div id="content"></div>
+
 
 <!-- CODING PROJECT CARDS -->
 
