@@ -1,4 +1,7 @@
 var Card = React.createClass({
+  componentDidMount: function() {
+    $(document).foundation();
+  },
   render: function() {
     return(
       <div className="medium-4 columns">
