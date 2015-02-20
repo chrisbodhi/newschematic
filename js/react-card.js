@@ -6,7 +6,7 @@ var Card = React.createClass({
     return(
       <div className="medium-4 columns">
         <header className="small-11 small-centered columns">
-          <h3 className="project-title small-6 medium-12 small-centered medium-centered columns">{this.props.data.title}</h3>
+          <h3>{this.props.data.title}</h3>
         </header>
         <div className="project-container" data-equalizer-watch>
           <h5 className="tagline small-6 medium-11 small-centered medium-centered columns">{this.props.data.subtitle}</h5>

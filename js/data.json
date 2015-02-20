@@ -2,6 +2,7 @@
   {
     "title": "Markov Q. Aurelius",
     "subtitle": "Philosopher for the 21st Century",
+    "classes": ["project-title", "small-6", "medium-12", "small-centered", "medium-centered", "columns"],
     "link": "https://markovqaurelius.herokuapp.com/",
     "alt": "Hosted on Heroku: Markov Aurelius, the Philosopher King",
     "image": "images/mqa-b.png",
@@ -17,6 +18,7 @@
   {
     "title": "Mars Attracts!",
     "subtitle": "Book a Flight to Mars! (Not Really)",
+    "classes": ["project-title", "small-5", "medium-9", "small-centered", "medium-centered", "columns"],
     "link": "http://marsattracts.com",
     "alt": "Book a [Fake] Trip to Mars!",
     "image": "images/mars.png",
@@ -31,6 +33,7 @@
   {
     "title": "Textspiration",
     "subtitle": "Inspiration to your Pocket",
+    "classes": ["project-title", "small-4", "medium-8", "small-centered", "medium-centered", "columns"],
     "link": "https://github.com/RollWave07/Textspiration",
     "alt": "Project Source Code on GitHub",
     "image": "images/texts.png",
