@@ -2,23 +2,22 @@
   {
     "title": "Markov Q. Aurelius",
     "subtitle": "Philosopher for the 21st Century",
-    "classes": ["project-title", "small-6", "medium-12", "small-centered", "medium-centered", "columns"],
     "link": "https://markovqaurelius.herokuapp.com/",
     "alt": "Hosted on Heroku: Markov Aurelius, the Philosopher King",
     "image": "images/mqa-b.png",
-    "description": "Uses Marcus Aurelius's \"Meditations\" and a Markov Chain to generate new quotes that are both displayed on a website and posted to Twitter once every morning.",
+    "description": "Uses Marcus Aurelius's \"Meditations\" and a Markov Chain to generate philosophical quotes that are both displayed on a website and posted to Twitter once every morning.",
     "techStack": "Ruby & Sinatra; Twitter & marky_markov Ruby gems; deployed to Heroku; daily post through a Rake task via Heroku Scheduler",
     "roles": ["developer", "designer"],
     "links": [
       {"text": "live project", "url": "https://markovqaurelius.herokuapp.com/"}, 
       {"text": "source code", "url": "https://github.com/chrisbodhi/stoic_generator"},
       {"text": "on twitter", "url": "https://twitter.com/markovQaurelius"}
-    ]
+    ],
+    "markov": true
   },
   {
     "title": "Mars Attracts!",
     "subtitle": "Book a Flight to Mars! (Not Really)",
-    "classes": ["project-title", "small-5", "medium-9", "small-centered", "medium-centered", "columns"],
     "link": "http://marsattracts.com",
     "alt": "Book a [Fake] Trip to Mars!",
     "image": "images/mars.png",
@@ -28,12 +27,12 @@
     "links": [
       {"text": "live project", "url": "http://marsattracts.com"}, 
       {"text": "source code", "url": "https://github.com/bensbigolbeard/marsattracts"}
-    ]
+    ],
+    "mars": true
   },
   {
     "title": "Textspiration",
     "subtitle": "Inspiration to your Pocket",
-    "classes": ["project-title", "small-4", "medium-8", "small-centered", "medium-centered", "columns"],
     "link": "https://github.com/RollWave07/Textspiration",
     "alt": "Project Source Code on GitHub",
     "image": "images/texts.png",
@@ -43,7 +42,8 @@
     "links": [
       {"text": "on hiatus", "url": "http://newschematic.org"},
       {"text": "source code", "url": "https://github.com/RollWave07/Textspiration"}
-    ]
+    ],
+    "textspiration": true
   }
 
 ]

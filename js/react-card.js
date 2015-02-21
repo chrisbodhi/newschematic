@@ -3,13 +3,32 @@ var Card = React.createClass({
     $(document).foundation();
   },
   render: function() {
+    var cx = React.addons.classSet;
+    var titleClasses = cx({
+      'project-title': true,
+      'medium-centered': true,
+      'small-centered': true,
+      'columns': true,
+      'small-6 medium-12': this.props.data.markov,
+      'small-5 medium-9': this.props.data.mars,
+      'small-4 medium-9': this.props.data.textspiration
+    });
+    var taglineClasses = cx({
+      'tagline': true,
+      'medium-centered': true,
+      'small-centered': true,
+      'columns': true,
+      'small-6 medium-11': this.props.data.markov,
+      'small-6 medium-11': this.props.data.mars,
+      'small-5 medium-9': this.props.data.textspiration
+    });
     return(
       <div className="medium-4 columns">
         <header className="small-11 small-centered columns">
-          <h3>{this.props.data.title}</h3>
+          <h3 className={titleClasses}>{this.props.data.title}</h3>
         </header>
         <div className="project-container" data-equalizer-watch>
-          <h5 className="tagline small-6 medium-11 small-centered medium-centered columns">{this.props.data.subtitle}</h5>
+          <h5 className={taglineClasses}>{this.props.data.subtitle}</h5>
           <div className="screenshot small-8 small-centered columns">
             <a href={this.props.data.link} alt={this.props.data.alt} target="_new"><img src={this.props.data.image} /></a>
           </div>
