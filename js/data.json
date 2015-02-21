@@ -9,9 +9,9 @@
     "techStack": "Ruby & Sinatra; Twitter & marky_markov Ruby gems; deployed to Heroku; daily post through a Rake task via Heroku Scheduler",
     "roles": ["developer", "designer"],
     "links": [
-      {"text": "live project", "url": "https://markovqaurelius.herokuapp.com/"}, 
-      {"text": "source code", "url": "https://github.com/chrisbodhi/stoic_generator"},
-      {"text": "on twitter", "url": "https://twitter.com/markovQaurelius"}
+      {"text": "on twitter", "url": "https://twitter.com/markovQaurelius"},
+      {"text": "on heroku", "url": "https://markovqaurelius.herokuapp.com/"}, 
+      {"text": "source code", "url": "https://github.com/chrisbodhi/stoic_generator"}
     ],
     "markov": true
   },
@@ -45,5 +45,4 @@
     ],
     "textspiration": true
   }
-
 ]
