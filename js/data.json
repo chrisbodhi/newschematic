@@ -2,7 +2,7 @@
   {
     "title": "Markov Q. Aurelius",
     "subtitle": "Philosopher for the 21st Century",
-    "link": "https://markovqaurelius.herokuapp.com/",
+    "link": "https://markovqaurelius.herokuapp.com",
     "alt": "Hosted on Heroku: Markov Aurelius, the Philosopher King",
     "image": "images/mqa-b.png",
     "description": "Uses Marcus Aurelius's \"Meditations\" and a Markov Chain to generate philosophical quotes that are both displayed on a website and posted to Twitter once every morning.",
@@ -10,7 +10,7 @@
     "roles": ["developer", "designer"],
     "links": [
       {"text": "on twitter", "url": "https://twitter.com/markovQaurelius"},
-      {"text": "on heroku", "url": "https://markovqaurelius.herokuapp.com/"}, 
+      {"text": "on heroku", "url": "https://markovqaurelius.herokuapp.com"}, 
       {"text": "source code", "url": "https://github.com/chrisbodhi/stoic_generator"}
     ],
     "markov": true
@@ -18,14 +18,14 @@
   {
     "title": "Mars Attracts!",
     "subtitle": "Book a Flight to Mars! (Not Really)",
-    "link": "http://marsattracts.com",
+    "link": "https://marsattracts.herokuapp.com",
     "alt": "Book a [Fake] Trip to Mars!",
     "image": "images/mars.png",
     "description": "A speculative fiction flight reservation app set in the near future, facilitating relocation to a newly colonized Mars. Built over 2+ weeks as part of a team of 3.",
     "techStack": "Angular.js frontend, Ruby on Rails backend; ForecastIO & MAAS Mars Weather APIs; Foundation & Simple_Form Ruby gems; Haml & Sass templating; PostgreSQL database; deployed to Heroku",
     "roles": ["front-end", "design &", "development"],
     "links": [
-      {"text": "live project", "url": "http://marsattracts.com"}, 
+      {"text": "live project", "url": "https://marsattracts.herokuapp.com"}, 
       {"text": "source code", "url": "https://github.com/bensbigolbeard/marsattracts"}
     ],
     "mars": true
