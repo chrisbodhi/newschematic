@@ -11,7 +11,8 @@ var Card = React.createClass({
       'columns': true,
       'small-6 medium-12': this.props.data.markov,
       'small-5 medium-9': this.props.data.mars,
-      'small-4 medium-9': this.props.data.textspiration
+      'small-4 medium-9': this.props.data.textspiration,
+      'small-4 medium-9': this.props.data.ticket
     });
     var taglineClasses = cx({
       'tagline': true,
@@ -20,7 +21,8 @@ var Card = React.createClass({
       'columns': true,
       'small-6 medium-11': this.props.data.markov,
       'small-6 medium-11': this.props.data.mars,
-      'small-5 medium-9': this.props.data.textspiration
+      'small-5 medium-9': this.props.data.textspiration,
+      'small-5 medium-10': this.props.data.ticket
     });
     return(
       <div className="medium-4 columns">
