@@ -1,5 +1,19 @@
 [
   {
+    "title": "Ticket Tracker",
+    "subtitle": "Ticket graph for the Spiceworks App Center",
+    "link": "https://chrisbodhi.github.com/ticket-graph",
+    "alt": "Screenshot of Ticket Tracker app in development",
+    "image": "images/ticket-a.png",
+    "description": "Easy-to-grok graphs showing ticket assignments for IT professionals in Spiceworks. Used the D3 library and Spiceworks SDK, as part of their beta evaluation.",
+    "techStack": "Spiceworks SDK; D3.js; RSVP; Yeoman; Grunt; Bower",
+    "roles": ["developer", "designer"],
+    "links": [
+      {"text": "source code", "url": "https://github.com/chrisbodhi/ticket-graph"}
+    ],
+    "ticket": true
+  },
+  {
     "title": "Markov Q. Aurelius",
     "subtitle": "Philosopher for the 21st Century",
     "link": "https://markovqaurelius.herokuapp.com",
@@ -29,20 +43,5 @@
       {"text": "source code", "url": "https://github.com/bensbigolbeard/marsattracts"}
     ],
     "mars": true
-  },
-  {
-    "title": "Textspiration",
-    "subtitle": "Inspiration to your Pocket",
-    "link": "https://github.com/RollWave07/Textspiration",
-    "alt": "Project Source Code on GitHub",
-    "image": "images/texts.png",
-    "description": "A service to send daily inspirational messages to subscribers. Built for a weekend hackathon as part of a team of 3.",
-    "techStack": "Ruby on Rails; Twilio Ruby gem; PostgreSQL database; deployed to Heroku",
-    "roles": ["back-end", "development", "Twilio wrangler"],
-    "links": [
-      {"text": "on hiatus", "url": "http://newschematic.org"},
-      {"text": "source code", "url": "https://github.com/RollWave07/Textspiration"}
-    ],
-    "textspiration": true
   }
 ]
