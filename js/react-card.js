@@ -2,8 +2,10 @@ var Card = React.createClass({
   componentDidMount: function() {
     $(document).foundation();
   },
+
   render: function() {
     var cx = React.addons.classSet;
+
     var titleClasses = cx({
       'project-title': true,
       'medium-centered': true,
@@ -11,19 +13,19 @@ var Card = React.createClass({
       'columns': true,
       'small-6 medium-12': this.props.data.markov,
       'small-5 medium-9': this.props.data.mars,
-      'small-4 medium-9': this.props.data.textspiration,
-      'small-4 medium-9': this.props.data.ticket
+      'small-3 medium-6': this.props.data.seBlock
     });
+
     var taglineClasses = cx({
       'tagline': true,
       'medium-centered': true,
       'small-centered': true,
       'columns': true,
-      'small-6 medium-11': this.props.data.markov,
-      'small-6 medium-11': this.props.data.mars,
-      'small-5 medium-9': this.props.data.textspiration,
-      'small-5 medium-10': this.props.data.ticket
+      'small-6 medium-11': true
     });
+
+    console.log('this.props.data', this.props.data);
+
     return(
       <div className="medium-4 columns">
         <header className="small-11 small-centered columns">
@@ -86,9 +88,9 @@ var Dealer = React.createClass({
       url: this.props.url,
       dataType: 'json',
       success: function(data) {
-	if (this.isMounted()){
+	      if (this.isMounted()){
           this.setState({data: data});
-	}
+	      }
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.props.url, status, err.toString());

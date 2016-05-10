@@ -1,17 +1,18 @@
 [
   {
-    "title": "Ticket Tracker",
-    "subtitle": "Ticket Graphs for IT Pros",
-    "link": "https://github.com/chrisbodhi/ticket-graph",
-    "alt": "Screenshot of Ticket Tracker app in development",
-    "image": "images/ticket-a.png",
-    "description": "Easy-to-grok graphs showing ticket assignments for IT professionals in Spiceworks. Used the D3 library and Spiceworks SDK, as part of their beta evaluation.",
-    "techStack": "Spiceworks SDK Beta for data; D3.js for graphs; RSVP library for promises; Yeoman, Grunt, &amp; Bower build tools; deployed to Heroku",
-    "roles": ["developer", "designer"],
+    "title": "SE Block",
+    "subtitle": "Hide the cruft on Stack Overflow",
+    "link": "https://chrome.google.com/webstore/detail/se-block/ffpkepieaocfchmcokenleighplnifjh",
+    "alt": "Screenshot of SE Block in Chrome Store",
+    "image": "images/se-block.png",
+    "description": "Blocks the distracting cruft from the otherwise-excellent Stack Overflow and Stack Exchange network. The idea for the extension came about as I started my first job as a web developer and, subsequently, came to spend more and more of my day scanning Stack Overflow, Server Fault, Ask Ubuntu, and so on. I became increasingly distracted by the sidebar links, which may have had to do with all of the coffee I drink.",
+    "techStack": "JavaScript; Yeoman generator",
+    "roles": ["developer"],
     "links": [
-      {"text": "source code", "url": "https://github.com/chrisbodhi/ticket-graph"}
+      {"text": "install it", "url": "https://chrome.google.com/webstore/detail/se-block/ffpkepieaocfchmcokenleighplnifjh"},
+      {"text": "source code", "url": "https://github.com/chrisbodhi/se-block"}
     ],
-    "ticket": true
+    "seBlock": true
   },
   {
     "title": "Markov Q. Aurelius",
