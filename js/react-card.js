@@ -25,7 +25,7 @@ var Card = React.createClass({
     });
 
     return(
-      <div className="medium-4 columns">
+      <div className="card medium-4 columns">
         <header className="small-11 small-centered columns">
           <h3 className={titleClasses}>{this.props.data.title}</h3>
         </header>

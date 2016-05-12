@@ -6,7 +6,7 @@
     "alt": "Screenshot of SE Block in Chrome Store",
     "image": "images/se-block.png",
     "description": "Blocks the distracting cruft from the otherwise-excellent Stack Overflow and Stack Exchange network. The idea for the extension came about as I started my first job as a web developer and, subsequently, came to spend more and more of my day scanning Stack Overflow, Server Fault, Ask Ubuntu, and so on. I became increasingly distracted by the sidebar links, which may have had to do with all of the coffee I drink.",
-    "techStack": "Vanilla JavaScript; Yeoman generator",
+    "techStack": "JavaScript; Yeoman generator",
     "roles": ["developer"],
     "links": [
       {"text": "install it", "url": "https://chrome.google.com/webstore/detail/se-block/ffpkepieaocfchmcokenleighplnifjh"},
@@ -38,7 +38,7 @@
     "image": "images/mars.png",
     "description": "A speculative fiction flight reservation app set in the near future, facilitating relocation to a newly colonized Mars. Built over 2+ weeks as part of a team of 3.",
     "techStack": "Angular.js frontend, Ruby on Rails backend; ForecastIO & MAAS Mars Weather APIs; Foundation & Simple_Form Ruby gems; Haml & Sass templating; PostgreSQL database; deployed to Heroku",
-    "roles": ["front-end", "design &", "development"],
+    "roles": ["developer", "designer"],
     "links": [
       {"text": "live project", "url": "https://marsattracts.herokuapp.com"}, 
       {"text": "source code", "url": "https://github.com/bensbigolbeard/marsattracts"}

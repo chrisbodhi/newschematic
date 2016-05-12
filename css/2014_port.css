@@ -1,6 +1,22 @@
 /* Started 16 February 2011 for this year's revision of the website located at http://newschematic.org */
 /* Revised & reviewed & responsified after MKS, March 2014 */
 
+acronym {
+  border-bottom: dotted 1px white;
+  color: #333333;
+  }
+
+body {
+  background-color: #AD8851;
+  background-image: url(../images/bg.jpg);
+  color: #333333;
+}
+
+#top {
+  border-bottom: 2px dotted black;
+  margin-bottom: 20px;
+}
+
 #top h1 {
 	font-family: 'Futura', Arial, Helvetica, sans-serif;
 	font-size: 2em;
@@ -42,23 +58,21 @@
   width: 100%;
 }
 
-.tech {
-	border-bottom: 2px dotted black;
-	padding-bottom: 10px;
-}
-
 .writeup {
   border-bottom: 2px dotted black;
   padding: 10px;
   margin-bottom: 10px;
 }
 
-.role {
-  text-align: right;
+.tech {
+  border-bottom: 2px dotted black;
+  padding-bottom: 10px;
 }
 
 .role li {
+  font-size: 1em;
   list-style: none;
+  text-align: right;
 }
 
 .links {
@@ -74,24 +88,18 @@
   border-bottom: 1px dotted black;
 }
 
+.links ul {
+  margin-bottom: 0;
+  margin-left: 0;
+}
+
 .links li {
+  font-size: 1em;
   list-style: none;
-	margin-left: -17px;
 }
 
 .links .strike {
 	text-decoration: line-through;
-}
-
-acronym {
-	border-bottom: dotted 1px white; 
-	color: #333333;
-	}	
-
-body { 
-  background-color: #AD8851;
-  background-image: url(../images/bg.jpg);
-  color: #333333; 
 }
 
 footer {
@@ -108,11 +116,6 @@ footer a {
 	color: white;
 }
 
-header #top {
-	border-bottom: 2px dotted black;
-	margin-bottom: 20px;
-}
-	
 /* For the Foundation icons in the page footer */
 i {
 	color: black;
@@ -131,23 +134,28 @@ i:visited {
 	color: gray;
 }
 
-
+/* For mobile views */
 @media only screen 
 and (min-device-width : 320px) 
 and (max-device-width : 480px) {
-	/* Datetime */
-	.date {display: none;}
-	hgroup h1 {font-size: 4em;}
-	hgroup h2 {font-size: 3em;}
-	h4 {font-size: 4em;
-			position: static;
-			margin-bottom: 10px;
-			color: FireBrick;
-		}
-	li {font-size: 3em;
-			text-align: left;}
-	footer {font-size: 2em;}
+  .card {
+    margin-bottom: 20px;
+  }
+
   .project-title {
     font-size: 1.25em;
+  }
+
+  li {
+    font-size: 3em;
+    text-align: left;
+  }
+
+  footer {
+    font-size: 2em;
+    margin-top: 0;
+  }
+  .date {
+    display: none;
   }
 }
