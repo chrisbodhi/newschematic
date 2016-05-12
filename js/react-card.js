@@ -11,9 +11,9 @@ var Card = React.createClass({
       'medium-centered': true,
       'small-centered': true,
       'columns': true,
-      'small-6 medium-12': this.props.data.markov,
-      'small-5 medium-9': this.props.data.mars,
-      'small-3 medium-6': this.props.data.seBlock
+      'small-11 medium-12': this.props.data.markov,
+      'small-9 medium-9': this.props.data.mars,
+      'small-6 medium-6': this.props.data.seBlock
     });
 
     var taglineClasses = cx({
@@ -21,10 +21,8 @@ var Card = React.createClass({
       'medium-centered': true,
       'small-centered': true,
       'columns': true,
-      'small-6 medium-11': true
+      'small-12 medium-11': true
     });
-
-    console.log('this.props.data', this.props.data);
 
     return(
       <div className="medium-4 columns">

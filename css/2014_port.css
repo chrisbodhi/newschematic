@@ -144,8 +144,10 @@ and (max-device-width : 480px) {
 			margin-bottom: 10px;
 			color: FireBrick;
 		}
-	img {display: none;}
 	li {font-size: 3em;
 			text-align: left;}
 	footer {font-size: 2em;}
-	}
+  .project-title {
+    font-size: 1.25em;
+  }
+}
