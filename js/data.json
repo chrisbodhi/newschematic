@@ -6,7 +6,7 @@
     "alt": "Screenshot of SE Block in Chrome Store",
     "image": "images/se-block.png",
     "description": "Blocks the distracting cruft from the otherwise-excellent Stack Overflow and Stack Exchange network. The idea for the extension came about as I started my first job as a web developer and, subsequently, came to spend more and more of my day scanning Stack Overflow, Server Fault, Ask Ubuntu, and so on. I became increasingly distracted by the sidebar links, which may have had to do with all of the coffee I drink.",
-    "techStack": "JavaScript; Yeoman generator",
+    "techStack": "Vanilla JavaScript; Yeoman generator",
     "roles": ["developer"],
     "links": [
       {"text": "install it", "url": "https://chrome.google.com/webstore/detail/se-block/ffpkepieaocfchmcokenleighplnifjh"},
