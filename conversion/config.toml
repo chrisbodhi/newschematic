@@ -1,0 +1,10 @@
+baseurl = "https://newschematic.org/"
+title = "New Schematic"
+languageCode = "en-us"
+copyright="CC by-sa-nc 201x, Chris Boette"
+
+[author]
+  name = "Chris Boette"
+  github = "chrisbodhi"
+  linkedin = "chrisboette"
+  twitter = "chrisbodi"
