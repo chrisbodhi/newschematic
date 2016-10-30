@@ -1,10 +1,32 @@
 baseurl = "https://newschematic.org/"
 title = "New Schematic"
 languageCode = "en-us"
-copyright="CC by-sa-nc 201x, Chris Boette"
+copyright = "CC by-sa-nc 201x, Chris Boette"
+theme = "hugo-sustain"
 
-[author]
+[params]
   name = "Chris Boette"
-  github = "chrisbodhi"
-  linkedin = "chrisboette"
-  twitter = "chrisbodhi"
+  avatar = "images/me.png"
+  description = "todo: seo keywords but in a way that is a-ok"
+
+[social]
+  Github = "chrisbodhi"
+  LinkedIn = "chrisboette"
+  Stackoverflow = "users/2276791/yossarian"
+  Twitter = "chrisbodhi"
+
+[[menu.main]]
+  name = "blog"
+  weight = 100
+  identifier = "blog"
+  url = "/blog/"
+[[menu.main]]
+  name = "projects"
+  weight = 100
+  identifier = "projects"
+  url = "/projects/"
+[[menu.main]]
+  name = "talks"
+  weight = 100
+  identifier = "talks"
+  url = "/talks/"
