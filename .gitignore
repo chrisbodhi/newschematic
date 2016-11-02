@@ -13,3 +13,7 @@ images/mqa-old.png
 
 # Hugo Themes
 themes/
+
+# Generated Hugo site
+public/
+
