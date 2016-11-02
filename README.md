@@ -5,4 +5,11 @@ Just my website stuff, now with source control!
 [New Schematic](http://newschematic.org)
 
 ###Development
-Run `ruby server.rb` to start the server for displaying the project. This is necessary because the site is now built using React.
+
+Built with Hugo!
+
+- Add a new blog post: `hugo new blog/POST-TITLE.md`
+- Add a new project page: `hugo new project/PROJECT.md`
+- Add a new talk: `hugo new talk/TALK-TITLE.md`
+- Run the server locally, using the Goa theme: `hugo server --theme=hugo-goa`
+- Generate the latest HTML files from the Markdown files, using the Goa theme: `hugo --theme=hugo-goa`
