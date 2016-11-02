@@ -1,0 +1,45 @@
+baseurl = "https://newschematic.org/"
+title = "New Schematic"
+languageCode = "en-us"
+theme = "hugo-goa"
+
+author = "Chris Boette"
+enableRobotsTXT = true
+
+[params]
+  author = "Chris Boette"
+  intro = "Software Engineer, with a focus on Web"
+  authorImage = "me.jpg"
+  description = "Like the smell of rain on a summer day: coding"
+  dateFormat = "Jan 2, 2006"
+
+[params.meta]
+  description = "Online portfolio and blag for Chris Boette"
+  keywords = "Chris Boette, Boette, developer, software engineer, ruby, ruby on rails, javascript, web app dev, web development, MakerSquare, online portfolio, portfolio, Entertainment Technology Center, graduate"
+
+[params.social]
+  github = "chrisbodhi"
+  linkedIn = "chrisboette"
+  twitter = "chrisbodhi"
+  stackoverflow = "2276791/yossarian"
+
+[params.extra]
+  copyright = "CC by-sa-nc 201x, Chris Boette"
+  poweredBy = true
+  highlightJS = true
+
+[[menu.main]]
+  name = "blog"
+  weight = 100
+  identifier = "blog"
+  url = "/blog/"
+[[menu.main]]
+  name = "projects"
+  weight = 100
+  identifier = "projects"
+  url = "/projects/"
+[[menu.main]]
+  name = "talks"
+  weight = 100
+  identifier = "talks"
+  url = "/talks/"

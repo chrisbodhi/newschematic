@@ -10,3 +10,10 @@ images/mqa-old.png
 
 # System sheeeeeet
 .DS_Store
+
+# Hugo Themes
+themes/
+
+# Generated Hugo site
+public/
+
