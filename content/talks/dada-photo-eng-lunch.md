@@ -7,7 +7,7 @@ tags = ["golang", "dada", "glitch"]
 comments = false
 +++
 
-[project page](https://newschematic.org/projects/dada-photo-booth) | [slides](https://github.com/chrisbodhi/presentations/tree/master/go-photo-booth)
+[project page](/projects/dada-photo-booth) | [slides](https://github.com/chrisbodhi/presentations/tree/master/go-photo-booth)
 
 Review of what I learned programming with Go for an art exhibition. Talk given at [OwnLocal](http://ownlocal.com) Engineering Lunch, November 21, 2016.
 
