@@ -15,7 +15,7 @@ comments = false
 
 _developer, artistic collaborator_
 
-Designed and developed as a final project for [dadageek](http://dadageek.com/)'s course on creating generative art using Processing. Presented at the [Fall 2016 Dadageek Student Showcase](https://www.eventbrite.com/e/dadageek-student-showcase-free-with-rsvp-tickets-28412124429), which was part of [EAST](http://east.bigmedium.org).
+Designed and developed as a final project for [dadageek](http://dadageek.com/)'s course on creating generative art using Processing. Presented at the Fall 2016 Dadageek Student Showcase, which was part of [EAST](http://east.bigmedium.org).
 
 _Tech Stack_
 
