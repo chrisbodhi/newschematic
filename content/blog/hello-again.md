@@ -1,12 +1,11 @@
 +++
-showcomments = false
+title = "Hello Again"
+date = "2016-11-01T07:33:27-05:00"
+tags = ["announcements"] 
 draft = false
 comments = false
-date = "2016-11-01T07:33:27-05:00"
-title = "Hello Again"
-tags = ["announcements"] 
+showcomments = false
 showpagemeta = false
-
 +++
 
 With the recent announcement that Vine will be getting shuttered, I'm reminded of the uncertainty that all free web-based services face. As such, I've decided to move [my blog](http://codeblocks.tumblr.com) off of Tumblr. While this decision is partly about wanting to get ahead of any potential disruptions in service, its roots are in mainitaining control and exercising autonomy.
