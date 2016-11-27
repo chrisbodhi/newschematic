@@ -6,7 +6,7 @@ categories = []
 draft = false
 comments = false
 showcomments = false
-showpagemeta = false
+showpagemeta = true
 +++
 
 With the recent announcement that Vine will be getting shuttered, I'm reminded of the uncertainty that all free web-based services face. As such, I've decided to move [my blog](http://codeblocks.tumblr.com) off of Tumblr. While this decision is partly about wanting to get ahead of any potential disruptions in service, its roots are in mainitaining control and exercising autonomy.

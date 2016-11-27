@@ -6,7 +6,7 @@ categories = []
 showcomments = false
 draft = false
 comments = false
-showpagemeta = false
+showpagemeta = true
 +++
 
 When writing tests for a Rake task at work, I came across `invoke` and `execute` as two different ways for calling a specific task. Most of the content I found online about the difference was fairly superficial: `invoke` can only get called once, `execute` can be called as many times as one wants.
