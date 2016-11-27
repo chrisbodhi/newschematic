@@ -2,6 +2,8 @@
 title = "about"
 draft = false
 date = "2016-10-29T17:35:45-05:00"
+categories = []
+tags = []
 
 +++
 
