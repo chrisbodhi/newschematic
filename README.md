@@ -1,10 +1,10 @@
-###README
+### README
 
 Just my website stuff, now with source control!
 
 [New Schematic](http://newschematic.org)
 
-###Development
+### Development
 
 Built with Hugo!
 
@@ -14,3 +14,8 @@ Built with Hugo!
 - Add the Goa theme, from the project root: `md themes && cd $_ && git clone https://github.com/shenoybr/hugo-goa`
 - Run the server locally, using the Goa theme: `hugo server --theme=hugo-goa`
 - Generate the latest HTML files from the Markdown files, using the Goa theme: `hugo --theme=hugo-goa`
+
+### Deployment
+
+- `./deploy.sh` to generate and deploy the latest content
+

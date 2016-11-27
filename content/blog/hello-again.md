@@ -2,6 +2,7 @@
 title = "Hello Again"
 date = "2016-11-01T07:33:27-05:00"
 tags = ["announcements"] 
+categories = []
 draft = false
 comments = false
 showcomments = false

@@ -2,6 +2,7 @@
 title = "invoke and execute in Rake"
 date = "2016-11-23T20:03:27-06:00"
 tags = ["rake", "ruby", "tests"]
+categories = []
 showcomments = false
 draft = false
 comments = false
