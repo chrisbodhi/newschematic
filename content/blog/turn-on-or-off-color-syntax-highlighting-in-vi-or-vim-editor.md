@@ -9,4 +9,4 @@ showcomments = false
 showpagemeta = true
 +++
 
-[<p>Short version: once vim is running, hit the <code>:</code> key to get to the Action Line [as I&rsquo;m now calling it] and type <code>syntax on</code> before hitting your enter key. A wonderful world of colors awaits you.</p>](http://www.cyberciti.biz/faq/turn-on-or-off-color-syntax-highlighting-in-vi-or-vim/)
+<p>Short version: once vim is running, hit the <code>:</code> key to get to the Action Line [as I&rsquo;m now calling it] and type <code>syntax on</code> before hitting your enter key. A wonderful world of colors awaits you.</p><br /><br />[goto](http://www.cyberciti.biz/faq/turn-on-or-off-color-syntax-highlighting-in-vi-or-vim/)

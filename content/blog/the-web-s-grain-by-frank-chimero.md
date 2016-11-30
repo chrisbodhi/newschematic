@@ -9,4 +9,4 @@ showcomments = false
 showpagemeta = true
 +++
 
-[<p>Come for the dial-up tone, stay for the philosophical &amp; practical discussions.</p>](http://frankchimero.com/talks/the-webs-grain/transcript/)
+<p>Come for the dial-up tone, stay for the philosophical &amp; practical discussions.</p><br /><br />[goto](http://frankchimero.com/talks/the-webs-grain/transcript/)

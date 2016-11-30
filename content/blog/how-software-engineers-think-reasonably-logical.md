@@ -9,4 +9,4 @@ showcomments = false
 showpagemeta = true
 +++
 
-[](http://www.philipreames.com/Blog/2013/10/18/how-software-engineers-think/)
+<br /><br />[goto](http://www.philipreames.com/Blog/2013/10/18/how-software-engineers-think/)

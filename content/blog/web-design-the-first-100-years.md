@@ -9,4 +9,4 @@ showcomments = false
 showpagemeta = true
 +++
 
-[<p>&ldquo;There is something quite colonial, too, about collecting data from users and repackaging it to sell back to them. I think of it as the White Nerd&rsquo;s Burden.&rdquo;</p>](http://idlewords.com/talks/web_design_first_100_years.htm)
+<p>&ldquo;There is something quite colonial, too, about collecting data from users and repackaging it to sell back to them. I think of it as the White Nerd&rsquo;s Burden.&rdquo;</p><br /><br />[goto](http://idlewords.com/talks/web_design_first_100_years.htm)

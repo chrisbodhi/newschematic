@@ -9,4 +9,4 @@ showcomments = false
 showpagemeta = true
 +++
 
-[<blockquote class="link_og_blockquote">TL;DR If you are new to the asset pipeline in rails, using custom fonts can be a bit confusing. This is how I recommend getting started: add fonts&hellip;</blockquote>](http://aokolish.me/blog/2011/12/24/at-font-face-with-the-asset-pipeline/)
+<blockquote class="link_og_blockquote">TL;DR If you are new to the asset pipeline in rails, using custom fonts can be a bit confusing. This is how I recommend getting started: add fonts&hellip;</blockquote><br /><br />[goto](http://aokolish.me/blog/2011/12/24/at-font-face-with-the-asset-pipeline/)

@@ -9,4 +9,4 @@ showcomments = false
 showpagemeta = true
 +++
 
-[<p>Combined my blog with my portfolio, and got them all hosted on my own business. Drop on by!</p>](https://newschematic.org/)
+<p>Combined my blog with my portfolio, and got them all hosted on my own business. Drop on by!</p><br /><br />[goto](https://newschematic.org/)

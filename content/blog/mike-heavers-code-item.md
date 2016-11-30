@@ -9,10 +9,10 @@ showcomments = false
 showpagemeta = true
 +++
 
-[<pre><code>
+<pre><code>
 var uniqueArray = duplicatesArray.filter(function(elem, pos) {
     return duplicatesArray.indexOf(elem) == pos;
 });
 </code></pre>
 
-<p>Lovely.</p>](http://mikeheavers.com/main/code-item/removing_duplicates_in_an_array_using_javascript)
+<p>Lovely.</p><br /><br />[goto](http://mikeheavers.com/main/code-item/removing_duplicates_in_an_array_using_javascript)

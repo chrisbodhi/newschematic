@@ -9,4 +9,4 @@ showcomments = false
 showpagemeta = true
 +++
 
-[](https://medium.com/@zengabor/three-takeaways-for-web-developers-after-two-weeks-of-painfully-slow-internet-9e7f6d47726e)
+<br /><br />[goto](https://medium.com/@zengabor/three-takeaways-for-web-developers-after-two-weeks-of-painfully-slow-internet-9e7f6d47726e)
