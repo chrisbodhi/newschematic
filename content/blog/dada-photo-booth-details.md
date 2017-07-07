@@ -16,14 +16,10 @@ For some reason that my therapist hasn't been able to nail down, I enjoy making 
 The story goes like this:
 
 - A command from the CLI starts our shell script.
-- The first tool, `go`, fires up a Go script.
-  - The Go script loads up OpenCV, finds faces, and listens for a keystroke to save [an image of a] face.
-- The second tool, `processing-java`, does the art.
-  - The back entrance to Processing, `processing-java`, creates a glitchy-looking block on top of the image of the face by grabbing the color from a random pixel. It does this 3500 times&mdash;we save off single frames of .gif images from frame 1500 to frame 3499. Processing exits.
-- The third tool, `gifsicle`, does the stitching.
-  - We end up with an animated, looping gif that gets mega-compressed for the next step.
-- The final tool, `ruby`, adds the image to Tumblr, but also does some clean-up.
-  - The animated gif gets uploaded to our Tumblr, [dadaphotobooth.tumblr.com/](http://dadaphotobooth.tumblr.com/), and then the script cleans up the animated gif and our temporary, single-frame gif files.
+- The Go script loads up OpenCV, finds faces, and listens for a keystroke to save [an image of a] face.
+- The back entrance to Processing, `processing-java`, creates a glitchy-looking block on top of the image of the face by grabbing the color from a random pixel. It does this 3500 times&mdash;we save off single frames of .gif images from frame 1500 to frame 3499. Processing exits.
+- We end up with an animated, looping gif that Gifsicle mega-compresses for the next step.
+- A Ruby script uploads the animated gif to our Tumblr, [dadaphotobooth.tumblr.com/](http://dadaphotobooth.tumblr.com/), and then cleans up the animated gif and our temporary, single-frame gif files.
 
 
 
