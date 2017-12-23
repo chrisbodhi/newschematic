@@ -69,4 +69,4 @@ fig.tight_layout()
 
 And part of that output:
 
-![emoji in matplotlib subplot output](https://newschematic.org/static/img/using-emoji-in-matplotlib.png)
+![emoji in matplotlib subplot output](https://newschematic.org/img/using-emoji-in-matplotlib.png)
