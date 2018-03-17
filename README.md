@@ -1,5 +1,7 @@
 ### README
 
+[ ![Codeship Status for chrisbodhi/newschematic](https://app.codeship.com/projects/1569e100-09bc-0136-4c2f-52fbe28f0cfd/status?branch=master)](https://app.codeship.com/projects/281510)
+
 Just my website stuff, now with source control!
 
 [New Schematic](http://newschematic.org)
