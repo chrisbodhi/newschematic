@@ -19,5 +19,6 @@ Built with Hugo!
 
 ### Deployment
 
-- `./deploy.sh` to generate and deploy the latest content
+- Typically: push changes to `master`, watch Codeship ship it.
+- Manually: `./deploy.sh` to generate and deploy the latest content
 
