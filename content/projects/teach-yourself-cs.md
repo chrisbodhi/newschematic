@@ -26,4 +26,4 @@ contents and repository of my work completed and subjects studied.
   - [Lab assignments: pdf](https://inst.eecs.berkeley.edu/~cs61a/reader/nodate-labs.pdf)
   - [Homework assignments: pdf](https://inst.eecs.berkeley.edu/~cs61a/reader/nodate-hw.pdf)
 
-- Week 1: [Labs](https://github.com/chrisbodhi/teach-yourself-cs/tree/master/programming/wk1) & Homework [WIP]
+- Week 1: [Labs & Homework](https://github.com/chrisbodhi/teach-yourself-cs/tree/master/programming/wk1)
