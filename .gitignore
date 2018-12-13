@@ -15,6 +15,7 @@ images/mqa-old.png
 themes/
 
 # Generated Hugo site
+output/
 public/
 
 .env
