@@ -1,5 +1,5 @@
 +++
-title = "DM's Are an Anti-Pattern"
+title = "DM's are an Anti-Pattern"
 date = "2019-02-01T14:30:56"
 draft = false
 categories = ["reflections", "workplace",]
