@@ -2,6 +2,7 @@ baseurl = "https://newschematic.org/"
 title = "New Schematic"
 languageCode = "en-us"
 theme = "hugo-goa"
+footnoteReturnLinkContents = "↩"
 
 author = "Chris Boette"
 enableRobotsTXT = true
