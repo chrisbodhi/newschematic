@@ -23,7 +23,7 @@ _Experienced_: Typescript, Node.js, serverless computing, Express, CSS, Shell sc
 
 * * *
 
-### [data.world](http://data.world)
+### [data.world](https://data.world)
 
 #### _Modern Data Catalog for Analyis & Teamwork_
 ##### software engineer | 2019 to present
