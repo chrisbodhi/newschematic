@@ -23,12 +23,19 @@ _Experienced_: Typescript, Node.js, serverless computing, Express, CSS, Shell sc
 
 * * *
 
+### [data.world](http://data.world)
+
+#### _Modern Data Catalog for Analyis & Teamwork_
+##### software engineer | 2019 to present
+
+- Making features and squarshing bugs
+
 ### [Volusion](https://volusion.com)
 
 <canvas id="vol" height="25"></canvas>
 
 #### _The All-in-One Ecommerce Solution_
-##### software engineer II | 2017 to present
+##### software engineer II | 2017 to 2019
 
 - Full-stack development on greenfield site-builder experience, from a CLI to UI built with _Typescript_, _React_, and _MobX_ and services written in _Express_
 - Incorporated 3rd-party APIs into legacy _AngularJS_ app backed by _Serverless_
