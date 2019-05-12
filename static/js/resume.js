@@ -10,6 +10,7 @@ const colorLang = {
     py: "#3572a5",
     rb: "#701516",
     sass: "#1e4aec",
+    scm: "#64b970",
     scss: "#1e4aec",
     sh: "#89e051",
     tmpl: "#0298c3",
@@ -69,6 +70,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const gsCtx = document.getElementById("gs").getContext("2d");
   const gsChart = makeChart(gsCtx, data.gsLog);
+
+  const tycsCtx = document.getElementById("tycs").getContext("2d");
+  const tycsChart = makeChart(tycsCtx, data.tycsLog);
 
   const dpbCtx = document.getElementById("dpb").getContext("2d");
   const dpbChart = makeChart(dpbCtx, data.dpbLog);

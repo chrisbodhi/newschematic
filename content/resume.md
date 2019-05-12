@@ -29,6 +29,9 @@ _Experienced_: Typescript, Node.js, serverless computing, Express, CSS, Shell sc
 ##### software engineer | 2019 to present
 
 - Making features and squarshing bugs
+- Front-end dev ops-y and tooling things
+
+<canvas id="ddw" height="25"></canvas>
 
 ### [Volusion](https://volusion.com)
 
@@ -88,6 +91,15 @@ _Experienced_: Typescript, Node.js, serverless computing, Express, CSS, Shell sc
 ## Projects
 
 * * *
+
+### [Teach Yourself CS](projects/teach-yourself-cs)
+
+<canvas id="tycs" height="25"></canvas>
+
+#### Course of study aimed at self-taught engineers and code-school grads
+##### student | 2018 to present
+
+- Self-study, following a curriculum including Programming
 
 ### [Dada Photo Booth](projects/dada-photo-booth/)
 
