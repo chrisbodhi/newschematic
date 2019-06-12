@@ -25,7 +25,7 @@ _Experienced_: Typescript, Node.js, serverless computing, Express, CSS, Shell sc
 
 ### [data.world](https://data.world)
 
-#### _Modern Data Catalog for Analyis & Teamwork_
+#### _Modern Data Catalog for Analysis & Teamwork_
 ##### software engineer | 2019 to present
 
 - Making features and squarshing bugs
