@@ -38,3 +38,4 @@ contents and repository of my work completed and subjects studied.
 - Week 6: [wip](https://github.com/chrisbodhi/teach-yourself-cs/tree/master/programming/wk6)
 - Week 7: [Labs & Homework](https://github.com/chrisbodhi/teach-yourself-cs/tree/master/programming/wk7)
 - Week 8: [Labs & Homework](https://github.com/chrisbodhi/teach-yourself-cs/tree/master/programming/wk8)
+- Week 9: [Labs & Homework, wip](https://github.com/chrisbodhi/teach-yourself-cs/tree/master/programming/wk9)
