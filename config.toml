@@ -17,6 +17,7 @@ enableRobotsTXT = true
 [params.meta]
   description = "Online portfolio and blag for Chris Boette"
   keywords = "Chris Boette, Boette, developer, software engineer, ruby, ruby on rails, javascript, web app dev, web development, MakerSquare, online portfolio, portfolio, Entertainment Technology Center, graduate"
+  monetization = "$coil.xrptipbot.com/zP3gu5RkRVSdjBhe_fu3XA"
 
 [params.social]
   github = "chrisbodhi"
