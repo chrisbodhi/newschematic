@@ -24,5 +24,5 @@ Built with Hugo!
 
 ### Deployment
 
-- Typically: push changes to `master`, watch Codeship ship it
+- Typically: push changes to `master`, watch Codeship ship it; configuration steps on Codeship
 - Manually: `./deploy.sh` to generate and deploy the latest content
