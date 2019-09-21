@@ -19,11 +19,10 @@ Built with Hugo!
 
 #### With Docker
 
-- Run `docker run --rm -it -v $(pwd):/src -p 1313:1313 klakegg/hugo:0.49-alpine server` for serving built files
-- Run `docker run --rm -it -v $(pwd):/src -v $(pwd)/output:/target klakegg/hugo:0.49-alpine` to build
+- Run `docker run --rm -it -v $(pwd):/src -p 1313:1313 klakegg/hugo:0.58.3-alpine server` for serving built files
+- Run `docker run --rm -it -v $(pwd):/src -v $(pwd)/output:/target klakegg/hugo:0.58.3-alpine` to build
 
 ### Deployment
 
-- Typically: push changes to `master`, watch Codeship ship it.
+- Typically: push changes to `master`, watch Codeship ship it
 - Manually: `./deploy.sh` to generate and deploy the latest content
-
