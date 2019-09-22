@@ -7,6 +7,7 @@ categories = [
 ]
 tags = [
   "scheme",
+  "hdl",
 ]
 date = "2018-09-03T20:48:47-05:00"
 
@@ -39,3 +40,14 @@ contents and repository of my work completed and subjects studied.
 - Week 7: [Labs & Homework](https://github.com/chrisbodhi/teach-yourself-cs/tree/master/programming/wk7)
 - Week 8: [Labs & Homework](https://github.com/chrisbodhi/teach-yourself-cs/tree/master/programming/wk8)
 - Week 9: [Labs & Homework, wip](https://github.com/chrisbodhi/teach-yourself-cs/tree/master/programming/wk9)
+
+## Computer Architecture
+
+### Nand2Tetris
+
+- Text: _[The Elements of Computer Systems](https://www.nand2tetris.org/book)_, by Noam Nisan and Shimon Schocken
+- Lectures: [Build a Modern Computer from First Principles: From Nand to Tetris](https://www.coursera.org/learn/build-a-computer/), Coursera
+- Resources:
+  - [The Nand2Tetris website](https://www.nand2tetris.org/)
+
+- [Project 01](https://github.com/chrisbodhi/teach-yourself-cs/tree/master/computer-architecture/nand2tetris/projects/01)
