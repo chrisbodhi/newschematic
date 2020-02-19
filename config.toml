@@ -26,7 +26,7 @@ enableRobotsTXT = true
   stackoverflow = "2276791/yossarian"
 
 [params.extra]
-  copyright = "CC by-sa-nc 201x, Chris Boette"
+  copyright = "CC by-sa-nc 20xx, Chris Boette"
   poweredBy = true
   highlightJS = true
 
