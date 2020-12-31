@@ -2,7 +2,7 @@
 # Install Hugo, https://gohugo.io/
 # adapted from https://github.com/codeship/scripts/blob/master/packages/hugo.sh
 #
-HUGO_VERSION="0.58.3"
+HUGO_VERSION="0.79.0"
 HUGO_DIR=${HUGO_DIR:="$HOME/hugo"}
 
 set -e
