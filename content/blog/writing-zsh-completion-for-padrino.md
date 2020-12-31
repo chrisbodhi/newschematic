@@ -9,4 +9,6 @@ showcomments = false
 showpagemeta = true
 +++
 
-<p>Just the first code block was :raised_hands:</p><br /><br />[goto](http://wikimatze.de/writing-zsh-completion-for-padrino/)
+Just the first code block was :raised_hands:
+
+[goto](http://wikimatze.de/writing-zsh-completion-for-padrino/)
