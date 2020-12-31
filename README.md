@@ -19,8 +19,8 @@ Built with Hugo!
 
 #### With Docker
 
-- Run `docker run --rm -it -v $(pwd):/src -p 1313:1313 klakegg/hugo:0.58.3-alpine server` for serving built files
-- Run `docker run --rm -it -v $(pwd):/src -v $(pwd)/output:/target klakegg/hugo:0.58.3-alpine` to build
+- Run `docker run --rm -it -v $(pwd):/src -p 1313:1313 klakegg/hugo:0.79.0-alpine server` for serving built files
+- Run `docker run --rm -it -v $(pwd):/src -v $(pwd)/output:/target klakegg/hugo:0.79.0-alpine` to build
 
 ### Deployment
 
