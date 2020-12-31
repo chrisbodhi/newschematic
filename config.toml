@@ -31,7 +31,9 @@ enableRobotsTXT = true
 [params.extra]
   poweredBy = true
   highlightJS = true
-  rss = true
+  socialmarkup = true
+  rss = true # Display next to social icons
+  displayrssicon = false # Hide in footer
 
 [[menu.main]]
   name = "blog"
