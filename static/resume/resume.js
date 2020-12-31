@@ -3,6 +3,7 @@ const colorLang = {
     css: "#563d7c",
     html: "#e34c26",
     jade: "#0298c3",
+    java: "#b07219",
     js: "#f1e05a",
     jsx: "#f1e05a",
     md: "#596706",
@@ -16,12 +17,14 @@ const colorLang = {
     tmpl: "#0298c3",
     ts: "#2b7489",
     tsx: "#2b7489",
+    yaml: "#cb171e",
+    yml: "#cb171e"
 };
 
 const makeChart = (ctx, logs) => new Chart(ctx, {
   type: "line",
   data: {
-      labels: logs.map(log => log.date),
+      labels: logs.map(_log => null),
       datasets: Object.keys(colorLang).map(lang => {
           return {
               fill: false,
@@ -52,28 +55,34 @@ const makeChart = (ctx, logs) => new Chart(ctx, {
               type: "logarithmic"
           }]
       },
+      tooltips: {
+          enabled: false
+      }
   }
 });
 
 document.addEventListener("DOMContentLoaded", () => {
+  const ddwCtx = document.getElementById("ddw").getContext("2d");
+  makeChart(ddwCtx, data.ddwLog);
+
   const volCtx = document.getElementById("vol").getContext("2d");
-  const volChart = makeChart(volCtx, data.volLog);
+  makeChart(volCtx, data.volLog);
 
   const swCtx = document.getElementById("sw").getContext("2d");
-  const swChart = makeChart(swCtx, data.swLog);
+  makeChart(swCtx, data.swLog);
 
   const olCtx = document.getElementById("ol").getContext("2d");
-  const olChart = makeChart(olCtx, data.olLog);
+  makeChart(olCtx, data.olLog);
 
   const wbCtx = document.getElementById("wb").getContext("2d");
-  const wbChart = makeChart(wbCtx, data.wbLog);
+  makeChart(wbCtx, data.wbLog);
 
   const gsCtx = document.getElementById("gs").getContext("2d");
-  const gsChart = makeChart(gsCtx, data.gsLog);
+  makeChart(gsCtx, data.gsLog);
 
   const tycsCtx = document.getElementById("tycs").getContext("2d");
-  const tycsChart = makeChart(tycsCtx, data.tycsLog);
+  makeChart(tycsCtx, data.tycsLog);
 
   const dpbCtx = document.getElementById("dpb").getContext("2d");
-  const dpbChart = makeChart(dpbCtx, data.dpbLog);
+  makeChart(dpbCtx, data.dpbLog);
 });
