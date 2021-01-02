@@ -2,7 +2,7 @@
 comments = false
 showcomments = false
 showpagemeta = true
-draft = false
+draft = true
 categories = [
 ]
 date = "2017-07-25T21:37:36-05:00"
@@ -14,5 +14,7 @@ tags = [
 
 ![](https://68.media.tumblr.com/21f62552a9175f9ab6e3f2aea93ab7d3/tumblr_ons4t754U91r9ru8eo1_1280.jpg)
 
-‘You can’t make things right by magic.  You can only stop making them wrong.’ (Witches Abroad)
+>You can’t make things right by magic.  You can only stop making them wrong.
+
+_Witches Abroad_, Terry Pratchett
 
