@@ -17,7 +17,7 @@ Following the advice that one could blog what would have helped oneself four wee
 joblib.hash(joblib.load('./path/to/pipeline.joblib'))
 ```
 
-It was unclear to me that the `obj` in the docs for `joblib.hash` was something that had to be loadeded in with `joblib.load`. I had tried pretty much everything else up to the point: passing in a string of the path, passing in a `Path` object of the pipeline's path, using `with open('./path') as p` and then trying to pass `p` into `joblib.hash`, and so forth and so forth.
+It was unclear to me that the `obj` in the docs for `joblib.hash` was something that had to be loaded in with `joblib.load`. I had tried pretty much everything else up to the point: passing in a string of the path, passing in a `Path` object of the pipeline's path, using `with open('./path') as p` and then trying to pass `p` into `joblib.hash`, and so forth and so forth.
 
 After getting the hash, I take the previous pipeline's filename and the extract the hash from the name; saving the fitted pipeline with its hash in the name is much nicer than having to recalculate the hash before every comparison. Plus, the pipelines aren't user-facing, so the only one getting confused by this mish-mash of letters and numbers is me.
 
