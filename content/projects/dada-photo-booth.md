@@ -9,7 +9,7 @@ comments = false
 
 ### An Inscrutable Representation of Yourself
 
-![A wild Canadian appears](img/glitch.gif)
+![A wild Canadian appears](/img/glitch.gif)
 
 [tumblr](http://dadaphotobooth.tumblr.com) | [source code](https://github.com/chrisbodhi/processing-class/tree/master/exhibit_00)
 

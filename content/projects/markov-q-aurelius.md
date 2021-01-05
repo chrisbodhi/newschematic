@@ -8,7 +8,7 @@ tags = ["ruby", "sinatra", "twitter bot", "solo"]
 
 ### Philosopher for the 21st Century
 
-![Hosted on Heroku: Markov Aurelius, the Philosopher King](img/mqa.png)
+![Hosted on Heroku: Markov Aurelius, the Philosopher King](/img/mqa.png)
 
 [on twitter](https://twitter.com/markovQaurelius) | [on heroku](https://markovqaurelius.herokuapp.com) | [source code](https://github.com/chrisbodhi/stoic_generator)
 

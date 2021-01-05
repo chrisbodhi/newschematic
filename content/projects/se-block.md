@@ -8,7 +8,7 @@ tags = ["chrome extension", "javascript", "stack overflow", "solo"]
 
 ### Hide the cruft on Stack Overflow
 
-![Screenshot of SE Block in Chrome Store](img/se-block.png)
+![Screenshot of SE Block in Chrome Store](/img/se-block.png)
 
 [install it](https://chrome.google.com/webstore/detail/se-block/ffpkepieaocfchmcokenleighplnifjh) | [source code](https://github.com/chrisbodhi/se-block)
 

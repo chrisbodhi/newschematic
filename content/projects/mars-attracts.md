@@ -8,7 +8,7 @@ tags = ["angularjs", "ruby", "rails", "teamwork makes the dream work"]
 
 ### Book a Flight to Mars! (Not Really)
 
-![Book a Fake Trip to Mars!](img/mars.png)
+![Book a Fake Trip to Mars!](/img/mars.png)
 
 [project](https://marsattracts.herokuapp.com) | [source code](https://github.com/bensbigolbeard/marsattracts)
 
