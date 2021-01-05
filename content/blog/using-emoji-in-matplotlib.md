@@ -16,6 +16,7 @@ tags = [
 comments = false
 date = "2017-12-23T06:54:34-06:00"
 title = "Using emoji in Matplotlib"
+toc = false
 +++
 
 ## tl;dr

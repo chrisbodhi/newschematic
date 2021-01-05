@@ -7,6 +7,7 @@ draft = false
 comments = false
 showcomments = false
 showpagemeta = true
+toc = false
 +++
 
 ## Background
@@ -17,7 +18,7 @@ In the last quarter of 2016, my team was tasked with automating away a large por
 
 As our new [pipeline](https://en.wikipedia.org/wiki/Pipeline_(software)) started to take shape, Chris Allen started to build out the front-end tool that support engineers would use to create those partner-specific configurations in the form of JSON. One requirement for that front-end tool was to allow the support engineer to view the results of their config as they were writing it; keeping the feedback cycle tight.
 
-It quickly became apparent that we'd need to share code between our pipeline&mdash;a graph run on AWS Lambdas&mdash;and our existing Rails app&mdash;deployed on EC2 and managed with OpsWorks. So, I got to work finding a way for us to share ~isomorphic~ universal JavaScript code between projects and contexts.
+It quickly became apparent that we'd need to share code between our pipeline&mdash;a graph run on AWS Lambdas&mdash;and our existing Rails app&mdash;deployed on EC2 and managed with OpsWorks. So, I got to work finding a way for us to share ~~isomorphic~~ universal JavaScript code between projects and contexts.
 
 ## Research and Requirements
 
