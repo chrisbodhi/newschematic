@@ -25,7 +25,7 @@ The selfie gauntlet would consist of 30 stations, with participants starting at 
 
 Initial ideas for how to rework the project included QR codes, gif uploads, app development, abusing a Kubernetes cluster <sup><a href="/blog/dada-photo-boobooth#1">1</a><span id="return-1" /></sup>, and on and on. Zac, the director of MOHA, had a simple suggestion: why not have the participant take a photo of a screen that's displaying their glitched image? I then took the suggestion a step further: why not introduce [this dynamic of self-image-capture in a prototypical context](https://www.theguardian.com/fashion/2018/sep/13/decoding-the-power-of-the-bathroom-selfie), the bathroom mirror?
 
-<img src="https://images.complex.com/complex/image/upload/c_limit,w_680/fl_lossy,pg_1,q_auto/bswxwqo51vgwj8hjqgkq.jpg" alt="Bathroom selfie via Complex magazine" />
+<img src="/img/bathroom-selfie.jpg" alt="Bathroom selfie via Complex magazine" />
 
 From this point on, the piece largely became a question of how to craft the setting. I picked up a bathroom vanity and sink from the [ReStore](https://www.austinhabitat.org/restore), and bought some new cabinet handles. Toothbrush, soap, ear swabs, and lotion all came from various [LOT 2046](https://lot2046.com) packages. Adam scavanged a stand for the monitor and created a wonderfully-constrasting backdrop to further imbue the concrete feeling of a sense of place.
 
@@ -35,7 +35,7 @@ Prior to the show, I picked up a webcam, in case something happened to the built
 
 In the end, the Dada Photo Boo-booth became an exercise in the best kind of code: the code you don't need to write.
 
-<a href="https://www.instagram.com/p/BqSyEUqFZSm2kCmEPAMFtZ954VuBxPNmGEexas0/"><img src="https://scontent-dfw5-1.cdninstagram.com/vp/ebb7495368031682a5c9fcf1ac442b5c/5C6AAD81/t51.2885-15/e35/44917784_264584914401317_1231652060160774694_n.jpg" alt="Photo by @dezein" title="Dada Photo Boo-booth" /></a>
+<a href="https://www.instagram.com/p/BqSyEUqFZSm2kCmEPAMFtZ954VuBxPNmGEexas0/"><img src="/img/dada-selfie-booth.jpg" alt="Photo by @dezein" title="Dada Photo Boo-booth" /></a>
 
 <hr />
 
