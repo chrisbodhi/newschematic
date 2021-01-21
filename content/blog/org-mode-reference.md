@@ -33,6 +33,14 @@ It'll look like this:
 
 ![image embed be like](/img/org-mode-img-embed-example.jpeg)
 
+And, via [the lambda.cx blog](https://blog.lambda.cx/posts/hugo-org-set-image-title/), adding the HTML attributes for `alt` text or `title` is as simple as using `#+ATTR_HTML`:
+
+```
+#+ATTR_HTML: :alt this is some alt text
+#+ATTR_HTML: :title this is the image title
+[[file:image.png]]
+```
+
 #### An entire file
 
 Let's say you want to embed an entire file in your output, and use the syntax highlighting for that file type. It's as simple as using `#+INCLUDE:`, the path to the file, and then `src` plus the source code language:
