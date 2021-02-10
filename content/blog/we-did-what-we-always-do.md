@@ -5,11 +5,11 @@ showcomments = false
 showpagemeta = true
 draft = false
 categories = [
-  "quotes",
+  "quote",
   "text",
 ]
 tags = [
-  "quotes",
+  "quote",
   "golang",
 ]
 comments = false
