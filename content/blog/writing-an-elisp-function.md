@@ -9,15 +9,15 @@ showcomments = false
 showpagemetadata = true
 +++
 
-In the much-vaunted style of literate programming, here&rsquo;s an emacs-lisp function I wrote this afternoon.
+In the much-vaunted style of literate programming, here&rsquo;s an emacs-lisp function I wrote recently.
 
 The motivation was to convert a shell alias I added this morning, which counts the number of Zettelkasten notes I&rsquo;ve written that day. (&ldquo;Jesus, him, too?&rdquo; Yes, dear reader, I&rsquo;m afraid that this is one trend I haven&rsquo;t managed to dodge forever, but my adoption has been cautious and deliberate.)
 
     alias today_count="fd $(date -u +"%Y-%m-%d") ~/org/zd | wc -l"
 
-Using the lovely [fd](https://github.com/sharkdp/fd) utility, I find all files in my Zetteldeft directory, which start with today&rsquo;s date. Then, I pipe that output to `wc -l` to get the count. Easy peasy, chicken breezy; took me about two minutes to write. *ETA: Turns out this doesn&rsquo;t work as an alias; the date isn&rsquo;t recalculated every time the alias is called.*
+Using the lovely [fd](https://github.com/sharkdp/fd) utility, I find all files in my [Zetteldeft](https://www.eliasstorms.net/zetteldeft/) directory, which start with today&rsquo;s date. Then, I pipe that output to `wc -l` to get the count. Easy peasy, chicken breezy; took me about two minutes to write. *Turns out this doesn&rsquo;t work as an alias; the date isn&rsquo;t recalculated every time the alias is called.*
 
-But, in the spirit of staying focused inside of one tool (where I&rsquo;m already writing my notes), I wanted to convert the alias to an emacs-lisp function I could call from anywhere in Emacs. And in the spirit of learning in public, here&rsquo;s an annotated walk-through.
+But, in the spirit of staying focused inside of one tool (where I&rsquo;m already writing my notes), I wanted to convert the alias to an emacs-lisp function I could call from anywhere in Emacs. And in the spirit of learning in public, here&rsquo;s an annotated walk-through, sharing the lessons I learned the hard way.
 
 We start with importing a sequence library to use later for filtering entries.
 
@@ -51,3 +51,6 @@ Lastly, in a convoluted line, we print a string to the Messages buffer, which in
 
     (message "It's %s; you've written %d notes so far." (get-today) (length (get-today-files (get-today)))))
 
+And to be able to use this from anywhere in Emacs, I run `(load "~/.doom.d/zd")` in my Doom Emacs `config.el` (though there may be a better way to do this). That `zd` file contains my function, and ends with `(provide 'zd)`.
+
+There it is &mdash; the thing works, and even on different days. I look forward to revisiting my approach in six months, chortling at my naivete, and improving my code and process.
