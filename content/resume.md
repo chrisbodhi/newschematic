@@ -25,7 +25,7 @@ _Modern Data Catalog for Analysis & Teamwork_
   <p>Contributions over time, by language, at data.world</p>
 </canvas>
 
-##### software engineer | 2019 to present
+##### senior software engineer | 2019 to present
 
 - Making features and squarshing bugs as part of roadmap and customer commitments, _React_ with _TypeScript_ blah blah blah
 - Identified, scoped, and implemented major version upgrade of _node.js_ across n projects
