@@ -28,6 +28,7 @@ _Modern Data Catalog for Analysis & Teamwork_
 ##### software engineer | 2019 to present
 
 - Making features and squarshing bugs as part of roadmap and customer commitments, _React_ with _TypeScript_ blah blah blah
+- Identified, scoped, and implemented major version upgrade of _node.js_ across n projects
 - Protoyped and then built production Machine Learning service for predictions, using _Python_ deployed on a _Flask_ server, then _AWS SageMaker_
 - Implemented _Storybook_ for rapid prototyping of components and keeping a library of same
 - Forked and extended open-source graph library for drawing SVG's on HTML `canvas`
