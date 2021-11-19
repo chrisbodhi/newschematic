@@ -36,6 +36,11 @@ enableRobotsTXT = true
   displayrssicon = false # Hide in footer
 
 [[menu.main]]
+  name = "now"
+  weight = 100
+  identifier = "now"
+  url = "/now"
+[[menu.main]]
   name = "blog"
   weight = 100
   identifier = "blog"
