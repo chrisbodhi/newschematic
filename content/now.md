@@ -23,4 +23,7 @@ Listening
 Meta
   - Goal tracking with [Beeminder](https://www.beeminder.com/)
   - Journaling with [Kurzgesagt](https://shop-us.kurzgesagt.org/collections/calendars-books/products/gratitude-journal?variant=32410837352496)
+  - Considering a move from Zetteldeft (in Emacs) to the stand-alone Obsidian
 
+Making
+  - A Scheme book for babies
