@@ -23,4 +23,11 @@ There's this loop that's constantly running, humming along at four instructions 
 * [A program written in Assembly](https://github.com/chrisbodhi/bcsi/blob/trunk/intro-to-computer-systems/assembly/sum_to_n.asm)
 * [Some optimized C code](https://github.com/chrisbodhi/bcsi/blob/trunk/intro-to-computer-systems/optimization/pagecount.c) and [thoughts on said code](https://github.com/chrisbodhi/bcsi/blob/trunk/intro-to-computer-systems/optimization/responses.org)
 
+## Advanced Programming
+
+You can write some code. Cool. What do you do next, and why? We examine these questions through the lens of the [Go programming language](https://go.dev/). You can start by looking at the abstractions that are your data structures: what's underlying your string variable, and what can you glean from it? What about the language's intermediate representation, Go Assembly, and the recent switch to a register-based calling system? How can we use concurrency well (starting with an understanding that it ain't parallelism); and how can we use a deeper understanding of memory models to write more correct code? How do scheduling, memory allocation, and garbage collection fit together? Figure out these answers to figure out how to solve the next, big problems you'll face.
+
+## Networking
+
+_TBD_
 
