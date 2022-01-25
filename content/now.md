@@ -28,5 +28,5 @@ Making
   - Plans
 
 Meta
-  - Living with both Obsidian and Zetteldeft (in Emacs) for note-taking (looking for a good org-mode parser)
+  - Living with both Obsidian and Zetteldeft (in Emacs) for note-taking (looking for time to futz with org-mode parsers)
   - Journaling with [Kurzgesagt](https://shop-us.kurzgesagt.org/collections/calendars-books/products/gratitude-journal?variant=32410837352496)
