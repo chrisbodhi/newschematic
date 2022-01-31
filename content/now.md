@@ -9,24 +9,25 @@ tags = []
 
 Engineering software seniorly & mentoring at [data.world](https://data.world)
 
-Learning about Networks during the third module of [Bradfield's Computer Science Intensive](https://bradfieldcs.com/csi)
-
-From my notes: "To understand the what, why, and how of network _protocols_ is to understand _computer networking_."
+Decompressing before the fourth module of [Bradfield's Computer Science Intensive](https://bradfieldcs.com/csi)
 
 Reading
-  - Tickets
-  - _Computer Networking: A Top-Down Approach_, Kurose and Ross 
-  - _Consider Phlebas_, Iain M. Banks
-  - _The Power of Myth_, Joseph Campell with Bill Moyers [backburnered when the above became available]
+  - _The Power of Myth_, Joseph Campell with Bill Moyers
+  - _Dynamo: Amazon's Highly Available Key-value Store_
 
 Listening
-  - ["The Mess We're In"](https://www.youtube.com/watch?v=lKXe3HUG2l4)
-  - Customers
+  - _The Scout Mindset_, Julia Galef
+  - Customer-facing coworkers
 
 Making
-  - Pacts
   - Plans
+  - Schemes
+  - Stratagem
 
 Meta
-  - Living with both Obsidian and Zetteldeft (in Emacs) for note-taking (looking for time to futz with org-mode parsers)
+  - Living with both Obsidian and Zetteldeft (in Emacs) for note-taking
   - Journaling with [Kurzgesagt](https://shop-us.kurzgesagt.org/collections/calendars-books/products/gratitude-journal?variant=32410837352496)
+
+* * *
+
+[edit](https://github.com/chrisbodhi/newschematic/edit/master/content/now.md)
