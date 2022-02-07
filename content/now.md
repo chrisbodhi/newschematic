@@ -9,20 +9,18 @@ tags = []
 
 Engineering software seniorly & mentoring at [data.world](https://data.world)
 
-Decompressing before the fourth module of [Bradfield's Computer Science Intensive](https://bradfieldcs.com/csi)
+Hyped for the fourth module of [Bradfield's Computer Science Intensive](https://bradfieldcs.com/csi), Data Structures for Storage &amp; Retrieval
 
 Reading
+  - _The Scout Mindset_, Julia Galef
   - _The Power of Myth_, Joseph Campell with Bill Moyers
-  - _Dynamo: Amazon's Highly Available Key-value Store_
 
 Listening
-  - _The Scout Mindset_, Julia Galef
   - Customer-facing coworkers
+  - _The Manual of Bean-Curd Boxing_, Paul Read
 
 Making
-  - Plans
-  - Schemes
-  - Stratagem
+  - Time
 
 Meta
   - Living with both Obsidian and Zetteldeft (in Emacs) for note-taking
@@ -31,3 +29,6 @@ Meta
 * * *
 
 [edit](https://github.com/chrisbodhi/newschematic/edit/master/content/now.md)
+
+* * *
+
