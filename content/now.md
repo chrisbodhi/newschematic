@@ -9,20 +9,24 @@ tags = []
 
 Engineering software seniorly & mentoring at [data.world](https://data.world)
 
-Hyped for the fourth module of [Bradfield's Computer Science Intensive](https://bradfieldcs.com/csi), Data Structures for Storage &amp; Retrieval
+Wrapping up a Bloom filter for the fourth module of [Bradfield's Computer Science Intensive](https://bradfieldcs.com/csi), Data Structures for Storage &amp; Retrieval
 
 Reading
-  - _The Scout Mindset_, Julia Galef
+  - The news 🇺🇦✊
+  - _A Mind at Play: How Claude Shannon Invented the Information Age_, Jimmy Soni and Rob Goodman
   - _The Power of Myth_, Joseph Campell with Bill Moyers
 
 Listening
-  - Customer-facing coworkers
-  - _The Manual of Bean-Curd Boxing_, Paul Read
+  - ["Internet Ethnography with Owen Cyclops"](https://brendonmarotta.com/8299/internet-ethnography-with-owen-cyclops/)
+  - Jimmy Soni talking about his books, including his latest _The Founders_
+  - El-P's solo catalog
 
 Making
-  - Time
+  - Dreams come true
+  - Plans for The Sunday Paper
 
 Meta
+  - Waking up 30 - 90 minutes before everyone else for reading
   - Living with both Obsidian and Zetteldeft (in Emacs) for note-taking
   - Journaling with [Kurzgesagt](https://shop-us.kurzgesagt.org/collections/calendars-books/products/gratitude-journal?variant=32410837352496)
 
