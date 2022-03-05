@@ -1,6 +1,6 @@
 +++
 draft = false
-categories = []
+categories = ["projects"]
 tags = []
 +++
 
