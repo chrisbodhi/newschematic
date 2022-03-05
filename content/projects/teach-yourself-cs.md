@@ -13,6 +13,8 @@ date = "2018-09-03T20:48:47-05:00"
 
 +++
 
+_⚠️ This project has been superceded by my participation in the [Bradfield Computer Science Intensive](https://newschematic.org/projects/bcsi/) ⚠️_
+
 Following the curriculum suggested at [Teach Yourself CS](https://teachyourselfcs.com/), I've started
 the necessary work of filling in the gaps of my knowledge. This project page serves as a table of
 contents and repository of my work completed and subjects studied.
