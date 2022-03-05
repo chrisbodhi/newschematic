@@ -22,8 +22,8 @@ Listening
   - El-P's solo catalog
 
 Making
-  - Dreams come true
-  - Plans for The Sunday Paper
+  - Notes after the first stream of ["The Sunday Paper"](/projects/the-sunday-paper)
+  - Ready for a mortgage application (looking forward to this whole process getting disrupted af)
 
 Meta
   - Waking up 30 - 90 minutes before everyone else for reading
