@@ -10,11 +10,11 @@ _If you have a suggestion for an executive summary, feel free to open a pull req
 
 ## Skills
 
-_Strong_: TypeScript, JavaScript [ES5 and ES6+], React, Git, RESTful APIs, HTML5
+_Strong_: TypeScript, JavaScript [ES5 and ES6+], React, Git, RESTful APIs
 
-_Experienced_: Node.js, CSS, Shell scripting, Python, containerization, miscellaneous AWS services
+_Experienced_: Node.js, CSS, Shell scripting, Go, Python, containerization, miscellaneous AWS services
 
-_Dabbling_: Scheme, Elixir, Go, Emacs Lisp
+_Dabbling_: Scheme, Elixir, Emacs Lisp
 
 ## Professional Experience
 
@@ -25,8 +25,13 @@ _Modern Data Catalog for Analysis & Teamwork_
   <p>Contributions over time, by language, at data.world</p>
 </canvas>
 
-##### senior software engineer | 2019 to present
+##### senior software engineer | 2021 to present
+##### software engineer | 2019 to 2021 
 
+- Founding member of Engineering Support Rotation, working with various customer-facing coworkers in various parts of customer lifecycle
+- Undertook multiple, self-directed improvements at improving DX and the codebase
+- Planned and led department-wide bug squash events
+- Mentored interns
 - Making features and squarshing bugs as part of roadmap and customer commitments, _React_ with _TypeScript_ blah blah blah
 - Identified, scoped, and implemented major version upgrade of _node.js_ across n projects
 - Protoyped and then built production Machine Learning service for predictions, using _Python_ deployed on a _Flask_ server, then _AWS SageMaker_
@@ -138,6 +143,7 @@ _automated, procedurally-generated photo booth experience_
 
 ## Education
 
+- [Bradfield School of Computer Science](https://bradfieldcs.com/csi): Computer Science Intensive, 2021 - present
 - [MakerSquare](https://getcoding.hackreactor.com/makersquare): Advanced Software Engineering Immersive program, 2013 - 2014
 - Carnegie Mellon University: [Masters in Entertainment Technology](https://www.etc.cmu.edu), 2006 - 2008
 - Carnegie Mellon University: [Bachelor of Arts in Creative Writing](https://www.cmu.edu/dietrich/english/undergraduate/ba-cw/index.html), minor in Architecture, 2001 - 2005
