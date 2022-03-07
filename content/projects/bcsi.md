@@ -31,3 +31,6 @@ You can write some code. Cool. What do you do next, and why? We examine these qu
 
 _TBD_
 
+## Data structures for storage and retrieval
+
+Reproducing some of the structures used by [LevelDB](https://github.com/google/leveldb), as well as plumbing through the C++ source and a Go implementation to discover how this key-value store works. Reading through "Skip Lists: A Probablistic Alternative to Balanced Trees" ([pdf](https://www.epaperpress.com/sortsearch/download/skiplist.pdf)) and implementing the algorithm. Peeking behind the veil and learning how Postgres and LevelDB store their data, using [`pg_filedump`](https://wiki.postgresql.org/wiki/Pg_filedump) for the former. Ending with aspirations to dig into Roaring bitmaps.
