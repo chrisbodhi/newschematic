@@ -6,7 +6,7 @@ toc: false
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js"></script>
 
-_If you have a suggestion for an executive summary, feel free to open a pull request!_
+Itinerant learner and dreamer. Expressing thoughts in code while allowing others to express theirs. Initiator of applause.
 
 ## Skills
 
@@ -144,6 +144,7 @@ _automated, procedurally-generated photo booth experience_
 ## Education
 
 - [Bradfield School of Computer Science](https://bradfieldcs.com/csi): Computer Science Intensive, 2021 - present
+- Udacity Nanodegree on Deep Learning, 2018
 - [MakerSquare](https://getcoding.hackreactor.com/makersquare): Advanced Software Engineering Immersive program, 2013 - 2014
 - Carnegie Mellon University: [Masters in Entertainment Technology](https://www.etc.cmu.edu), 2006 - 2008
 - Carnegie Mellon University: [Bachelor of Arts in Creative Writing](https://www.cmu.edu/dietrich/english/undergraduate/ba-cw/index.html), minor in Architecture, 2001 - 2005
