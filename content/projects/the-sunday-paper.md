@@ -12,6 +12,8 @@ A weekly-ish livestream session where I read a CS paper, annotate it, and take n
 
 ### Completed sessions
 
+- Session `0b1` (part A), ["The UNIX Time-sharing System"](https://newschematic.org/docs/papers/unix-time-sharing-system.pdf) on 13 Mar '22
+
 - Session `0b0`, ["How to read a paper" by S. Keshav](https://newschematic.org/docs/papers/keshav-how-to-read-a-paper.pdf), on 5 Mar '22
     <details>
         <summary>My literature notes</summary>
@@ -66,5 +68,7 @@ A weekly-ish livestream session where I read a CS paper, annotate it, and take n
 
 ### Upcoming sessions
 
+- Finishing up "The UNIX Time-sharing system"
+- Another paper on Operating Systems
 - A literature review on _TBD_
 - [Let me know your favorite paper](https://twitter.com/chrisbodhi)
