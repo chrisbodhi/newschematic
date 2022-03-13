@@ -1,7 +1,7 @@
 +++
 title = "now"
 draft = false
-date = "2022-01-24T11:12:45-05:00"
+date = "2022-03-13T11:12:45-05:00"
 categories = []
 tags = []
 
@@ -9,7 +9,7 @@ tags = []
 
 Engineering software seniorly & mentoring at [data.world](https://data.world)
 
-Wrapping up a Bloom filter for the fourth module of [Bradfield's Computer Science Intensive](https://bradfieldcs.com/csi), Data Structures for Storage &amp; Retrieval
+Reading and thinking about mf'ing Operating Systems for the fifth module of [Bradfield's Computer Science Intensive](https://bradfieldcs.com/csi)
 
 Reading
   - The news 🇺🇦✊
@@ -17,16 +17,14 @@ Reading
   - _The Power of Myth_, Joseph Campell with Bill Moyers
 
 Listening
-  - ["Internet Ethnography with Owen Cyclops"](https://brendonmarotta.com/8299/internet-ethnography-with-owen-cyclops/)
-  - Jimmy Soni talking about his books, including his latest _The Founders_
-  - El-P's solo catalog
+  - For nap time to be over
 
 Making
-  - Notes after the first stream of ["The Sunday Paper"](/projects/the-sunday-paper)
-  - Ready for a mortgage application (looking forward to this whole process getting disrupted af)
+  - Notes after the second stream of ["The Sunday Paper"](/projects/the-sunday-paper)
+  - Plans to buy a mf'ing house
 
 Meta
-  - Waking up 30 - 90 minutes before everyone else for reading
+  - Waking up 30 - 90 minutes before everyone else for reading & drinking day-old coffee
   - Living with both Obsidian and Zetteldeft (in Emacs) for note-taking
   - Journaling with [Kurzgesagt](https://shop-us.kurzgesagt.org/collections/calendars-books/products/gratitude-journal?variant=32410837352496)
 
