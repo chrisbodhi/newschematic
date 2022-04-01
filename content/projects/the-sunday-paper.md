@@ -70,7 +70,7 @@ A weekly-ish livestream session where I read a CS paper, annotate it, and take n
 
 ### Upcoming sessions
 
-- Finishing up "The UNIX Time-sharing system"
 - Another paper on Operating Systems
+    - Maybe "The Design and Implementation of a Log-Structured File System" by Rosenblum and Ousterhout?
 - A literature review on _TBD_
 - [Let me know your favorite paper](https://twitter.com/chrisbodhi)
