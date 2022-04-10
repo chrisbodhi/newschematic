@@ -1,7 +1,7 @@
 +++
 title = "now"
 draft = false
-date = "2022-04-01T11:20:45-05:00"
+date = "2022-04-10T11:20:45-05:00"
 categories = []
 tags = []
 
@@ -9,19 +9,19 @@ tags = []
 
 Engineering software seniorly & mentoring at [data.world](https://data.world)
 
-Reading and thinking about file systems in Operating Systems for the fifth module of [Bradfield's Computer Science Intensive](https://bradfieldcs.com/csi)
+On break from [Bradfield's Computer Science Intensive](https://bradfieldcs.com/csi)
 
 Reading
   - The news 🇺🇦✊
-  - _A Mind at Play: How Claude Shannon Invented the Information Age_, Jimmy Soni and Rob Goodman
   - _Leviathan Wakes (The Expanse book 1)_, James S. A. Corey
+  - _A Mind at Play: How Claude Shannon Invented the Information Age_, Jimmy Soni and Rob Goodman
   - _The Power of Myth_, Joseph Campell with Bill Moyers
 
 Listening
-  - Droning
+  - Clacks of a different keyboard
 
 Making
-  - Plans for moving
+  - Plans to make checklists
 
 Meta
   - Living with more Obsidian than Zetteldeft (in Emacs) for note-taking
