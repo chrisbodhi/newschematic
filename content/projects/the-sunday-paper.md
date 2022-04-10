@@ -12,6 +12,8 @@ A weekly-ish livestream session where I read a CS paper, annotate it, and take n
 
 ### Completed sessions
 
+- Session `0b11` (part A), ["The Design and Implementation of a Log-Structured File System"](https://newschematic.org/docs/papers/log-structured-file-system.pdf) on 10 Apr '22
+
 - Session `0b10` (part B), ["The UNIX Time-sharing System"](https://newschematic.org/docs/papers/unix-time-sharing-system.pdf) on 27 Mar '22
 
 - Session `0b1` (part A), ["The UNIX Time-sharing System"](https://newschematic.org/docs/papers/unix-time-sharing-system.pdf) on 13 Mar '22
