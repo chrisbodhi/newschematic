@@ -12,6 +12,8 @@ A weekly-ish livestream session where I read a CS paper, annotate it, and take n
 
 ### Completed sessions
 
+- Session `0b100` (part B), ["The Design and Implementation of a Log-Structured File System"](https://newschematic.org/docs/papers/log-structured-file-system.pdf) on 24 Apr '22
+
 - Session `0b11` (part A), ["The Design and Implementation of a Log-Structured File System"](https://newschematic.org/docs/papers/log-structured-file-system.pdf) on 10 Apr '22
 
 - Session `0b10` (part B), ["The UNIX Time-sharing System"](https://newschematic.org/docs/papers/unix-time-sharing-system.pdf) on 27 Mar '22
@@ -72,7 +74,8 @@ A weekly-ish livestream session where I read a CS paper, annotate it, and take n
 
 ### Upcoming sessions
 
-- Another paper on Operating Systems
-    - Maybe "The Design and Implementation of a Log-Structured File System" by Rosenblum and Ousterhout?
+- _Dynamo: Amazon’s Highly Available Key-value Store_
+- _Communicating Sequential Processes_
+- _Why Programming is a good medium for expressing poorly understood and sloppily-formulated ideas_
 - A literature review on _TBD_
 - [Let me know your favorite paper](https://twitter.com/chrisbodhi)
