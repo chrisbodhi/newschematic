@@ -13,14 +13,16 @@ On break from [Bradfield's Computer Science Intensive](https://bradfieldcs.com/c
 
 Reading
   - The news 🇺🇦✊
-  - _A Mind at Play: How Claude Shannon Invented the Information Age_, Jimmy Soni and Rob Goodman
+  - _Postcapitalism: A Guide to Our Future_, Paul Mason
+  - _Energies: An Illustrated Guide to the Biosphere and Civilization_, Vaclav Smil
   - _The Power of Myth_, Joseph Campell with Bill Moyers
 
 Listening
-  - Clacks of a different keyboard
+  - [El-Q](https://totom.bandcamp.com/album/el-q), ToToM
 
 Making
   - Plans to move
+  - Plans to garden
 
 Meta
   - Living with more Obsidian than Zetteldeft (in Emacs) for note-taking
