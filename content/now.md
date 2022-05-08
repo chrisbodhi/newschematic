@@ -7,25 +7,25 @@ tags = []
 
 +++
 
-Engineering software seniorly & mentoring at [data.world](https://data.world)
+Engineering software seniorly at [data.world](https://data.world)
 
 On break from [Bradfield's Computer Science Intensive](https://bradfieldcs.com/csi)
 
 Reading
   - The news 🇺🇦✊
-  - _Postcapitalism: A Guide to Our Future_, Paul Mason
+  - _Feeling Good &mdash; The New Mood Therapy_, Dr. David Burns
   - _Energies: An Illustrated Guide to the Biosphere and Civilization_, Vaclav Smil
   - _The Power of Myth_, Joseph Campell with Bill Moyers
 
 Listening
-  - [El-Q](https://totom.bandcamp.com/album/el-q), ToToM
+  - For a toddler to wake from his nap
 
 Making
-  - Plans to move
-  - Plans to garden
+  - Attempts to upgrade the package manager
+  - Plans for https://3523camp.us
 
 Meta
-  - Living with more Obsidian than Zetteldeft (in Emacs) for note-taking
+  - Living largely with Obsidian for note-taking; hypothes.is factors in
   - Journaling with [Kurzgesagt](https://shop-us.kurzgesagt.org/collections/calendars-books/products/gratitude-journal?variant=32410837352496)
 
 * * *
