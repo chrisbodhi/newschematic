@@ -12,13 +12,15 @@ A weekly-ish livestream session where I read a CS paper, annotate it, and take n
 
 ### Completed sessions
 
-- Session `0b100` (part B), ["The Design and Implementation of a Log-Structured File System"](https://newschematic.org/docs/papers/log-structured-file-system.pdf) on 24 Apr '22
+- Session `0b101`, ["Ironies of Automation" by Lisanne Bainbridge](https://newschematic.org/docs/papers/Bainbridge_1983_Automatica.pdf) (part A) on 8 May '22
 
-- Session `0b11` (part A), ["The Design and Implementation of a Log-Structured File System"](https://newschematic.org/docs/papers/log-structured-file-system.pdf) on 10 Apr '22
+- Session `0b100`, ["The Design and Implementation of a Log-Structured File System"](https://newschematic.org/docs/papers/log-structured-file-system.pdf) (part B) on 24 Apr '22
 
-- Session `0b10` (part B), ["The UNIX Time-sharing System"](https://newschematic.org/docs/papers/unix-time-sharing-system.pdf) on 27 Mar '22
+- Session `0b11` (part A), ["The Design and Implementation of a Log-Structured File System"](https://newschematic.org/docs/papers/log-structured-file-system.pdf) (part A) on 10 Apr '22
 
-- Session `0b1` (part A), ["The UNIX Time-sharing System"](https://newschematic.org/docs/papers/unix-time-sharing-system.pdf) on 13 Mar '22
+- Session `0b10`, ["The UNIX Time-sharing System"](https://newschematic.org/docs/papers/unix-time-sharing-system.pdf) (part B) on 27 Mar '22
+
+- Session `0b1`, ["The UNIX Time-sharing System"](https://newschematic.org/docs/papers/unix-time-sharing-system.pdf) (part A) on 13 Mar '22
 
 - Session `0b0`, ["How to read a paper" by S. Keshav](https://newschematic.org/docs/papers/keshav-how-to-read-a-paper.pdf), on 5 Mar '22
     <details>
