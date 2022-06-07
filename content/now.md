@@ -1,7 +1,7 @@
 +++
 title = "now"
 draft = false
-date = "2022-05-08T11:20:45-05:00"
+date = "2022-06-06T11:20:45-05:00"
 categories = []
 tags = []
 
@@ -14,19 +14,20 @@ On break from [Bradfield's Computer Science Intensive](https://bradfieldcs.com/c
 Reading
   - The news 🇺🇦✊
   - _Feeling Good &mdash; The New Mood Therapy_, Dr. David Burns
-  - _Energies: An Illustrated Guide to the Biosphere and Civilization_, Vaclav Smil
-  - _The Power of Myth_, Joseph Campell with Bill Moyers
+  - Tea leaves
+  - ["Effective Go"](https://go.dev/doc/effective_go)
 
 Listening
-  - For a toddler to wake from his nap
+  - To the quiet, punctuated by...
+  - Creaky wood floors
 
 Making
-  - Attempts to upgrade the package manager
-  - Plans for https://3523camp.us
+  - Inroads in the neighborhood
+  - A budget
 
 Meta
-  - Living largely with Obsidian for note-taking; hypothes.is factors in
-  - Journaling with [Kurzgesagt](https://shop-us.kurzgesagt.org/collections/calendars-books/products/gratitude-journal?variant=32410837352496)
+  - What will weekends be like with a toddler and an infant?
+  - Why do I forget that preassembled furniture is worth the extra cost, in terms of saved time and fewer busted knuckles? 
 
 * * *
 
