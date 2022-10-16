@@ -1,8 +1,8 @@
 # Dissecting an Integer Cast in Go
 
-In a recent issue of [Go Weekly](), there was a link to [Ben Boyter's blog post](https://boyter.org/posts/cost-of-integer-cast-in-go/) on using Go's benchmarking capabilities to determine how relatively expensive different casting functions are. Take a look at the post.
+In a recent-ish issue of [Go Weekly](https://golangweekly.com/issues/425), there was a link to [Ben Boyter's blog post](https://boyter.org/posts/cost-of-integer-cast-in-go/) on using Go's benchmarking capabilities to determine how relatively expensive different casting functions are. Take a look at the post.
 
-I was curious about how we could use Go assembly[1] to develop an intuition for how expensive these casting functions are. Rather than futzing with my environment to view the assembly, I went to godbolt.org, the compiler explorer, and started writing functions. To see the full output of my explorations, [visit this link](https://godbolt.org/z/sb1nsjeE8). I opted to use `amd64` because the assembler is so much more readable than the `x86`.
+I was curious about how we could use Go assembly[1] to develop an intuition for how expensive these casting functions are. Rather than futzing with my environment to view the assembly, I went to [godbolt.org](https://www.godbolt.org), the compiler explorer, and started writing functions. To see the full output of my explorations, [visit this link](https://www.godbolt.org/z/sb1nsjeE8). I opted to use `amd64` because the assembler is so much more readable than the `x86`.
 
 I started with writing an identity function that takes an `int` and returns it:
 
@@ -12,7 +12,7 @@ func Id(x int) int {
 }
 ```
 
-There's a good bit of setup that happens:
+There's a good bit of setup that happens; `FUNCDATA` and `PCDATA` are used by the garbage collector:
 
 ```asm
         TEXT    main.Id(SB), NOSPLIT|ABIInternal, $0-8
@@ -23,13 +23,13 @@ There's a good bit of setup that happens:
         PCDATA  $3, $1
 ```
 
-and then, the important bit:
+and then, the relevant bit:
 
 ```asm
         RET
 ```
 
-The function just returns the input.
+~The function just returns the input.~ Not exactly; the parameter-less `RET` instruction is present in functions that return a value.
 
 What about a function that takes an `int` and returns an `int32`?
 
