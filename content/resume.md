@@ -28,16 +28,15 @@ _Modern Data Catalog for Analysis & Teamwork_
 ##### senior software engineer | 2021 to present
 ##### software engineer | 2019 to 2021 
 
+- Developed features and squarshed bugs as part of roadmap and customer commitments, _React_ with _TypeScript_
+- Identified, scoped, and implemented major version upgrade of _node.js_ across all production services, with zero downtime
+- Protoyped, built, and deployed production Machine Learning service for predictions, using _Python_ deployed on a _Flask_ server, then _AWS SageMaker_
+- Implemented and maintained _Storybook_ for rapid prototyping of components and keeping a library of same
 - Founding member of Engineering Support Rotation, working with various customer-facing coworkers in various parts of customer lifecycle
-- Undertook multiple, self-directed improvements at improving DX and the codebase
+- Undertook multiple, self-directed improvements at improving developer experience and the codebase
 - Planned and led department-wide bug squash events
-- Mentored interns
-- Making features and squarshing bugs as part of roadmap and customer commitments, _React_ with _TypeScript_ blah blah blah
-- Identified, scoped, and implemented major version upgrade of _node.js_ across n projects
-- Protoyped and then built production Machine Learning service for predictions, using _Python_ deployed on a _Flask_ server, then _AWS SageMaker_
-- Implemented _Storybook_ for rapid prototyping of components and keeping a library of same
+- Mentored interns from the University of Waterloo
 - Forked and extended open-source graph library for drawing SVG's on HTML `canvas`
-- Front-end dev ops-y and tooling things
 - Led by example on documentation, adding to the dev process, and continuous learning
 
 ### [Volusion](https://volusion.com)
@@ -112,7 +111,7 @@ _Empowering Game Creators_
 - Implemented responsive layouts from designer using _Jade_ templates & _Sass_ with _Bootstrap_
 - Crafted _Express_ middleware for single sign-on to tie together _Discourse_ and _Stormpath_
 - Added features to _Rails_ app, including move to monthly billing model and integration with payment API
-- Wrote more Perl than I should have
+- Wrote more _Perl_ than I should have
 
 ## Projects
 
@@ -143,8 +142,8 @@ _automated, procedurally-generated photo booth experience_
 
 ## Education
 
-- [Bradfield School of Computer Science](https://bradfieldcs.com/csi): Computer Science Intensive, 2021 - present
-- Udacity Nanodegree on Deep Learning, 2018
+- [Bradfield School of Computer Science](https://bradfieldcs.com/csi): Computer Science Intensive, 2021 - 2022
+- [Udacity Nanodegree on Deep Learning](https://www.udacity.com/course/deep-learning-nanodegree--nd101), 2018
 - [MakerSquare](https://getcoding.hackreactor.com/makersquare): Advanced Software Engineering Immersive program, 2013 - 2014
 - Carnegie Mellon University: [Masters in Entertainment Technology](https://www.etc.cmu.edu), 2006 - 2008
 - Carnegie Mellon University: [Bachelor of Arts in Creative Writing](https://www.cmu.edu/dietrich/english/undergraduate/ba-cw/index.html), minor in Architecture, 2001 - 2005
