@@ -1,7 +1,7 @@
 +++
 title = "now"
 draft = false
-date = "2022-06-06T11:20:45-05:00"
+date = "2022-11-24T00:20:45-05:00"
 categories = []
 tags = []
 
@@ -9,25 +9,25 @@ tags = []
 
 Engineering software seniorly at [data.world](https://data.world)
 
-On break from [Bradfield's Computer Science Intensive](https://bradfieldcs.com/csi)
-
 Reading
+  - _Pieces of the Action_, Vannevar Bush
+  - _Summerland_, Hannu Rajaniemi
   - The news 🇺🇦✊
-  - _Feeling Good &mdash; The New Mood Therapy_, Dr. David Burns
-  - Tea leaves
-  - ["Effective Go"](https://go.dev/doc/effective_go)
 
 Listening
   - To the quiet, punctuated by...
-  - Creaky wood floors
+  - Creaky wood floors and...
+  - Dog snores
 
 Making
-  - Inroads in the neighborhood
-  - A budget
+  - Plans! Big plans!
+  - Reading lists
+  - Notes, so many notes
 
 Meta
-  - What will weekends be like with a toddler and an infant?
-  - Why do I forget that preassembled furniture is worth the extra cost, in terms of saved time and fewer busted knuckles? 
+  - How long will I be able to resist the mini pecan pies after Thanksgiving dinner?
+  - Where is everyone going to sit?
+  - I hope everyone is excited about holding the baby!
 
 * * *
 
