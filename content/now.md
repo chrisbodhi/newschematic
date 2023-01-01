@@ -7,24 +7,31 @@ tags = []
 
 +++
 
-_This year's theme: Consistency_
+* * *
+
+_This year's theme: Just do the thing, now_
+
+* * *
 
 Engineering software seniorly at [data.world](https://data.world)
 
-Reading
+**Reading**
+
   - _Jiu-Jitsu University_, Saulo Ribeiro
   - _Summerland_, Hannu Rajaniemi
   - Emails
   - The news 🇺🇦✊
 
-Listening
-  - To the quiet, punctuated by...
-  - Creaky wood floors and...
-  - Dog snores
+**Listening**
 
-Making
+  - Negotiations with a toddler
+  - The heater kicking on
+  - Dog and infant snores
+
+**Making**
+
   - Plans! Big plans!
-  - Reading lists
+  - Weight
   - Notes, so many notes
 
 * * *
