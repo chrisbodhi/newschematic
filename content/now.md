@@ -1,17 +1,20 @@
 +++
 title = "now"
 draft = false
-date = "2022-11-24T00:20:45-05:00"
+date = "2023-01-01T00:20:45-05:00"
 categories = []
 tags = []
 
 +++
 
+_This year's theme: Consistency_
+
 Engineering software seniorly at [data.world](https://data.world)
 
 Reading
-  - _Pieces of the Action_, Vannevar Bush
+  - _Jiu-Jitsu University_, Saulo Ribeiro
   - _Summerland_, Hannu Rajaniemi
+  - Emails
   - The news 🇺🇦✊
 
 Listening
@@ -23,11 +26,6 @@ Making
   - Plans! Big plans!
   - Reading lists
   - Notes, so many notes
-
-Meta
-  - How long will I be able to resist the mini pecan pies after Thanksgiving dinner?
-  - Where is everyone going to sit?
-  - I hope everyone is excited about holding the baby!
 
 * * *
 
