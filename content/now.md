@@ -9,7 +9,7 @@ tags = []
 
 * * *
 
-_This year's theme: Just do the thing, now_
+_This year's theme: Consistency_
 
 * * *
 
