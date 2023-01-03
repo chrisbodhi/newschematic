@@ -1,7 +1,7 @@
 +++
 title = "now"
 draft = false
-date = "2023-01-01T00:20:45-05:00"
+date = "2023-01-03T00:20:45-05:00"
 categories = []
 tags = []
 
@@ -14,6 +14,12 @@ _This year's theme: Consistency_
 * * *
 
 Engineering software seniorly at [data.world](https://data.world)
+
+**Consistently**
+
+  - Three complete meals a day, protein supplement after exercise
+  - Bed before midnight
+  - BJJ scheduling
 
 **Reading**
 
