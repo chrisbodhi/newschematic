@@ -1,7 +1,7 @@
 +++
 title = "now"
 draft = false
-date = "2023-01-03T00:20:45-05:00"
+date = "2023-01-09T00:20:45-05:00"
 categories = []
 tags = []
 
@@ -20,6 +20,7 @@ Engineering software seniorly at [data.world](https://data.world)
   - Three complete meals a day, protein supplement after exercise
   - Bed before midnight
   - BJJ scheduling
+  - "If it's your job to eat a frog, it's best to do it first thing in the morning. And If it's your job to eat two frogs, it's best to eat the biggest one first." N.B. it helps to find the frogs the day before
 
 **Reading**
 
