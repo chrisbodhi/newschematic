@@ -1,0 +1,26 @@
+on:
+  push:
+    branches:
+    - master
+    - migrate-gh-wf
+
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Deploy to DH
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install Hugo
+      run: ./install-hugo.sh
+    - name: Get theme
+      run: git clone https://github.com/chrisbodhi/hugo-goa themes
+    - name: Generate site
+      run: hugo --theme=hugo-goa
+    - name: Deploy
+      env:
+        DH_USER: ${{ secrets.DH_USER }}
+        DH_HOST: ${{ secrets.DH_HOST }}
+      run: rsync -e "$(which ssh)" --bwlimit=2000 -av public/ "$DH_USER"@"$DH_HOST":newschematic.org
+
