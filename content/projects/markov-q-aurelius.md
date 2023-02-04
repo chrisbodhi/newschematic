@@ -8,18 +8,16 @@ tags = ["ruby", "sinatra", "twitter bot", "solo"]
 
 ### Philosopher for the 21st Century
 
-![Hosted on Heroku: Markov Aurelius, the Philosopher King](/img/mqa.png)
+![Was once hosted on Heroku: Markov Aurelius, the Philosopher King](/img/mqa.png)
 
-[on twitter](https://twitter.com/markovQaurelius) | [on heroku](https://markovqaurelius.herokuapp.com) | [source code](https://github.com/chrisbodhi/stoic_generator)
+[on twitter](https://twitter.com/markovQaurelius) | was once on heroku | [source code](https://github.com/chrisbodhi/stoic_generator)
 
 _developer, designer_
 
-Uses Marcus Aurelius's "Meditations" and a Markov Chain to generate philosophical quotes that are both displayed on a website and posted to Twitter once every morning.
+Uses Marcus Aurelius's "Meditations" and a Markov Chain to generate philosophical quotes that are posted to Twitter daily.
 
 _Tech Stack_
 
-- Ruby & Sinatra
+- Ruby on a [GitHub Action](https://github.com/chrisbodhi/stoic_generator/blob/trunk/.github/workflows/generate-tweet.yml)
 - Twitter & marky_markov Ruby gems
-- Deployed to Heroku
-- Daily post through a Rake task via Heroku Scheduler
-
+- Daily post through [another GitHub Action](https://github.com/chrisbodhi/stoic_generator/blob/trunk/.github/workflows/send-tweet.yml)
