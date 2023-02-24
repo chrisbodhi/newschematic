@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-    - master
+    # - master
     - migrate-gh-wf
 
   workflow_dispatch:
@@ -15,7 +15,7 @@ jobs:
     - name: Install Hugo
       run: sudo apt install hugo
     - name: Get theme
-      run: git clone https://github.com/chrisbodhi/hugo-goa themes
+      run: git clone https://github.com/chrisbodhi/hugo-goa themes && pwd && ls -la
     - name: Generate site
       run: hugo --theme=hugo-goa
     - name: Deploy
