@@ -15,7 +15,7 @@ jobs:
     - name: Install Hugo
       run: sudo apt install hugo
     - name: Get theme
-      run: git clone https://github.com/chrisbodhi/hugo-goa themes && pwd && ls -la
+      run: git clone https://github.com/chrisbodhi/hugo-goa themes && pwd && ls -la && ls -la themes
     - name: Generate site
       run: hugo --theme=hugo-goa
     - name: Deploy
