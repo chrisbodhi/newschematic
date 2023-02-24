@@ -15,9 +15,9 @@ jobs:
     - name: Install Hugo
       run: sudo apt install hugo
     - name: Get theme
-      run: git clone https://github.com/chrisbodhi/hugo-goa themes/hugo-goa && pwd && ls -la && ls -la themes
+      run: git clone https://github.com/chrisbodhi/hugo-goa themes/hugo-goa
     - name: Generate site
-      run: hugo --theme=hugo-goa
+      run: hugo --theme=hugo-goa && pwd && ls -la
     - name: Deploy
       env:
         DH_USER: ${{ secrets.DH_USER }}
