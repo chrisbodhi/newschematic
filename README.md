@@ -23,5 +23,5 @@ Built with Hugo!
 
 ### Deployment
 
-- Typically: push changes to `master`, watch Codeship ship it; configuration steps on Codeship
+- Typically: push changes to `master`, watch GitHub Actions ship it; configuration steps in .github/workflow
 - Manually: `./deploy.sh` to generate and deploy the latest content
