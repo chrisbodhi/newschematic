@@ -20,7 +20,7 @@ jobs:
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         known_hosts: 'placeholder-per-zellwk-dot-com'
     - name: Adding Known Hosts
-      run: ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+      run: ssh-keyscan -H ${{ secrets.DH_HOST }} >> ~/.ssh/known_hosts
     - name: Install Hugo
       run: sudo apt install hugo
 
