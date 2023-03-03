@@ -1,0 +1,36 @@
+on:
+  push:
+    branches:
+    - master
+
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Deploy to DH
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+
+    # Via https://github.com/zellwk/zellwk.com/blob/master/.github/workflows/deploy.yml
+    - name: Install SSH Key
+      uses: shimataro/ssh-key-action@v2
+      with:
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        known_hosts: 'placeholder-per-zellwk-dot-com'
+    - name: Adding Known Hosts
+      run: ssh-keyscan -H ${{ secrets.DH_HOST }} >> ~/.ssh/known_hosts
+    - name: Install Hugo
+      run: sudo apt install hugo
+
+    - name: Get theme
+      run: git clone https://github.com/chrisbodhi/hugo-goa themes/hugo-goa
+
+    - name: Generate site
+      run: hugo --theme=hugo-goa
+
+    - name: Deploy
+      env:
+        DH_USER: ${{ secrets.DH_USER }}
+        DH_HOST: ${{ secrets.DH_HOST }}
+      run: rsync -vz -e "$(which ssh)" --bwlimit=2000 -av public/ "$DH_USER"@"$DH_HOST":newschematic.org
