@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-    - master
+    # - master
     - migrate-gh-wf
 
   workflow_dispatch:
@@ -12,6 +12,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
+
+    # Via https://github.com/zellwk/zellwk.com/blob/master/.github/workflows/deploy.yml
     - name: Install SSH Key
       uses: shimataro/ssh-key-action@v2
       with:
@@ -21,12 +23,15 @@ jobs:
       run: ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
     - name: Install Hugo
       run: sudo apt install hugo
+
     - name: Get theme
-      run: git clone https://github.com/chrisbodhi/hugo-goa themes
+      run: git clone https://github.com/chrisbodhi/hugo-goa themes/hugo-goa
+
     - name: Generate site
       run: hugo --theme=hugo-goa
+
     - name: Deploy
       env:
         DH_USER: ${{ secrets.DH_USER }}
         DH_HOST: ${{ secrets.DH_HOST }}
-      run: rsync -e "$(which ssh)" --bwlimit=2000 -av public/ "$DH_USER"@"$DH_HOST":newschematic.org
+      run: rsync -vz -e "$(which ssh)" --bwlimit=2000 -av public/ "$DH_USER"@"$DH_HOST":newschematic.org
