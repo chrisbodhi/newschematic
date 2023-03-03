@@ -1,8 +1,7 @@
 on:
   push:
     branches:
-    # - master
-    - migrate-gh-wf
+    - master
 
   workflow_dispatch:
 
