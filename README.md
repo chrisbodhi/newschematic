@@ -4,6 +4,8 @@ Just my website stuff, now with source control!
 
 [New Schematic](http://newschematic.org)
 
+[![.github/workflows/deploy.yml](https://github.com/chrisbodhi/newschematic/actions/workflows/deploy.yml/badge.svg)](https://github.com/chrisbodhi/newschematic/actions/workflows/deploy.yml)
+
 ### Development
 
 Built with Hugo!
