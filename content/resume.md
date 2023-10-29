@@ -14,7 +14,7 @@ _Strong_: TypeScript, JavaScript [ES5 and ES6+], React, Git, RESTful APIs
 
 _Experienced_: Node.js, CSS, Shell scripting, Go, Python, containerization, miscellaneous AWS services
 
-_Dabbling_: Scheme, Elixir, Emacs Lisp
+_Dabbling_: Swift, Java, Scheme, Elixir, Emacs Lisp
 
 ## Professional Experience
 
@@ -26,16 +26,19 @@ _Modern Data Catalog for Analysis & Teamwork_
 </canvas>
 
 ##### senior software engineer | 2021 to present
+
+- Developed customer-facing features in _React_ and _TypeScript_ monorepo, including group access control, and replacing the file upload UI and pipeline to improve security
+- Led creation of first AI team to integrate _generative AI_ into the knowledge graph platform
+- Mentored interns from the University of Waterloo
+- Undertook multiple initiatives to improve the developer experience and the codebase, including improving E2E test resiliency and automating repetitive tasks with _GitHub Actions_
+- Early member of Engineering Support Rotation, working with various customer-facing coworkers in various steps of customer lifecycle
+
 ##### software engineer | 2019 to 2021 
 
-- Developed features and squarshed bugs as part of roadmap and customer commitments, _React_ with _TypeScript_
-- Identified, scoped, and implemented major version upgrade of _node.js_ across all production services, with zero downtime
-- Protoyped, built, and deployed production Machine Learning service for predictions, using _Python_ deployed on a _Flask_ server, then _AWS SageMaker_
+- Protoyped, built, and deployed production Machine Learning service for predictions, using _Python_ deployed on a _Flask_ server, then _AWS SageMaker_, to meet a contractual obligation
 - Implemented and maintained _Storybook_ for rapid prototyping of components and keeping a library of same
-- Founding member of Engineering Support Rotation, working with various customer-facing coworkers in various parts of customer lifecycle
-- Undertook multiple, self-directed improvements at improving developer experience and the codebase
-- Planned and led department-wide bug squash events
-- Mentored interns from the University of Waterloo
+- Proactively identified impending lack of support for our version of _node.js_, and implemented a major version upgrade across all production services with zero downtime
+- Planned and led department-wide bug squash events to improve accessibility, as well as delete dead code
 - Forked and extended open-source graph library for drawing SVG's on HTML `canvas`
 - Led by example on documentation, adding to the dev process, and continuous learning
 
