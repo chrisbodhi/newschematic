@@ -14,7 +14,7 @@ _Strong_: TypeScript, JavaScript [ES5 and ES6+], React, Git, RESTful APIs
 
 _Experienced_: Node.js, CSS, Shell scripting, Go, Python, containerization, miscellaneous AWS services
 
-_Dabbling_: Swift, Java, Scheme, Elixir, Emacs Lisp
+_Dabbling_: Zig, Swift, Java, Scheme, Elixir, Emacs Lisp
 
 ## Professional Experience
 
