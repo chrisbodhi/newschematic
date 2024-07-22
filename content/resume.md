@@ -30,6 +30,7 @@ _Modern Data Catalog for Analysis & Teamwork_
 - Developed customer-facing features in _React_ and _TypeScript_ monorepo, including group access control, and replacing the file upload UI and pipeline to improve security
 - Led creation of first AI team to integrate _generative AI_ capabilities into the knowledge graph platform
 - Executed a _database migration_ to sanitize metadata on user-uploaded content for 768,000 users, following security audit findings
+- Extended and productionized a proof-of-concept observability system for gaining insight into time spent in development workflows
 - Mentored software engineering interns from the University of Waterloo, providing guidance on working effectively in the organization
 - Undertook multiple initiatives to improve the developer experience and the codebase, including improving E2E test resiliency and automating repetitive tasks with _GitHub Actions_
 - Early member of Engineering Support Rotation, working with various customer-facing coworkers in various steps of customer lifecycle
