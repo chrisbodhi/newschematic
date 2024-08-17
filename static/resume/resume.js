@@ -11,6 +11,7 @@ const colorLang = {
     py: "#3572a5",
     rb: "#701516",
     sass: "#1e4aec",
+    scala: "#c22d40",
     scm: "#64b970",
     scss: "#1e4aec",
     sh: "#89e051",
@@ -21,6 +22,8 @@ const colorLang = {
     yml: "#cb171e"
 };
 
+// Uses chart.js: https://www.chartjs.org/
+// Added via script tag in content/resume.md
 const makeChart = (ctx, logs) => new Chart(ctx, {
   type: "line",
   data: {
