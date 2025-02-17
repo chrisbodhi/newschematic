@@ -1,6 +1,6 @@
 +++
 title = "Debugging Claude's MCP Server with Nix"
-date = "2025-02-17T12:00:00-06:00"
+date = "2025-02-17T11:00:00-05:00"
 draft = false
 tags = ["nix", "claude", "debugging", "mcp", "development",]
 comments = false
