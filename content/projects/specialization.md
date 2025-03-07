@@ -1,10 +1,9 @@
 +++
+date = "2025-03-04T19:00:00-06:00"
 title = "Specialization is for insects"
 draft = false
-date = "2025-03-04T19:00:00-06:00"
 categories = ["projects"]
 tags = ["writing"]
-comments = false
 +++
 
 ## A guide
