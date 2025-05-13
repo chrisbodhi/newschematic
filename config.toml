@@ -56,6 +56,11 @@ enableRobotsTXT = true
   identifier = "resume"
   url = "/resume"
 [[menu.main]]
+  name = "reference"
+  weight = 100
+  identifier = "reference"
+  url = "/reference/"
+[[menu.main]]
   name = "talks"
   weight = 100
   identifier = "talks"
