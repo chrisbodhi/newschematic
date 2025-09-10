@@ -1,0 +1,22 @@
+on:
+  push:
+    branches-ignore:
+      - master
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build Site
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Install Hugo
+        run: sudo apt install hugo
+
+      - name: Get theme
+        run: git clone https://github.com/chrisbodhi/hugo-goa themes/hugo-goa
+
+      - name: Generate site
+        run: hugo --theme=hugo-goa
