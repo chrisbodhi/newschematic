@@ -180,11 +180,9 @@ More directly, that diff looks like this:
 
 ## Ok, so now what?
 
-Earlier, I asked if Rust could have prevented this disaster. Facetiously, no, Rust hadn't been invented yet. More realistically, could Rust prevent a similar disaster in the future? Maybe. As an outsider to the industry, it seems that it would be harder to introduce a mismatched unit using Rust and newtypes when working on a project like this, but I don't know how those conversations go. Like I said, I'm an outsider. But, I do know that much of aerospace code is written in C and C++, which leads us to the question of how to interop Rust and C/C++ while still maintaining this level of expressive type safety.
+Could Rust prevent a similar disaster? The newtype system makes unit mismatches much harder to introduce. But prevention isn't just about the language—it's about the conversations between teams and the processes around critical calculations.
 
-There's something to say here about the cost of mistakes like this. One of the reasons that space is hard is because a single at-bat is so eye-wateringly expensive, and not even just for folks with a software background. Even for us software folks, though, our costs have really been ameliorized over time -- the application of Moore's Law (both the transistors fitting and the economics of it) coupled with many, many interested and smart and focused people trying to make computers faster, easier to use, and more thoroughly networked -- have all led to a plethora of choices for a single button click deploys of web applications with sub-100ms response times for 90% of the workd' population. And yeah, this is also standing on the shoulders of ARPAnet and its successors.
-
-It remains to be seen how Starship and the next generation of reusable rockets impact the costs of those at-bats. We have to be exploring and making use of all the tools we have at our disposal, regardless of what the cost per kilogram to orbit becomes. Because once we can be secure in our software, we can innovate faster in our hardware. (huh?)
+Aerospace code is still largely C and C++. The next technical question becomes: how do we bring this type safety to existing systems through interop while maintaining the expressiveness that prevents these costly mistakes?
 
 * * *
 
