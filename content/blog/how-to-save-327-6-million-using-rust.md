@@ -9,7 +9,7 @@ showpagemeta = true
 title = "How to save $327.6 million using Rust"
 +++
 
-It was 1999. In my memory, I'm in Mr. Wilson's chemistry class when I hear about the cause of the crash, but I'm not sure about that. What I am sure about, though, is the feeling: overwhelm at the sheer magnitude of the blunder. A $327.6 million spacecraft, in development for three years, traveling the vastness of space for ten months, lost in the Martian atmosphere in seconds, all because two teams were using two different sets of units.
+It was 1999. In my memory, I'm in Mr. Wilson's chemistry class when I hear about the cause of the crash, but I'm not sure about that. What I am sure about, though, is the feeling: overwhelm at the sheer magnitude of the blunder. $327.6 million spacecraft was lost in seconds. Three years of development. Ten months traveling through space. All because two teams used different units.
 
 Could Rust have prevented this disaster?
 
@@ -86,9 +86,9 @@ impl Meters {
 }
 ```
 
-<aside>We'll hold off on adding support for common mathematical operators, like `+` and `-`, because this makes the point.</aside>
+>We'll hold off on adding support for common mathematical operators, like `+` and `-`, because this makes the point.
 
-This may seem like a bunch of burdensome boilerplate, and depending on your use case, it could be! But, my intuition is that the underlying math for your units isn't going to change much, and this is exactly the kind of work to feed to your favorite LLM, which will also happily churn out complete unit test coverage and documentation for these methods.
+This looks like burdensome boilerplate. For some use cases, it is! But unit math rarely changes, making this perfect work for an LLM to generate along with tests and documentation.
 
 ## Seeing is believing
 
@@ -181,3 +181,11 @@ More directly, that diff looks like this:
 ## Ok, so now what?
 
 Earlier, I asked if Rust could have prevented this disaster. Facetiously, no, Rust hadn't been invented yet. More realistically, could Rust prevent a similar disaster in the future? Maybe. As an outsider to the industry, it seems that it would be harder to introduce a mismatched unit using Rust and newtypes when working on a project like this, but I don't know how those conversations go. Like I said, I'm an outsider. But, I do know that much of aerospace code is written in C and C++, which leads us to the question of how to interop Rust and C/C++ while still maintaining this level of expressive type safety.
+
+There's something to say here about the cost of mistakes like this. One of the reasons that space is hard is because a single at-bat is so eye-wateringly expensive, and not even just for folks with a software background. Even for us software folks, though, our costs have really been ameliorized over time -- the application of Moore's Law (both the transistors fitting and the economics of it) coupled with many, many interested and smart and focused people trying to make computers faster, easier to use, and more thoroughly networked -- have all led to a plethora of choices for a single button click deploys of web applications with sub-100ms response times for 90% of the workd' population. And yeah, this is also standing on the shoulders of ARPAnet and its successors.
+
+It remains to be seen how Starship and the next generation of reusable rockets impact the costs of those at-bats. We have to be exploring and making use of all the tools we have at our disposal, regardless of what the cost per kilogram to orbit becomes. Because once we can be secure in our software, we can innovate faster in our hardware. (huh?)
+
+* * *
+
+Read more about the Mars Climate Orbiter on [Wikipedia](https://en.wikipedia.org/wiki/Mars_Climate_Orbiter).
