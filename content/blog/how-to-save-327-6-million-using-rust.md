@@ -92,7 +92,9 @@ This looks like burdensome boilerplate. For some use cases, it is! But unit math
 
 ## Seeing is believing
 
-"But, wait," you say, "what about the runtime costs?" There are _no runtime costs_ with this approach. The compiler removes the newtypes and then the hardware treats the values as `f64`, or whatever they're defined to use, when executing the code. Weary about such a statement? I understand. So, take a look at these two examples in [Godbolt](https://godbolt.org/) to compare the generated assembly (Rust 1.89.0, with the `-O` flag set):
+"But, wait," you say, "what about the runtime costs?" There are _no runtime costs_ with this approach. This is what is meant when folks in the Rust community say "Zero Cost Abstractions." The compiler removes the newtypes and then the hardware treats the values as `f64`, or whatever they're defined to use, when executing the code.
+
+Weary about such a statement? I understand. So, take a look at these two examples in [Godbolt](https://godbolt.org/) to compare the generated assembly (Rust 1.89.0, with the `-O` flag set):
 
 _With newtypes_
 
@@ -182,8 +184,10 @@ More directly, that diff looks like this:
 
 Could Rust prevent a similar disaster? The newtype system makes unit mismatches much harder to introduce. But prevention isn't just about the language—it's about the conversations between teams and the processes around critical calculations.
 
-Aerospace code is still largely C and C++. The next technical question becomes: how do we bring this type safety to existing systems through interop while maintaining the expressiveness that prevents these costly mistakes?
+Aerospace code is still largely Ada, C, and C++. The next technical question becomes: how do we bring this type safety to existing systems through interop while maintaining the expressiveness that prevents these costly mistakes?
 
 * * *
 
 Read more about the Mars Climate Orbiter on [Wikipedia](https://en.wikipedia.org/wiki/Mars_Climate_Orbiter).
+
+_Thanks to Adam Melnyk for reviewing._
