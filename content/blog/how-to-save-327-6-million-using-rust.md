@@ -39,16 +39,21 @@ fn main() {
 And what can ensure that a consuming function will only accept values of this type? Rust's type system!
 
 ```rust
-fn calculate_area(radius: Meters) -> Meters {
+fn calculate_area(radius: Meters) -> MetersSquared {
     let area = std::f64::consts::PI * radius.0.powi(2);
-    Meters(area)
+    MetersSquared(area)
 }
 
-fn calculate_volume(radius: Meters) -> Meters {
+fn calculate_volume(radius: Meters) -> MetersCubed {
     let volume = std::f64::consts::PI * radius.0.powi(3);
-    Meters(volume)
+    MetersCubed(volume)
 }
+
+struct MetersCubed(f64);
+struct MetersSquared(f64);
 ```
+
+We'll, of course, need to define those return types more completely for them to be useful, much in the same way that we'll expand on `Meters` next.
 
 If accessing the underlying value with the `0` index gives you pause, you can define a method to access it:
 
@@ -94,7 +99,7 @@ This looks like burdensome boilerplate. For some use cases, it is! But unit math
 
 "But, wait," you say, "what about the runtime costs?" There are _no runtime costs_ with this approach. This is what is meant when folks in the Rust community say "Zero Cost Abstractions." The compiler removes the newtypes and then the hardware treats the values as `f64`, or whatever they're defined to use, when executing the code.
 
-Weary about such a statement? I understand. So, take a look at these two examples in [Godbolt](https://godbolt.org/) to compare the generated assembly (Rust 1.89.0, with the `-O` flag set):
+Wary about such a statement? I understand. So, take a look at these two examples in [Godbolt](https://godbolt.org/) to compare the generated assembly (Rust 1.89.0, with the `-O` flag set):
 
 _With newtypes_
 
@@ -190,4 +195,4 @@ Aerospace code is still largely Ada, C, and C++. The next technical question bec
 
 Read more about the Mars Climate Orbiter on [Wikipedia](https://en.wikipedia.org/wiki/Mars_Climate_Orbiter).
 
-_Thanks to Adam Melnyk for reviewing._
+_Thanks to Adam Melnyk and /r/rust for reviewing._
