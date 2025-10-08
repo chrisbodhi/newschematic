@@ -16,10 +16,11 @@ enableRobotsTXT = true
   description = "Like the smell of rain on a summer day: coding"
   dateFormat = "Jan 2, 2006"
   colortheme = "light"
+  math = false # Set to true in front matter for rendering with MathJax
 
 [params.meta]
-  description = "Online portfolio and blag for Chris Boette"
-  keywords = "Chris Boette, Boette, developer, software engineer, ruby, ruby on rails, javascript, typescript, web app dev, web development, MakerSquare, online portfolio, portfolio, Entertainment Technology Center, graduate"
+  description = "Online portfolio and blog for Chris Boette"
+  keywords = "Chris Boette, Boette, developer, software engineer, javascript, typescript, web app dev, web development, MakerSquare, online portfolio, portfolio, Carnegie Mellon University, Entertainment Technology Center, graduate"
   monetization = "$coil.xrptipbot.com/zP3gu5RkRVSdjBhe_fu3XA"
 
 [params.social]
@@ -70,5 +71,10 @@ enableRobotsTXT = true
   [markup.goldmark]
     [markup.goldmark.extensions]
       footnote = true
+      [markup.goldmark.extensions.passthrough]
+      enable = true
+      [markup.goldmark.extensions.passthrough.delimiters]
+        block = [['\[', '\]'], ['$$', '$$']]
+        inline = [['\(', '\)']]
     [markup.goldmark.renderer]
       unsafe = true
