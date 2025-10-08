@@ -22,7 +22,10 @@ jobs:
         run: ssh-keyscan -H ${{ secrets.DH_HOST }} >> ~/.ssh/known_hosts
 
       - name: Install Hugo
-        run: sudo apt install hugo
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y hugo
+          hugo version
 
       - name: Get theme
         run: git clone https://github.com/chrisbodhi/hugo-goa themes/hugo-goa
