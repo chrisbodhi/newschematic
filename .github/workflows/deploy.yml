@@ -10,7 +10,7 @@ jobs:
     name: Deploy to DH
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v5
 
       # Via https://github.com/zellwk/zellwk.com/blob/master/.github/workflows/deploy.yml
       - name: Install SSH Key
