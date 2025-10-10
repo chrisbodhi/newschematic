@@ -36,4 +36,4 @@ jobs:
           git pull
 
       - name: Generate site
-        run: hugo --minify --theme=hugo-goa
+        run: hugo --minify
