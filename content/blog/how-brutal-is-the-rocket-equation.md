@@ -78,6 +78,6 @@ The basic physics is inescapable.
 
 [^4]: Similar to [^2], but instead of subtracting the tether tip speed, we add it: \(7.67 + 2.4\).
 
-[^5]: With a translunar injection, the largest possible payload drops down to 43,500 kg &mdash 1.5% of the total mass.
+[^5]: With a translunar injection, the largest possible payload drops down to 43,500 kg &mdash; 1.5% of the total mass.
 
 [^6]: Starship weighs up to 4.99 million kg and will be able to deliver around 199,500 kg to LEO ([wikipedia](https://en.wikipedia.org/wiki/SpaceX_Starship))
