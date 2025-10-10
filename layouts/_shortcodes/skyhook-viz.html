@@ -3,24 +3,30 @@
 <!-- Fallback for users without JavaScript -->
 <noscript>
     <img
-        src="{{ .Site.BaseURL }}images/skyhook_visualization.png"
+        src="/img/skyhook_visualization.png"
         alt="The Tyranny of the Rocket Equation - How Skyhooks Reduce Delta-v Requirements"
         style="max-width: 100%; height: auto"
     />
 </noscript>
 
-{{ if not (.Page.Scratch.Get "skyhook-loaded") }}
-<!-- Load React, ReactDOM, and Recharts from CDN (only once per page) -->
+<!-- Load React, React Is, ReactDOM, and Recharts from CDN -->
 <script
     crossorigin
     src="https://unpkg.com/react@18/umd/react.production.min.js"
 ></script>
 <script
     crossorigin
+    src="https://unpkg.com/react-is@18/umd/react-is.production.min.js"
+></script>
+
+<script
+    crossorigin
     src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"
 ></script>
-<script src="https://unpkg.com/recharts@2.5.0/dist/Recharts.js"></script>
-<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-{{ .Page.Scratch.Set "skyhook-loaded" true }} {{ end }}
+<script src="https://unpkg.com/recharts@3.2.1/umd/Recharts.js"></script>
+<script
+    crossorigin
+    src="https://unpkg.com/@babel/standalone/babel.min.js"
+></script>
 
-<script type="text/babel" src="{{ .Site.BaseURL }}js/skyhook-viz.js"></script>
+<script type="text/babel" src="/js/skyhook-viz.js"></script>
