@@ -9,17 +9,31 @@ jobs:
   build:
     name: Build Site
     runs-on: ubuntu-latest
+    env:
+      HUGO_CACHEDIR: /tmp/hugo_cache # <- Define the env variable here, so that Hugo's cache dir is now predictible in your workflow and doesn't depend on the Hugo's version you're using.
+      HUGO_ENV: production
+
     steps:
       - uses: actions/checkout@v5
 
-      - name: Install Hugo
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y hugo
-          hugo version
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: "0.151.0"
+          extended: true
+
+      - uses: actions/cache@v4
+        with:
+          path: ${{ env.HUGO_CACHEDIR }} # <- Use the same env variable just right here
+          key: ${{ runner.os }}-hugomod-${{ hashFiles('**/go.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-hugomod-
 
       - name: Get theme
-        run: git clone https://github.com/chrisbodhi/hugo-goa themes/hugo-goa
+        run: |
+          git clone https://github.com/adityatelange/hugo-PaperMod themes/PaperMod --depth=1
+          cd themes/PaperMod
+          git pull
 
       - name: Generate site
-        run: hugo --theme=hugo-goa
+        run: hugo --minify

@@ -73,7 +73,8 @@ That's 9.3, _more than double the mass ratio_, which means that's more than twic
 
 **17.76**.
 
-[^1] "bowing to the tyranny of the rocket equation" link on substack
+[^1]: "bowing to the tyranny of the rocket equation" link on substack
+
 [^2] Briefly, the base of the tether system at \(400 km\) is traveling at about \(7.67 km/s\) to stay in orbit. At the lowest point (closest to Earth), the tether tip is traveling at the orbital speed minus the speed at which the tether is rotating (\(2.4 km/s\)). So, \(5.27 km/s\).
 [^3] "...typical rocket exhaust velocity of v_e ≈ 3.5 km/s (reasonable for a kerosene/LOX engine)." TODO -- add citation
 [^4] Similar to [^2], but instead of subtracting the tether tip speed, we add it: \(7.67 + 2.4\).

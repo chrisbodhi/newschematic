@@ -1,33 +1,52 @@
 baseurl = "https://newschematic.org/"
 title = "New Schematic"
 languageCode = "en-us"
-theme = "hugo-goa"
+theme = "PaperMod"
 footnoteReturnLinkContents = "↩"
 enableEmoji = true
 
-author = "Chris Boette"
-copyright = "Chris Boette, CC by-sa-nc"
+author = "Christopher Boette"
+copyright = "Christopher Boette, CC by-sa-nc"
 enableRobotsTXT = true
 
 [params]
-  author = "Chris Boette"
+  author = "Christopher Boette"
   intro = "Software Engineer, with a focus on Web"
   authorImage = "me.jpg"
   description = "Like the smell of rain on a summer day: coding"
   dateFormat = "Jan 2, 2006"
-  colortheme = "light"
+  defaultTheme = "auto"
   math = false # Set to true in front matter for rendering with MathJax
+
+[params.profileMode]
+  enabled = true
+  title = "Christopher Boette"
+  subtitle = "Software Engineer, with a focus on Web\n\n_Like the smell of rain on a summer day: coding_"
+  imageUrl = "img/me.jpg"
+  imageTitle = "Christopher Boette, by Larry Suarez"
+  imageWidth = 120
+  imageHeight = 120
+
+[[params.socialIcons]]
+   name = "GitHub"
+   url = "https://github.com/chrisbodhi"
+[[params.socialIcons]]
+   name = "LinkedIn"
+   url = "https://www.linkedin.com/in/chrisboette/"
+[[params.socialIcons]]
+   name = "Substack"
+   url = "https://chrisbodhi.substack.com/profile/posts"
+[[params.socialIcons]]
+   name = "Twitter"
+   url = "https://twitter.com/chrisbodhi"
+[[params.socialIcons]]
+   name = "RSS"
+   url = "https://newschematic.org/blog/index.xml"
 
 [params.meta]
   description = "Online portfolio and blog for Chris Boette"
   keywords = "Chris Boette, Boette, developer, software engineer, javascript, typescript, web app dev, web development, MakerSquare, online portfolio, portfolio, Carnegie Mellon University, Entertainment Technology Center, graduate"
   monetization = "$coil.xrptipbot.com/zP3gu5RkRVSdjBhe_fu3XA"
-
-[params.social]
-  github = "chrisbodhi"
-  linkedIn = "chrisboette"
-  twitter = "chrisbodhi"
-  stackoverflow = "2276791/yossarian"
 
 [params.extra]
   poweredBy = true
@@ -36,6 +55,13 @@ enableRobotsTXT = true
   rss = true # Display next to social icons
   displayrssicon = false # Hide in footer
 
+[[outputs]]
+  home = "html"
+[[outputs]]
+  home = "rss"
+[[outputs]]
+  home = "json"
+
 [[menu.main]]
   name = "now"
   weight = 100
@@ -43,27 +69,27 @@ enableRobotsTXT = true
   url = "/now"
 [[menu.main]]
   name = "blog"
-  weight = 100
+  weight = 200
   identifier = "blog"
   url = "/blog/"
 [[menu.main]]
   name = "projects"
-  weight = 100
+  weight = 300
   identifier = "projects"
   url = "/projects/"
 [[menu.main]]
   name = "resume"
-  weight = 100
+  weight = 400
   identifier = "resume"
   url = "/resume"
 [[menu.main]]
   name = "reference"
-  weight = 100
+  weight = 600
   identifier = "reference"
   url = "/reference/"
 [[menu.main]]
   name = "talks"
-  weight = 100
+  weight = 500
   identifier = "talks"
   url = "/talks/"
 

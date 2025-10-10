@@ -27,7 +27,7 @@ In considering the potential of one's efficacy, we must consider environment as 
 
 * * *
 
-![Year-round allergies](http://images.twcnews.com/tx/weather/AUS_Seasonal_Allergens.jpg)
+![Year-round allergies](http://images.twcnews.com/tx/weather/AUS_Seasonal_Allergens.jpg#center)
 
 * * *
 
