@@ -48,19 +48,8 @@ enableRobotsTXT = true
   keywords = "Chris Boette, Boette, developer, software engineer, javascript, typescript, web app dev, web development, MakerSquare, online portfolio, portfolio, Carnegie Mellon University, Entertainment Technology Center, graduate"
   monetization = "$coil.xrptipbot.com/zP3gu5RkRVSdjBhe_fu3XA"
 
-[params.extra]
-  poweredBy = true
-  highlightJS = true
-  socialmarkup = true
-  rss = true # Display next to social icons
-  displayrssicon = false # Hide in footer
-
-[[outputs]]
-  home = "html"
-[[outputs]]
-  home = "rss"
-[[outputs]]
-  home = "json"
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
 
 [[menu.main]]
   name = "now"
