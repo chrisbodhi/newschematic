@@ -13,7 +13,7 @@ title = "A lunar calculation with Almagest"
 
 **BLUF**
 
-A momentum-exchange tether in Earth orbit can deliver a payload to the Moon with [] times less fuel than a rocket. The savings multiply when there's another tether around the Moon to send a payload back, if only for the fact that we do not have to send fuel (mass) for the return trip. I'm developing a simulation tool called Almagest to run tether calculations. Almagest is the foundational piece of software for this tether network, for everything from planning to web-based simulations, even for the embedded systems that will power the tethers themselves.
+A momentum-exchange tether in Earth orbit can deliver a payload to the Moon with [] times less [fuel than a rocket](https://newschematic.org/blog/how-brutal-is-the-rocket-equation/). The savings multiply when there's another tether around the Moon to send a payload back, if only for the fact that we do not have to send fuel (mass) for the return trip. I'm developing a simulation tool called Almagest to run tether calculations. Almagest is the foundational piece of software for this tether network, for everything from planning to web-based simulations, even for the embedded systems that will power the tethers themselves.
 
 * * *
 
