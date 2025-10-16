@@ -1,7 +1,7 @@
 +++
 title = "now"
 draft = false
-date = "2024-01-09T00:20:45-05:00"
+date = "2025-10-15T00:20:45-05:00"
 categories = []
 tags = []
 
@@ -9,32 +9,30 @@ tags = []
 
 * * *
 
-_This year's theme: Duty, Joyfully_
+_This year's theme: Just worry about being good today_
 
 * * *
 
-Engineering software seniorly at [data.world](https://data.world)
+Engineering software seniorly at [ServiceNow](https://www.servicenow.com) (acquired)
 
 **Consistently**
 
-  - Three complete meals a day, protein supplement after exercise
-  - Bed before 11pm
-  - Lifting, rucking, running: TB's Green Protocol
+  - Three complete meals a day, protein and creatine supplement after exercise
+  - Bedroom by 10pm
+  - Lifting: working toward a 135-pound overhead press by the end of the year
   - "If it's your job to eat a frog, it's best to do it first thing in the morning. And If it's your job to eat two frogs, it's best to eat the biggest one first." N.B. it helps to find the frogs the day before
 
 **Reading**
 
-  - _Back in the Fight: The Explosive Memoir of a Special Operator Who Never Gave Up_, Joseph Kapacziewski and Charles W. Sasser 
+  - _BOOM_, Hobart and Huber (leaning away from my compulsion to buy everything published by Stripe Press, but never finishing the books)
 
 **Listening**
 
-  - Pneumatic tools at the mechanic
-  - Hum of the vending machine
-  - Rain pitter pattering (very welcomed)
+  - Baby sighs while she's snoozing
 
 **Making**
 
-  - Plans! Big plans!
+  - [Calculations](https://newschematic.org/blog/how-brutal-is-the-rocket-equation/)
 
 * * *
 
