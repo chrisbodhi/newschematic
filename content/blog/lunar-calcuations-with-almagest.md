@@ -1,6 +1,6 @@
 +++
 date = "2025-10-13T07:33:27-05:00"
-draft = false
+draft = true
 categories = ["programming", "almagest",]
 tags = ["rust", "aerospace", "space",]
 comments = false
