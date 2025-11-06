@@ -1,7 +1,7 @@
 +++
 title = "now"
 draft = false
-date = "2025-11-03T00:20:45-05:00"
+date = "2025-11-05T00:19:45-05:00"
 categories = []
 tags = []
 
@@ -29,6 +29,7 @@ Engineering software seniorly at [ServiceNow](https://www.servicenow.com) (acqui
 **Listening**
 
   - Baby sighs while she's snoozing
+  - [MIT machine shop instruction from the mid 90's](https://youtube.com/playlist?list=PLF06SHGgSg4Fk5-yeh8DN3g6ZgaM0tbk7&si=Yc6q-E9iltxr5XKB)
 
 **Making**
 
