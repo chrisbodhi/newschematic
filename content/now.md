@@ -1,7 +1,7 @@
 +++
 title = "now"
 draft = false
-date = "2025-12-08T00:19:45-05:00"
+date = "2026-01-03T00:19:45-05:00"
 categories = []
 tags = []
 
@@ -9,7 +9,14 @@ tags = []
 
 * * *
 
-_This year's theme: Just be good today_
+_This year's theme: On the lookout for knuckle-busters_
+
+Knuckle-busters being those jammed up spots
+that resist any movement, but block all progress.
+Finally getting them unstuck stings for a moment,
+but you get to move on. Sometimes, you even
+figure out a new trick to try on the next
+stuck thing.
 
 * * *
 
