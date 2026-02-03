@@ -1,7 +1,11 @@
 +++
 title = "now"
 draft = false
+<<<<<<< HEAD
 date = "2026-02-05T00:19:45-05:00"
+=======
+date = "2026-02-02T00:19:45-05:00"
+>>>>>>> 6454a82 (Update now.)
 categories = []
 tags = []
 
