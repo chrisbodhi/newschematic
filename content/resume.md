@@ -20,11 +20,14 @@ _Dabbling_: Rust, Terraform
 ## Professional Experience
 
 ### [ServiceNow](https://www.servicenow.com)
-_How the world works_
+_Put AI to work_
 
 ##### senior software engineer | 2025 to present
 
 - Joined as part of acquisition of data.world
+- Maintaining AWS infrastructure for legacy data.world applications
+- Migrated the release process for 40 repositories from Slack to GitHub Actions and MS Teams
+- Rewrote code release audit flow for SOC 2 reporting following migration off of Slack
 
 ### [data.world](https://data.world)
 _Modern Data Catalog for Analysis & Teamwork_
