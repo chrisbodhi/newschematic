@@ -13,9 +13,9 @@ Itinerant learner and dreamer. Expressing thoughts in code while allowing others
 
 _Strong_: TypeScript, JavaScript [ES5 and ES6+], React, Git, RESTful APIs
 
-_Experienced_: Node.js, CSS, Shell scripting, Go, Python, containerization, miscellaneous AWS services
+_Experienced_: Node.js, CSS, Shell scripting, Python, containerization, Go, miscellaneous AWS services
 
-_Dabbling_: Rust, Java
+_Dabbling_: Rust, Terraform
 
 ## Professional Experience
 
