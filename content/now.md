@@ -1,7 +1,7 @@
 +++
 title = "now"
 draft = false
-date = "2026-01-03T00:19:45-05:00"
+date = "2026-02-05T00:19:45-05:00"
 categories = []
 tags = []
 
@@ -26,22 +26,21 @@ Engineering software seniorly at [ServiceNow](https://www.servicenow.com) (acqui
 
   - Three complete meals a day, protein and creatine supplement after exercise
   - Bedroom by 11pm
-  - Dreaming of lifting while my shoulder heals; time to get back into running?
+  - Dreaming of lifting while my shoulder heals; time to get back into running? In the snow?
   - "If it's your job to eat a frog, it's best to do it first thing in the morning. And If it's your job to eat two frogs, it's best to eat the biggest one first." N.B. it helps to find the frogs the day before
-
-**Reading**
-
-  - _Make: Electronics_
-
-**Listening**
-
-  - Baby sighs while she's snoozing
-  - [MIT machine shop instruction from the mid 90's](https://youtube.com/playlist?list=PLF06SHGgSg4Fk5-yeh8DN3g6ZgaM0tbk7&si=Yc6q-E9iltxr5XKB)
 
 **Making**
 
-A steel thread to validate this idea: via web form, it's possible to specify parameters for an object (within a narrow range) and then download a generated STEP file of that object. The server and frontend is done, so I'm now learning CAD.
- 
+A steel thread to validate this idea: via web form, it's possible to specify parameters for an object (within a narrow range) and then download a generated STEP file of that object. It lives here: [https://platerator.newschematic.org](https://platerator.newschematic.org) The next question is going to be around creating an order queue.
+
+**Reading**
+
+  - _Till We Have Faces_, C.S. Lewis
+
+**Listening**
+
+  - Baby laughing while she's getting tickled
+  - [MIT machine shop instruction from the mid 90's](https://youtube.com/playlist?list=PLF06SHGgSg4Fk5-yeh8DN3g6ZgaM0tbk7&si=Yc6q-E9iltxr5XKB)
 
 * * *
 
