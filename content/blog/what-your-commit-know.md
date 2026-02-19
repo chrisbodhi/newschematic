@@ -1,7 +1,7 @@
 +++
 title = "What Your Commits Know That Your Resume Doesn't"
 date = "2026-02-06T14:00:00-05:00"
-draft = false
+draft = true
 categories = ["programming"]
 tags = ["git", "tools", "visualization"]
 comments = false
