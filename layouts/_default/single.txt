@@ -1,0 +1,6 @@
+{{- .RawContent | safeHTML }}
+{{ range site.RegularPages }}
+{{- with .OutputFormats.Get "markdown" }}
+- [{{ $.Title }}]({{ .Permalink }})
+{{- end }}
+{{- end }}
