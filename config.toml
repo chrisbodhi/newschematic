@@ -51,6 +51,21 @@ enableRobotsTXT = true
 [outputs]
   home = ["HTML", "RSS", "JSON"]
 
+[mediaTypes]
+  [mediaTypes.'text/plain']
+    suffixes = ['txt']
+
+[outputFormats]
+  [outputFormats.llms]
+    mediaType = 'text/plain'
+    isPlainText = true
+    baseName = "llms"
+    root = true
+  [outputFormats.markdown]
+    mediaType = 'text/plain'
+    isPlainText = true
+    suffix = 'md'
+
 [[menu.main]]
   name = "now"
   weight = 100

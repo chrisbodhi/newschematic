@@ -10,8 +10,6 @@ showpagemeta = true
 description = "Building git-log-carver to chart actual work distribution from commit history"
 +++
 
-## What Your Commits Know That Your Resume Doesn't
-
 Your resume summarizes three years at a job in a bullet point. Your git history knows the truth: which languages you actually touched, when, and how much of your energy went where. Here's how I made that visible.
 
 ## The Gap
@@ -35,4 +33,3 @@ The output feeds directly into Chart.js on the resume page. Each language gets i
 ## What This Revealed
 
 Honest reflection on what you learn about your own work patterns. Why small, focused tools that output JSON are better than big dashboards. The value of making invisible work visible.
-

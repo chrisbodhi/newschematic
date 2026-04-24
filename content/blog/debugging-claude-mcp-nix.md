@@ -9,8 +9,6 @@ showpagemeta = true
 toc = false
 +++
 
-# Debugging Claude's MCP Server with Nix
-
 When I first started using Claude with my Nix-managed development environment, I ran into an interesting issue. The default examples for starting a local MCP (Model Context Protocol) server with `npx` were giving me cryptic error messages whenever I tried to restart Claude:
 
 ```
