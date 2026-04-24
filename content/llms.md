@@ -15,11 +15,13 @@ Current making interest: a web service that generates STEP files from user-speci
 
 ## Blog
 
-- [How brutal is the rocket equation?](https://newschematic.org/blog/TODO): An analysis of delta-v costs and why momentum-exchange tethers are compelling for orbital logistics.
-- [How to save $327.6 million using Rust](https://newschematic.org/blog/TODO): Uses the 1999 Mars Climate Orbiter unit mismatch as a lens for Rust's type system and compile-time safety guarantees.
-- [Debugging Claude's MCP Server with Nix](https://newschematic.org/blog/TODO): Walkthrough of diagnosing `spawn ENOENT` errors when running MCP servers in a Nix-managed dev environment.
-- [Default On vs Default Off](https://newschematic.org/blog/TODO): Short essay on two modes of operating: proactive vs reactive, and what each costs.
-- [All posts](https://newschematic.org/blog/): Full archive.
+- [Herzog's Rules for Startups](https://newschematic.org/blog/herzogs-rules-for-startups/): An idea of how to reframe Herzog's famed rulers for filmmakers 
+- [It's actually velocity debt, not technical debt](https://newschematic.org/blog/its-actually-velocity-debt-not-technical/): PM's need to think "velocity debt" when they hear "technical debt," which is a loaded term already
+- [How brutal is the rocket equation?](https://newschematic.org/blog/how-brutal-is-the-rocket-equation/): An analysis of delta-v costs and why momentum-exchange tethers are compelling for orbital logistics
+- [How to save $327.6 million using Rust](https://newschematic.org/blog/how-to-save-327-6-million-using-rust/): Uses the 1999 Mars Climate Orbiter unit mismatch as a lens for Rust's type system and compile-time safety guarantees
+- [Debugging Claude's MCP Server with Nix](https://newschematic.org/blog/debugging-claude-mcp-nix/): Walkthrough of diagnosing `spawn ENOENT` errors when running MCP servers in a Nix-managed dev environment
+- [Default On vs Default Off](https://newschematic.org/blog/default-on-vs-default-off/): Short essay on two modes of operating: proactive vs reactive, and what each costs
+- [All posts](https://newschematic.org/blog/): Full archive
 
 ## Projects
 
