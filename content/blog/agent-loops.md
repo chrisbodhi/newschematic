@@ -1,5 +1,5 @@
 +++
-title = "Agent loops"
+title = "Baby's first agentic loop"
 date = "2026-05-11T14:00:00-05:00"
 draft = false
 categories = []
