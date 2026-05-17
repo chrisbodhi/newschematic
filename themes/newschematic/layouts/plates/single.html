@@ -1,0 +1,37 @@
+{{ define "main" }}
+<article class="ns-plate-page">
+
+  <div class="ns-essay-runhead">
+    <span class="ns-mono">Plate · Fig. {{ .Params.fig | default (printf "%03d" .File.Dir) }}</span>
+    <span class="ns-mono ns-oxblood">{{ partial "roman.html" .Date.Year }}</span>
+  </div>
+
+  <header class="ns-plate-head">
+    <h1 class="ns-plate-title">{{ .Title }}</h1>
+    {{ with .Params.deck }}<p class="ns-deck">{{ . | safeHTML }}</p>{{ end }}
+  </header>
+
+  {{- /* The figure itself — large, bordered, centered */ -}}
+  <figure class="ns-plate-figure">
+    <div class="ns-plate-frame">
+      {{ if .Params.image }}
+        <img src="{{ .Params.image | relURL }}" alt="{{ .Params.alt | default .Title }}">
+      {{ else }}
+        {{ .Content }}
+      {{ end }}
+    </div>
+    {{ with .Params.caption }}
+      <figcaption>
+        <span class="ns-fig">Fig. {{ $.Params.fig | default "—" }}</span>
+        <span class="ns-italic">{{ . | safeHTML }}</span>
+      </figcaption>
+    {{ end }}
+  </figure>
+
+  {{- /* If there's body content beyond the figure, show it below */ -}}
+  {{ if and .Params.image .Content }}
+    <div class="ns-essay-body">{{ .Content }}</div>
+  {{ end }}
+
+</article>
+{{ end }}

@@ -1,0 +1,52 @@
+{{ define "main" }}
+<article class="ns-project-page">
+
+  <div class="ns-essay-runhead">
+    <span class="ns-mono">Project · {{ .Params.codename | default (.Title | lower) }}</span>
+    <span class="ns-mono ns-oxblood">{{ .Params.status | default "in progress" }}</span>
+  </div>
+
+  <header class="ns-project-head">
+    <h1 class="ns-project-title">{{ .Title }}</h1>
+    {{ with .Params.deck }}<p class="ns-deck">{{ . | safeHTML }}</p>{{ end }}
+  </header>
+
+  {{- /* Specs card: stack, status, dates, links — structured like a parts list */ -}}
+  <aside class="ns-project-specs">
+    <dl>
+      {{ with .Params.stack }}
+        <dt>Stack</dt>
+        <dd>{{ delimit . ", " }}</dd>
+      {{ end }}
+      {{ with .Params.status }}
+        <dt>Status</dt>
+        <dd>{{ . }}</dd>
+      {{ end }}
+      {{ if not .Date.IsZero }}
+        <dt>Started</dt>
+        <dd>{{ .Date.Format "January 2006" }}</dd>
+      {{ end }}
+      {{ with .Params.repo }}
+        <dt>Repo</dt>
+        <dd><a href="{{ . }}">{{ . | replaceRE "https?://" "" }}</a></dd>
+      {{ end }}
+      {{ with .Params.demo }}
+        <dt>Demo</dt>
+        <dd><a href="{{ . }}">{{ . | replaceRE "https?://" "" }}</a></dd>
+      {{ end }}
+    </dl>
+  </aside>
+
+  <div class="ns-essay-body">
+    {{ .Content }}
+  </div>
+
+  {{ if or .PrevInSection .NextInSection }}
+    <nav class="ns-essay-nav" aria-label="Project navigation">
+      {{ with .PrevInSection }}<a href="{{ .RelPermalink }}" class="ns-essay-nav-prev"><span class="ns-mono ns-sepia">← previous</span><span class="ns-italic">{{ .Title }}</span></a>{{ else }}<span></span>{{ end }}
+      {{ with .NextInSection }}<a href="{{ .RelPermalink }}" class="ns-essay-nav-next"><span class="ns-mono ns-sepia">next →</span><span class="ns-italic">{{ .Title }}</span></a>{{ else }}<span></span>{{ end }}
+    </nav>
+  {{ end }}
+
+</article>
+{{ end }}

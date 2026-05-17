@@ -1,0 +1,18 @@
+{{- /*
+  Pull quote shortcode. Large italic text with oxblood left rule.
+
+  Usage:
+    {{< pull >}}
+    It is easier, now, to make a thousand bad diagrams than one good one.
+    {{< /pull >}}
+
+  Or with named attribution:
+    {{< pull cite="from Fig. 3, on the discipline of small plates" >}}
+    The dashboard is a kind of panic.
+    {{< /pull >}}
+*/ -}}
+{{- $cite := .Get "cite" -}}
+<aside class="ns-pull">
+  <p>{{ .Inner | .Page.RenderString }}</p>
+  {{ with $cite }}<cite class="ns-mono ns-sepia">{{ . }}</cite>{{ end }}
+</aside>

@@ -1,0 +1,22 @@
+{{- /*
+  Drop-cap shortcode. Wraps the first letter of a paragraph in
+  the oversized oxblood initial from the identity system.
+
+  Usage — wrap around the full first paragraph:
+    {{< drop >}}
+    There is a particular kind of drawing that engineers of a certain
+    generation could make in fifteen minutes with a mechanical pencil…
+    {{< /drop >}}
+
+  Goldmark wraps the inner content in <p>...</p>, so we strip that
+  wrapper before picking the first character to float as the drop cap.
+*/ -}}
+{{- $content := .Inner | .Page.RenderString -}}
+{{- $trimmed := $content | strings.TrimSpace -}}
+{{- /* Strip a leading <p> and trailing </p> if Goldmark added them */ -}}
+{{- $stripped := $trimmed | replaceRE `^<p[^>]*>` "" | replaceRE `</p>\s*$` "" -}}
+{{- $first := substr $stripped 0 1 -}}
+{{- $rest := substr $stripped 1 -}}
+<p class="ns-full ns-drop-para">
+  <span class="ns-drop">{{ $first }}</span>{{ $rest | safeHTML }}
+</p>

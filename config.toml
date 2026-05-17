@@ -1,7 +1,7 @@
 baseurl = "https://newschematic.org/"
 title = "New Schematic"
 languageCode = "en-us"
-theme = "PaperMod"
+theme = "newschematic"
 footnoteReturnLinkContents = "↩"
 enableEmoji = true
 

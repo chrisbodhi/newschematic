@@ -1,0 +1,66 @@
+{{ define "main" }}
+<article class="ns-essay">
+
+  {{- /* Running head: essay number + issue */ -}}
+  <div class="ns-essay-runhead">
+    <span class="ns-mono">Essay · № {{ .Params.number | default (printf "%02d" (add 1 (len (where .Site.RegularPages "Section" "essays" "ge" .Date)))) }}</span>
+    <span class="ns-mono ns-oxblood">{{ partial "roman.html" .Date.Year }}</span>
+  </div>
+
+  <header class="ns-essay-head">
+    <h1 class="ns-essay-title">{{ .Title | safeHTML }}</h1>
+
+    {{ with .Params.deck }}
+      <p class="ns-deck ns-essay-deck">{{ . | safeHTML }}</p>
+    {{ end }}
+
+    <div class="ns-essay-meta">
+      {{ with .Params.author | default .Site.Params.author }}
+        <span>{{ . }}</span><span class="ns-sep">·</span>
+      {{ end }}
+      <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 January 2006" }}</time>
+      {{ with .ReadingTime }}
+        <span class="ns-sep">·</span><span>{{ . }}-minute read</span>
+      {{ end }}
+      {{ with .Params.tags }}
+        <span class="ns-sep">·</span>
+        {{ range $i, $tag := . }}{{ if $i }}, {{ end }}<a href="{{ "/tags/" | relURL }}{{ $tag | urlize }}">{{ $tag }}</a>{{ end }}
+      {{ end }}
+    </div>
+  </header>
+
+  <div class="ns-essay-body">
+    {{ .Content }}
+  </div>
+
+  {{- /* Foot ornament — a small datum mark, then the footer block */ -}}
+  <div class="ns-essay-ornament" aria-hidden="true">
+    <svg viewBox="0 0 60 24" width="60" height="24">
+      <path d="M4 12 L24 12" stroke="currentColor" stroke-width="0.5"/>
+      <circle cx="30" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="0.5"/>
+      <circle cx="30" cy="12" r="1.2" fill="var(--ns-oxblood)"/>
+      <path d="M36 12 L56 12" stroke="currentColor" stroke-width="0.5"/>
+    </svg>
+  </div>
+
+  {{- /* Prev/next navigation */ -}}
+  {{ if or .PrevInSection .NextInSection }}
+    <nav class="ns-essay-nav" aria-label="Essay navigation">
+      {{ with .PrevInSection }}
+        <a href="{{ .RelPermalink }}" class="ns-essay-nav-prev">
+          <span class="ns-mono ns-sepia">← previous</span>
+          <span class="ns-italic">{{ .Title }}</span>
+        </a>
+      {{ else }}<span></span>{{ end }}
+
+      {{ with .NextInSection }}
+        <a href="{{ .RelPermalink }}" class="ns-essay-nav-next">
+          <span class="ns-mono ns-sepia">next →</span>
+          <span class="ns-italic">{{ .Title }}</span>
+        </a>
+      {{ else }}<span></span>{{ end }}
+    </nav>
+  {{ end }}
+
+</article>
+{{ end }}

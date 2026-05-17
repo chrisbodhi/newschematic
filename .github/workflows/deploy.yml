@@ -37,11 +37,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-hugomod-
 
-      - name: Get theme
-        run: |
-          git clone https://github.com/adityatelange/hugo-PaperMod themes/PaperMod --depth=1
-          cd themes/PaperMod
-          git pull
 
       - name: Generate site
         run: hugo --minify

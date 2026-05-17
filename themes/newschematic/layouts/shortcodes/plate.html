@@ -1,0 +1,39 @@
+{{- /*
+  Plate shortcode — a figure-numbered bordered container for diagrams,
+  images, or blockquote-style callouts embedded in essay prose.
+
+  Named parameters:
+    fig      — figure number (e.g. "1", "i", "2a")
+    caption  — italic caption below the plate
+    dashed   — use dashed border (default: solid)
+    src      — image src (optional; if omitted, use shortcode body)
+    alt      — image alt text (if src is provided)
+
+  Examples:
+    {{< plate fig="1" caption="The anatomy of a small plate." >}}
+    ...SVG or content here...
+    {{< /plate >}}
+
+    {{< plate fig="2" caption="Orbit, near apogee." src="/images/orbit.png" alt="Orbital diagram" />}}
+*/ -}}
+{{- $fig := .Get "fig" -}}
+{{- $caption := .Get "caption" -}}
+{{- $dashed := .Get "dashed" -}}
+{{- $src := .Get "src" -}}
+{{- $alt := .Get "alt" | default $caption -}}
+
+<figure class="ns-plate-figure">
+  <div class="ns-plate{{ if $dashed }} ns-plate--dashed{{ end }}">
+    {{ if $src }}
+      <img src="{{ $src | relURL }}" alt="{{ $alt }}">
+    {{ else }}
+      {{ .Inner }}
+    {{ end }}
+  </div>
+  {{ if or $fig $caption }}
+    <figcaption>
+      {{ with $fig }}<span class="ns-fig">Fig. {{ . }}</span>{{ end }}
+      {{ with $caption }}<span class="ns-italic">{{ . | safeHTML }}</span>{{ end }}
+    </figcaption>
+  {{ end }}
+</figure>

@@ -1,0 +1,24 @@
+<footer class="ns-site-foot">
+  <div class="ns-site-foot-rule"></div>
+  <div class="ns-site-foot-inner">
+
+    <div class="ns-colophon">
+      <span class="ns-mono">{{ partial "roman.html" now.Year }}</span>
+      <span class="ns-sep">·</span>
+      <span class="ns-italic ns-sepia">
+        {{ with .Site.Params.colophon }}{{ . | safeHTML }}{{ else }}
+          Set in Iowan Old Style and IBM Plex Mono. Machine-built with Hugo.
+        {{ end }}
+      </span>
+    </div>
+
+    <nav class="ns-site-foot-nav" aria-label="Footer">
+      {{ range .Site.Menus.foot }}
+        <a href="{{ .URL | relURL }}">{{ .Name }}</a>
+      {{ end }}
+      {{ with .OutputFormats.Get "rss" }}
+        <a href="{{ .Permalink }}" rel="alternate" type="application/rss+xml">RSS</a>
+      {{ end }}
+    </nav>
+  </div>
+</footer>

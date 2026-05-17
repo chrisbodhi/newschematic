@@ -1,0 +1,53 @@
+{{- /*
+  Roman numeral partial.
+
+  Converts a positive integer (1..3999) to its Roman numeral representation
+  using the standard subtractive form (IV, IX, XL, XC, CD, CM).
+
+  Usage:
+    {{ partial "roman.html" 2026 }}     → MMXXVI
+    {{ partial "roman.html" now.Year }} → current year in Roman
+    {{ partial "roman.html" .Date.Year }}
+
+  The partial is whitespace-tight by design — no leading/trailing newlines —
+  so it composes cleanly inside other templates.
+
+  Input validation:
+    - 0 or negative   → empty string
+    - > 3999          → empty string (Roman numerals traditionally cap at
+                         3999 in standard form; higher values need a vinculum)
+*/ -}}
+
+{{- $n := . -}}
+{{- $out := "" -}}
+
+{{- if and (gt $n 0) (le $n 3999) -}}
+  {{- /* Descending value table. Order matters — greedy matching. */ -}}
+  {{- $table := slice
+      (slice 1000 "M")
+      (slice  900 "CM")
+      (slice  500 "D")
+      (slice  400 "CD")
+      (slice  100 "C")
+      (slice   90 "XC")
+      (slice   50 "L")
+      (slice   40 "XL")
+      (slice   10 "X")
+      (slice    9 "IX")
+      (slice    5 "V")
+      (slice    4 "IV")
+      (slice    1 "I")
+  -}}
+
+  {{- range $table -}}
+    {{- $val := index . 0 -}}
+    {{- $sym := index . 1 -}}
+    {{- $count := math.Floor (div $n $val) -}}
+    {{- range seq (int $count) -}}
+      {{- $out = printf "%s%s" $out $sym -}}
+    {{- end -}}
+    {{- $n = math.Mod $n $val -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $out -}}

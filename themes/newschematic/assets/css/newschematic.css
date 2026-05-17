@@ -1,0 +1,1125 @@
+/* ============================================================
+   newschematic.css
+   A utility + element layer for the newschematic identity.
+   Paper-warm, ink-black, oxblood-signaled. Serif throughout.
+
+   Usage:
+     <link rel="stylesheet" href="newschematic.css">
+   Then write semantic HTML. Reach for utility classes only
+   for the distinctive moves: plates, figure numbers, running
+   heads, corner ticks, drop caps, oxblood emphasis.
+   ============================================================ */
+
+/* ---- 1. Tokens ---------------------------------------------- */
+
+:root {
+  /* Palette */
+  --ns-paper:    #F4EFE3;  /* Foolscap — ground */
+  --ns-paper-2:  #FFFCF4;  /* raised surfaces, plate fills */
+  --ns-ink:      #1C1917;  /* primary type */
+  --ns-ink-soft: rgba(28, 25, 23, 0.7);
+  --ns-rule:     rgba(28, 25, 23, 0.35);
+  --ns-rule-faint: rgba(28, 25, 23, 0.2);
+
+  --ns-oxblood:   #6B1D1D;  /* signal — links, emphasis, drops */
+  --ns-oxblood-2: #8B2A2A;  /* hover */
+  --ns-sepia:     #5C4B3B;  /* secondary type, captions */
+  --ns-verdigris: #3D5949;  /* accent i — organic / growing */
+  --ns-goldleaf:  #A47831;  /* accent ii — honor / highlight */
+
+  /* Type */
+  --ns-serif: "Iowan Old Style", "Palatino Linotype", Palatino,
+              "EB Garamond", "Georgia", "Book Antiqua", serif;
+  --ns-mono:  "IBM Plex Mono", "JetBrains Mono",
+              ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  /* Scale (optical, not strictly modular) */
+  --ns-size-display: 34px;
+  --ns-size-h1:      28px;
+  --ns-size-h2:      20px;
+  --ns-size-h3:      16px;
+  --ns-size-body:    15.5px;
+  --ns-size-small:   13px;
+  --ns-size-meta:    10.5px;
+
+  /* Rhythm */
+  --ns-lh-tight: 1.1;
+  --ns-lh-body:  1.6;
+  --ns-lh-loose: 1.75;
+
+  /* Layout */
+  --ns-measure:   34em;     /* ideal reading column */
+  --ns-gutter:    2rem;
+  --ns-margin:    1rem;     /* inner page margin for frame */
+  --ns-radius:    4px;
+  --ns-hairline:  0.5px;
+}
+
+/* Dark mode — sepia-on-ink rather than bright white.
+   The system is paper-first; dark mode should feel like
+   reading under a lamp, not like a terminal. */
+@media (prefers-color-scheme: dark) {
+  :root.ns-auto-dark {
+    --ns-paper:    #1B1712;
+    --ns-paper-2:  #231E18;
+    --ns-ink:      #E8E0D0;
+    --ns-ink-soft: rgba(232, 224, 208, 0.7);
+    --ns-rule:     rgba(232, 224, 208, 0.3);
+    --ns-rule-faint: rgba(232, 224, 208, 0.15);
+    --ns-oxblood:   #C96A5C;
+    --ns-oxblood-2: #DC8377;
+    --ns-sepia:     #B8A58A;
+  }
+}
+
+/* ---- 2. Element defaults ------------------------------------ */
+
+html {
+  background: var(--ns-paper);
+  color: var(--ns-ink);
+  font-family: var(--ns-serif);
+  font-size: var(--ns-size-body);
+  line-height: var(--ns-lh-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "kern", "liga", "onum" 1;  /* old-style figures */
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--ns-paper);
+  color: var(--ns-ink);
+}
+
+/* Headings — serif, loose weight, tight leading, sentence case */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--ns-serif);
+  font-weight: 400;
+  line-height: var(--ns-lh-tight);
+  letter-spacing: -0.01em;
+  color: var(--ns-ink);
+  margin: 1.75em 0 0.5em;
+  text-transform: none;
+}
+h1 { font-size: var(--ns-size-h1); }
+h2 { font-size: var(--ns-size-h2); }
+h3 { font-size: var(--ns-size-h3); font-style: italic; color: var(--ns-sepia); }
+h4, h5, h6 {
+  font-size: var(--ns-size-small);
+  font-family: var(--ns-mono);
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ns-sepia);
+}
+
+/* First heading in a section shouldn't have top margin */
+:where(section, article, header) > :first-child { margin-top: 0; }
+
+/* Body copy */
+p {
+  margin: 0 0 1em;
+  max-width: var(--ns-measure);
+}
+p.ns-full { max-width: none; }
+
+/* Emphasis — italic is primary, bold is reserved */
+em, i   { font-style: italic; }
+strong, b { font-weight: 500; color: var(--ns-oxblood); }
+
+/* Small caps & meta */
+small { font-size: var(--ns-size-small); color: var(--ns-sepia); }
+
+/* Links */
+a {
+  color: var(--ns-oxblood);
+  text-decoration: none;
+  border-bottom: var(--ns-hairline) solid var(--ns-oxblood);
+  transition: color 120ms ease, border-color 120ms ease;
+}
+a:hover { color: var(--ns-oxblood-2); border-bottom-color: var(--ns-oxblood-2); }
+a:focus-visible {
+  outline: var(--ns-hairline) solid var(--ns-oxblood);
+  outline-offset: 2px;
+}
+
+/* Rules */
+hr {
+  border: 0;
+  border-top: var(--ns-hairline) solid var(--ns-rule);
+  margin: 2rem 0;
+}
+
+/* Blockquote — pull quote, oxblood rule */
+blockquote {
+  margin: 1.5rem 0;
+  padding: 0 1.5rem;
+  border-left: 2px solid var(--ns-oxblood);
+  font-style: italic;
+  font-size: 1.1em;
+  line-height: 1.45;
+  color: var(--ns-ink);
+  max-width: var(--ns-measure);
+}
+blockquote p { margin: 0; }
+
+/* Lists — tight, serif bullets */
+ul, ol { padding-left: 1.25em; margin: 0 0 1em; max-width: var(--ns-measure); }
+li { margin: 0.2em 0; }
+ul { list-style: none; }
+ul > li::before {
+  content: "\2014";          /* em dash as bullet */
+  color: var(--ns-sepia);
+  margin-right: 0.6em;
+  margin-left: -1.25em;
+  display: inline-block;
+  width: 1.25em;
+}
+
+/* Inline code & preformatted */
+code, kbd, samp, pre {
+  font-family: var(--ns-mono);
+  font-size: 0.92em;
+}
+code {
+  background: var(--ns-paper-2);
+  border: var(--ns-hairline) solid var(--ns-rule-faint);
+  border-radius: 3px;
+  padding: 0.05em 0.35em;
+}
+pre {
+  background: var(--ns-paper-2);
+  border: var(--ns-hairline) solid var(--ns-rule);
+  border-radius: var(--ns-radius);
+  padding: 1rem 1.25rem;
+  overflow-x: auto;
+  line-height: 1.5;
+  max-width: 100%;
+}
+pre code { background: transparent; border: 0; padding: 0; }
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--ns-size-small);
+  margin: 1.25rem 0;
+}
+th, td {
+  text-align: left;
+  padding: 0.5rem 0.75rem;
+  border-bottom: var(--ns-hairline) solid var(--ns-rule-faint);
+  vertical-align: top;
+}
+th {
+  font-family: var(--ns-mono);
+  font-weight: 400;
+  font-size: var(--ns-size-meta);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ns-sepia);
+  border-bottom: var(--ns-hairline) solid var(--ns-rule);
+}
+
+/* Selection — oxblood on paper */
+::selection { background: var(--ns-oxblood); color: var(--ns-paper); }
+
+/* Figures & captions */
+figure { margin: 1.5rem 0; }
+figcaption {
+  font-style: italic;
+  font-size: var(--ns-size-small);
+  color: var(--ns-sepia);
+  line-height: 1.4;
+  margin-top: 0.5rem;
+  text-align: center;
+}
+
+/* ---- 3. Layout primitives ----------------------------------- */
+
+/* The sheet — a bounded page with a hairline frame inset.
+   Use as the outermost wrapper for one-pagers and long docs. */
+.ns-sheet {
+  position: relative;
+  background: var(--ns-paper);
+  max-width: 8.5in;
+  min-height: 11in;
+  margin: 0 auto;
+  padding: 2.5rem 2.75rem;
+  box-sizing: border-box;
+}
+.ns-sheet::before {
+  content: "";
+  position: absolute;
+  inset: var(--ns-margin);
+  border: var(--ns-hairline) solid var(--ns-rule-faint);
+  border-radius: var(--ns-radius);
+  pointer-events: none;
+}
+
+/* Corner registration ticks — small crosses at the four inset
+   corners of a sheet, drawn as inline-SVG backgrounds. Pure
+   decoration; turn on via .ns-ticked. One rule, four layers. */
+.ns-ticked::after {
+  content: "";
+  position: absolute;
+  inset: var(--ns-margin);
+  pointer-events: none;
+  background-image:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'><path d='M0 7 H14 M7 0 V14' stroke='%231C1917' stroke-width='0.5' opacity='0.5'/></svg>"),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'><path d='M0 7 H14 M7 0 V14' stroke='%231C1917' stroke-width='0.5' opacity='0.5'/></svg>"),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'><path d='M0 7 H14 M7 0 V14' stroke='%231C1917' stroke-width='0.5' opacity='0.5'/></svg>"),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'><path d='M0 7 H14 M7 0 V14' stroke='%231C1917' stroke-width='0.5' opacity='0.5'/></svg>");
+  background-repeat: no-repeat;
+  background-size: 14px 14px;
+  background-position: top left, top right, bottom left, bottom right;
+}
+
+/* Two-column masthead — running head at top of sheet */
+.ns-masthead {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-bottom: 0.6rem;
+  border-bottom: var(--ns-hairline) solid var(--ns-rule);
+  margin-bottom: 2rem;
+}
+
+/* Foot — mirror of masthead */
+.ns-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-top: 0.75rem;
+  border-top: var(--ns-hairline) solid var(--ns-rule);
+  margin-top: 2rem;
+}
+
+/* Columns — simple 2-up for dense resume sections */
+.ns-cols-2 {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 1.5rem 2rem;
+}
+.ns-cols-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem 1.5rem;
+}
+
+/* ---- 4. Signature components -------------------------------- */
+
+/* Plate — a bordered, dashed container for a diagram or callout.
+   Figure-numbered, italicized caption below. */
+.ns-plate {
+  margin: 1.5rem 0;
+  padding: 1.25rem;
+  border: var(--ns-hairline) solid var(--ns-rule);
+  border-radius: var(--ns-radius);
+  background: var(--ns-paper-2);
+  max-width: none;
+}
+.ns-plate--dashed {
+  border-style: dashed;
+}
+.ns-plate > :first-child { margin-top: 0; }
+.ns-plate > :last-child  { margin-bottom: 0; }
+
+/* Figure number — uppercase mono, oxblood, used inline or as a label */
+.ns-fig {
+  font-family: var(--ns-mono);
+  font-size: var(--ns-size-meta);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ns-oxblood);
+  font-style: normal;
+}
+
+/* Drop cap — use on a span wrapping the first letter of a lede */
+.ns-drop {
+  float: left;
+  font-family: var(--ns-serif);
+  font-size: 3.4em;
+  line-height: 0.88;
+  padding: 4px 10px 0 0;
+  color: var(--ns-oxblood);
+}
+
+/* Pull quote — alternative to <blockquote> for inline emphasis */
+.ns-pull {
+  margin: 1.5rem 0;
+  padding: 0 1.5rem;
+  border-left: 2px solid var(--ns-oxblood);
+  font-style: italic;
+  font-size: 1.1em;
+  line-height: 1.45;
+  max-width: var(--ns-measure);
+}
+
+/* The deck — italic tagline that sits under a title */
+.ns-deck {
+  font-family: var(--ns-serif);
+  font-style: italic;
+  font-size: 1.05em;
+  line-height: 1.45;
+  color: var(--ns-sepia);
+  margin: 0.5rem 0 1rem;
+  max-width: var(--ns-measure);
+}
+
+/* The registration mark — a small SVG glyph for avatars,
+   section breaks, or a favicon. Drop inline:
+     <svg class="ns-mark" viewBox="0 0 60 60">...</svg>
+   or use the pre-built generator below with .ns-mark-auto */
+.ns-mark {
+  display: inline-block;
+  width: 44px;
+  height: 44px;
+  vertical-align: middle;
+}
+
+/* A pure-CSS registration mark — concentric circles + crosshair
+   + oxblood dot, built from radial gradients. Drop on any box. */
+.ns-mark-auto {
+  display: inline-block;
+  width: 44px;
+  height: 44px;
+  background:
+    radial-gradient(circle, var(--ns-oxblood) 2px, transparent 2.5px),
+    linear-gradient(var(--ns-ink), var(--ns-ink)) center/0.5px 100% no-repeat,
+    linear-gradient(90deg, var(--ns-ink), var(--ns-ink)) center/100% 0.5px no-repeat,
+    radial-gradient(circle, transparent 13px, var(--ns-ink) 13px, var(--ns-ink) 13.5px, transparent 14px),
+    radial-gradient(circle, transparent 19px, var(--ns-ink) 19px, var(--ns-ink) 19.5px, transparent 20px);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* ---- 5. Utilities ------------------------------------------- */
+
+/* Type family utilities */
+.ns-serif { font-family: var(--ns-serif); }
+.ns-mono  { font-family: var(--ns-mono); font-size: var(--ns-size-meta);
+            letter-spacing: 0.08em; text-transform: uppercase;
+            color: var(--ns-sepia); }
+.ns-mono-plain { font-family: var(--ns-mono); letter-spacing: 0;
+                 text-transform: none; color: inherit; }
+
+/* Size utilities */
+.ns-display { font-size: var(--ns-size-display); line-height: 1.05;
+              letter-spacing: -0.015em; }
+.ns-small   { font-size: var(--ns-size-small); }
+.ns-meta    { font-size: var(--ns-size-meta); }
+
+/* Style utilities */
+.ns-italic { font-style: italic; }
+.ns-oxblood    { color: var(--ns-oxblood); }
+.ns-sepia      { color: var(--ns-sepia); }
+.ns-verdigris  { color: var(--ns-verdigris); }
+.ns-goldleaf   { color: var(--ns-goldleaf); }
+.ns-ink-soft   { color: var(--ns-ink-soft); }
+
+/* Background utilities — use sparingly */
+.ns-bg-paper-2   { background: var(--ns-paper-2); }
+.ns-bg-verdigris { background: var(--ns-verdigris); color: var(--ns-paper); }
+.ns-bg-goldleaf  { background: var(--ns-goldleaf);  color: var(--ns-ink); }
+.ns-bg-oxblood   { background: var(--ns-oxblood);   color: var(--ns-paper); }
+
+/* Rule utilities */
+.ns-hr-fine { border: 0; border-top: var(--ns-hairline) solid var(--ns-rule-faint); margin: 1rem 0; }
+.ns-hr-oxblood { border: 0; border-top: 1px solid var(--ns-oxblood); margin: 1rem 0; }
+
+/* Alignment */
+.ns-center { text-align: center; }
+.ns-right  { text-align: right; }
+
+/* Spacing — mt/mb in rems, keyed to the rhythm */
+.ns-mt-0 { margin-top: 0; }
+.ns-mt-1 { margin-top: 0.5rem; }
+.ns-mt-2 { margin-top: 1rem; }
+.ns-mt-3 { margin-top: 1.5rem; }
+.ns-mt-4 { margin-top: 2rem; }
+.ns-mb-0 { margin-bottom: 0; }
+.ns-mb-1 { margin-bottom: 0.5rem; }
+.ns-mb-2 { margin-bottom: 1rem; }
+.ns-mb-3 { margin-bottom: 1.5rem; }
+.ns-mb-4 { margin-bottom: 2rem; }
+
+/* Flex helpers for mastheads, rows, metadata strips */
+.ns-row     { display: flex; align-items: baseline; gap: 1rem; }
+.ns-row-between { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
+.ns-stack   { display: flex; flex-direction: column; gap: 0.25rem; }
+
+/* Width helpers */
+.ns-measure { max-width: var(--ns-measure); }
+.ns-full    { max-width: none; }
+
+/* ---- 6. Resume-specific helpers ----------------------------- */
+/* The resume is dense; these are tuned for an 8.5x11 one-pager. */
+
+.ns-resume { font-size: 14px; line-height: 1.5; }
+.ns-resume h1 { font-size: 30px; margin: 0; }
+.ns-resume h2 {
+  font-size: 13px;
+  font-family: var(--ns-mono);
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ns-sepia);
+  margin: 1.25rem 0 0.5rem;
+  padding-bottom: 0.25rem;
+  border-bottom: var(--ns-hairline) solid var(--ns-rule);
+}
+.ns-resume h3 {
+  font-size: 15px;
+  font-style: normal;
+  color: var(--ns-ink);
+  margin: 0.75rem 0 0.1rem;
+}
+.ns-resume p { margin: 0.25rem 0; max-width: none; }
+.ns-resume ul { margin: 0.25rem 0 0.5rem; padding-left: 1.25em; }
+.ns-resume li { margin: 0.15em 0; line-height: 1.45; }
+
+/* A resume "entry" — company/role on one line, dates right-aligned */
+.ns-entry {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.5rem 1rem;
+  align-items: baseline;
+  margin-top: 0.75rem;
+}
+.ns-entry .ns-entry-title { font-weight: 400; }
+.ns-entry .ns-entry-meta  {
+  font-family: var(--ns-mono);
+  font-size: var(--ns-size-meta);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ns-sepia);
+  white-space: nowrap;
+}
+
+/* ---- 7. Print -------------------------------------------------- */
+
+@page {
+  size: letter;
+  margin: 0.5in;
+}
+
+@media print {
+  html, body { background: #fff; }
+  :root {
+    --ns-paper:    #FFFFFF;
+    --ns-paper-2:  #FAF7EF;
+    /* keep ink + oxblood for print — they'll render as warm grays
+       on B&W printers and as intended on color */
+  }
+  .ns-sheet {
+    max-width: none;
+    min-height: auto;
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+  }
+  .ns-sheet::before { display: none; }
+  .ns-sheet.ns-ticked::after { opacity: 0.7; }
+  a { color: var(--ns-ink); border-bottom-color: var(--ns-rule); }
+  /* Prevent entries from splitting across pages */
+  .ns-entry, h2, h3 { break-inside: avoid; page-break-inside: avoid; }
+  h2, h3 { break-after: avoid; page-break-after: avoid; }
+}
+
+/* ---- 8. Responsive ------------------------------------------ */
+
+@media (max-width: 640px) {
+  .ns-sheet { padding: 1.5rem 1.25rem; }
+  .ns-cols-2, .ns-cols-3 { grid-template-columns: 1fr; }
+  :root { --ns-size-display: 28px; --ns-size-h1: 24px; }
+}
+
+/* ============================================================
+   9. Hugo theme — site chrome, index, and per-section pages
+   ============================================================ */
+
+/* ---- Dark-mode: class-triggered (complements @media) ------- */
+html.ns-dark {
+  --ns-paper:    #1B1712;
+  --ns-paper-2:  #231E18;
+  --ns-ink:      #E8E0D0;
+  --ns-ink-soft: rgba(232, 224, 208, 0.7);
+  --ns-rule:     rgba(232, 224, 208, 0.3);
+  --ns-rule-faint: rgba(232, 224, 208, 0.15);
+  --ns-oxblood:   #C96A5C;
+  --ns-oxblood-2: #DC8377;
+  --ns-sepia:     #B8A58A;
+}
+
+/* ---- Site chrome ------------------------------------------- */
+
+.ns-site-masthead {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--ns-paper);
+  padding: 1.25rem 1.5rem 0;
+  margin-bottom: 2rem;
+}
+
+.ns-site-masthead-inner {
+  max-width: 54rem;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.ns-site-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--ns-ink);
+  border: 0;
+}
+.ns-site-brand:hover { color: var(--ns-oxblood); }
+.ns-site-brand:hover .ns-mark circle:last-of-type { fill: var(--ns-oxblood-2); }
+
+.ns-site-title {
+  font-family: var(--ns-serif);
+  font-size: 18px;
+  font-style: italic;
+  letter-spacing: -0.005em;
+}
+
+.ns-site-nav {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.ns-site-nav-link {
+  font-family: var(--ns-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ns-sepia);
+  border: 0;
+  transition: color 120ms ease;
+}
+.ns-site-nav-link:hover,
+.ns-site-nav-link.is-current { color: var(--ns-oxblood); }
+
+.ns-theme-toggle {
+  background: transparent;
+  border: 0.5px solid var(--ns-rule);
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 120ms ease;
+}
+.ns-theme-toggle:hover { border-color: var(--ns-oxblood); }
+.ns-theme-toggle-mark {
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: linear-gradient(to right, var(--ns-ink) 0 50%, transparent 50% 100%);
+  border: 0.5px solid var(--ns-ink);
+}
+
+.ns-site-masthead-rule {
+  max-width: 54rem;
+  margin: 1.25rem auto 0;
+  border-top: 0.5px solid var(--ns-rule);
+}
+
+/* ---- Main container ---------------------------------------- */
+
+.ns-main {
+  max-width: 54rem;
+  margin: 0 auto;
+  padding: 0 1.5rem 4rem;
+}
+
+/* Essays get a tighter measure for prose comfort */
+.ns-essay, .ns-plate-page, .ns-project-page, .ns-list-page {
+  max-width: 38rem;
+  margin: 0 auto;
+}
+.ns-home-page { max-width: none; }
+
+/* ---- Site foot --------------------------------------------- */
+
+.ns-site-foot {
+  max-width: 54rem;
+  margin: 3rem auto 0;
+  padding: 0 1.5rem 2rem;
+}
+.ns-site-foot-rule { border-top: 0.5px solid var(--ns-rule); margin-bottom: 1rem; }
+.ns-site-foot-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-size: 12px;
+}
+.ns-colophon { color: var(--ns-sepia); }
+.ns-colophon .ns-sep { margin: 0 0.5em; color: var(--ns-rule); }
+.ns-site-foot-nav {
+  display: flex;
+  gap: 1rem;
+  font-family: var(--ns-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.ns-site-foot-nav a { color: var(--ns-sepia); border: 0; }
+.ns-site-foot-nav a:hover { color: var(--ns-oxblood); }
+
+/* ---- Home page --------------------------------------------- */
+
+.ns-home-hero {
+  padding: 2rem 0 2.5rem;
+  max-width: 38rem;
+  margin: 0 auto;
+}
+.ns-home-hero-inner { max-width: none; }
+.ns-home-title {
+  font-size: clamp(40px, 7vw, 64px);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  margin: 0;
+  font-weight: 400;
+}
+.ns-home-tagline { font-size: 18px; margin-top: 1rem; max-width: 32em; }
+.ns-home-intro { margin-top: 1.5rem; font-size: 16px; line-height: 1.65; max-width: 32em; }
+.ns-home-intro p { max-width: none; }
+
+.ns-hr-oxblood {
+  max-width: 38rem;
+  margin: 1.5rem auto 2.5rem;
+  border-top: 1px solid var(--ns-oxblood);
+}
+
+.ns-home-section {
+  max-width: 38rem;
+  margin: 0 auto 3.5rem;
+}
+
+.ns-section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-bottom: 0.4rem;
+  border-bottom: 0.5px solid var(--ns-rule);
+  margin: 0 0 1.25rem;
+}
+.ns-section-head h2 {
+  font-family: var(--ns-mono);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ns-sepia);
+  margin: 0;
+}
+
+.ns-section-more {
+  margin-top: 1rem;
+  font-size: 13px;
+}
+.ns-section-more a {
+  font-family: var(--ns-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 0;
+  color: var(--ns-sepia);
+}
+.ns-section-more a:hover { color: var(--ns-oxblood); }
+
+/* ---- Essay list (home + archive) --------------------------- */
+
+.ns-essay-group { margin-bottom: 1.5rem; }
+.ns-essay-group-label {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+.ns-essay-group-label .ns-mono { font-size: 13px; letter-spacing: 0.1em; }
+.ns-essay-group-rule {
+  flex: 1;
+  border-top: 0.5px solid var(--ns-rule-faint);
+}
+
+.ns-essay-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  counter-reset: essay;
+}
+.ns-essay-list > li::before { content: none; margin: 0; width: 0; }
+
+.ns-essay-item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.5rem 1rem;
+  align-items: baseline;
+  padding: 0.5rem 0;
+  border-bottom: 0.5px solid var(--ns-rule-faint);
+  counter-increment: essay;
+}
+.ns-essay-item:last-child { border-bottom: 0; }
+
+.ns-essay-link {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  border: 0;
+  color: var(--ns-ink);
+}
+.ns-essay-link::before {
+  content: counter(essay, decimal-leading-zero);
+  font-family: var(--ns-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--ns-sepia);
+  margin-right: 0.5rem;
+  display: none;  /* kept minimal; enable via .ns-numbered if desired */
+}
+.ns-essay-title {
+  font-size: 16px;
+  line-height: 1.3;
+  transition: color 120ms ease;
+}
+.ns-essay-link:hover .ns-essay-title { color: var(--ns-oxblood); }
+.ns-essay-deck {
+  font-style: italic;
+  font-size: 13px;
+  color: var(--ns-sepia);
+  line-height: 1.4;
+}
+.ns-essay-meta {
+  font-family: var(--ns-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  color: var(--ns-oxblood);
+  white-space: nowrap;
+}
+.ns-essay-meta .ns-sep { margin: 0 0.3em; color: var(--ns-rule); }
+
+/* ---- Project grid ------------------------------------------ */
+
+.ns-project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}
+.ns-project-card {
+  display: block;
+  padding: 1rem 1.1rem;
+  border: 0.5px solid var(--ns-rule);
+  border-radius: var(--ns-radius);
+  background: var(--ns-paper-2);
+  color: var(--ns-ink);
+  border-bottom: 0.5px solid var(--ns-rule);
+  transition: border-color 120ms ease, background 120ms ease;
+}
+.ns-project-card:hover {
+  border-color: var(--ns-oxblood);
+  background: var(--ns-paper);
+}
+.ns-project-card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-bottom: 0.35rem;
+}
+.ns-project-card h3 {
+  font-size: 15px;
+  font-style: italic;
+  color: var(--ns-oxblood);
+  margin: 0;
+  line-height: 1.2;
+}
+.ns-project-status {
+  font-family: var(--ns-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ns-sepia);
+}
+.ns-project-deck {
+  font-style: italic;
+  font-size: 13px;
+  color: var(--ns-ink);
+  line-height: 1.45;
+  margin: 0.25rem 0 0.5rem;
+  max-width: none;
+}
+.ns-project-stack {
+  list-style: none;
+  padding: 0;
+  margin: 0.4rem 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  font-family: var(--ns-mono);
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  color: var(--ns-sepia);
+}
+.ns-project-stack > li::before { content: none; margin: 0; width: 0; }
+.ns-project-stack > li:not(:last-child)::after { content: "·"; margin-left: 0.35rem; color: var(--ns-rule); }
+
+/* ---- Plate list -------------------------------------------- */
+
+.ns-plate-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.ns-plate-list > li::before { content: none; margin: 0; width: 0; }
+.ns-plate-list > li {
+  border-bottom: 0.5px solid var(--ns-rule-faint);
+}
+.ns-plate-list > li:last-child { border-bottom: 0; }
+.ns-plate-list a {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 0.45rem 0;
+  border: 0;
+  color: var(--ns-ink);
+}
+.ns-plate-list a:hover { color: var(--ns-oxblood); }
+
+/* ---- Essay single page ------------------------------------- */
+
+.ns-essay-runhead,
+.ns-project-page .ns-essay-runhead,
+.ns-plate-page .ns-essay-runhead {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 0.5rem;
+  border-bottom: 0.5px solid var(--ns-rule);
+  margin-bottom: 2rem;
+}
+.ns-essay-runhead .ns-mono { font-size: 10.5px; letter-spacing: 0.1em; }
+
+.ns-essay-head {
+  margin-bottom: 2.5rem;
+}
+.ns-essay-head .ns-essay-title,
+.ns-project-title,
+.ns-plate-title {
+  font-size: clamp(28px, 4vw, 38px);
+  line-height: 1.1;
+  letter-spacing: -0.012em;
+  margin: 0 0 0.5rem;
+  font-weight: 400;
+}
+.ns-essay-deck { font-size: 17px; max-width: none; }
+.ns-essay-meta {
+  font-family: var(--ns-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  color: var(--ns-sepia);
+  margin-top: 1rem;
+}
+.ns-essay-meta a { color: var(--ns-sepia); border-bottom-color: var(--ns-rule-faint); }
+.ns-essay-meta a:hover { color: var(--ns-oxblood); border-bottom-color: var(--ns-oxblood); }
+.ns-essay-meta .ns-sep { margin: 0 0.5em; color: var(--ns-rule); }
+
+.ns-essay-body { font-size: 16px; line-height: 1.7; }
+.ns-essay-body h2 {
+  margin-top: 2.5rem;
+  font-size: 22px;
+  font-family: var(--ns-serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.005em;
+  color: var(--ns-ink);
+  text-transform: none;
+}
+.ns-essay-body h3 {
+  margin-top: 2rem;
+  font-size: 17px;
+  font-family: var(--ns-serif);
+  font-style: italic;
+  color: var(--ns-ink);
+}
+.ns-essay-body p { font-size: 16px; line-height: 1.7; }
+.ns-essay-body a { border-bottom-color: var(--ns-oxblood); }
+
+/* Ornament between prose and nav */
+.ns-essay-ornament {
+  text-align: center;
+  color: var(--ns-sepia);
+  margin: 3rem 0 1.5rem;
+}
+
+/* Prev/next nav at essay foot */
+.ns-essay-nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 0.5px solid var(--ns-rule);
+  margin-top: 2rem;
+}
+.ns-essay-nav a {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  border: 0;
+  color: var(--ns-ink);
+  font-size: 14px;
+  line-height: 1.3;
+}
+.ns-essay-nav a:hover { color: var(--ns-oxblood); }
+.ns-essay-nav-prev { text-align: left; }
+.ns-essay-nav-next { text-align: right; }
+.ns-essay-nav .ns-mono { font-size: 10px; letter-spacing: 0.1em; }
+
+/* ---- Project single ---------------------------------------- */
+
+.ns-project-specs {
+  padding: 1rem 1.25rem;
+  border: 0.5px solid var(--ns-rule);
+  border-radius: var(--ns-radius);
+  background: var(--ns-paper-2);
+  margin: 1.5rem 0 2rem;
+  max-width: none;
+}
+.ns-project-specs dl {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.3rem 1rem;
+  margin: 0;
+  font-size: 13px;
+}
+.ns-project-specs dt {
+  font-family: var(--ns-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ns-sepia);
+  padding-top: 0.15rem;
+}
+.ns-project-specs dd {
+  margin: 0;
+  color: var(--ns-ink);
+}
+.ns-project-specs dd a { font-family: var(--ns-mono); font-size: 12px; }
+
+/* ---- Plate single ------------------------------------------ */
+
+.ns-plate-figure {
+  margin: 2rem 0;
+}
+.ns-plate-frame {
+  padding: 1.5rem;
+  border: 0.5px solid var(--ns-rule);
+  border-radius: var(--ns-radius);
+  background: var(--ns-paper-2);
+  text-align: center;
+}
+.ns-plate-frame img,
+.ns-plate-frame svg { max-width: 100%; height: auto; }
+.ns-plate-figure figcaption {
+  margin-top: 0.75rem;
+  text-align: center;
+  font-size: 13px;
+  color: var(--ns-sepia);
+}
+.ns-plate-figure figcaption .ns-fig { margin-right: 0.5rem; }
+
+/* ---- Shortcode: plate (inline, within prose) --------------- */
+
+.ns-essay-body .ns-plate-figure { margin: 1.75rem 0; }
+.ns-essay-body .ns-plate {
+  padding: 1rem 1.25rem;
+}
+
+/* ---- Shortcode: break --------------------------------------- */
+
+.ns-break {
+  text-align: center;
+  margin: 2.5rem 0;
+  color: var(--ns-sepia);
+}
+.ns-break--asterism { font-size: 18px; letter-spacing: 0.3em; }
+.ns-break-rule {
+  display: inline-block;
+  width: 60px;
+  height: 0;
+  border-top: 0.5px solid var(--ns-rule);
+  vertical-align: middle;
+}
+
+/* ---- Shortcode: marginalia ---------------------------------- */
+
+.ns-mn {
+  font-family: var(--ns-serif);
+}
+.ns-mn-marker {
+  color: var(--ns-oxblood);
+  font-weight: 500;
+  vertical-align: super;
+  font-size: 0.75em;
+  margin: 0 0.1em;
+  cursor: default;
+}
+.ns-mn-note {
+  display: inline;
+  font-style: italic;
+  font-size: 0.9em;
+  color: var(--ns-sepia);
+  padding: 0 0.35em;
+  border-left: 0.5px solid var(--ns-rule);
+  border-right: 0.5px solid var(--ns-rule);
+  margin: 0 0.25em;
+}
+
+/* On wide screens, push the note into the outer margin as a proper sidenote */
+@media (min-width: 1100px) {
+  .ns-essay-body, .ns-plate-page, .ns-project-page { position: relative; }
+  .ns-mn-note {
+    position: absolute;
+    right: -14rem;
+    width: 12rem;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.5;
+    text-align: left;
+    color: var(--ns-sepia);
+  }
+}
+
+/* ---- List page --------------------------------------------- */
+
+.ns-list-head { margin-bottom: 2rem; }
+.ns-list-head h1 { font-size: 32px; margin: 0.25rem 0 0.5rem; }
+
+/* ---- Responsive -------------------------------------------- */
+
+@media (max-width: 640px) {
+  .ns-site-masthead { padding: 1rem 1rem 0; }
+  .ns-main { padding: 0 1rem 3rem; }
+  .ns-site-foot { padding: 0 1rem 2rem; }
+  .ns-home-title { font-size: 36px; }
+  .ns-essay-head .ns-essay-title, .ns-project-title, .ns-plate-title { font-size: 26px; }
+  .ns-essay-nav { grid-template-columns: 1fr; }
+  .ns-essay-nav-next { text-align: left; }
+}

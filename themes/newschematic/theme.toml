@@ -1,0 +1,12 @@
+name = "newschematic"
+license = "MIT"
+licenselink = "https://github.com/chrisbodhi/newschematic-theme/blob/main/LICENSE"
+description = "A paper-warm, ink-black, oxblood-signaled Hugo theme. Serif typography, figure-numbered plates, and the discipline of a well-set book."
+homepage = "https://newschematic.org"
+tags = ["minimal", "editorial", "serif", "blog", "personal"]
+features = ["dark-mode", "shortcodes", "responsive"]
+min_version = "0.120.0"
+
+[author]
+  name = "Christopher"
+  homepage = "https://newschematic.org"

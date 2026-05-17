@@ -1,0 +1,19 @@
+{{ define "main" }}
+<article class="ns-essay">
+
+  <header class="ns-essay-head">
+    <h1 class="ns-essay-title">{{ .Title }}</h1>
+    {{ with .Params.deck }}<p class="ns-deck ns-essay-deck">{{ . | safeHTML }}</p>{{ end }}
+    {{ if not .Date.IsZero }}
+      <div class="ns-essay-meta">
+        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 January 2006" }}</time>
+      </div>
+    {{ end }}
+  </header>
+
+  <div class="ns-essay-body">
+    {{ .Content }}
+  </div>
+
+</article>
+{{ end }}

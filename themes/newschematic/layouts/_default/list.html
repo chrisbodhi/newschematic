@@ -1,0 +1,36 @@
+{{ define "main" }}
+<section class="ns-list-page">
+
+  <header class="ns-list-head">
+    <div class="ns-mono ns-sepia ns-mb-1">{{ .Section | humanize }}</div>
+    <h1>{{ .Title }}</h1>
+    {{ with .Content }}<div class="ns-deck">{{ . }}</div>{{ end }}
+  </header>
+
+  <div class="ns-hr-fine"></div>
+
+  {{ range .Pages.GroupByDate "2006" }}
+    <section class="ns-essay-group">
+      <div class="ns-essay-group-label">
+        <span class="ns-mono ns-oxblood">{{ .Key }}</span>
+        <span class="ns-essay-group-rule"></span>
+      </div>
+      <ol class="ns-essay-list">
+        {{ range .Pages }}
+          <li class="ns-essay-item">
+            <a href="{{ .RelPermalink }}" class="ns-essay-link">
+              <span class="ns-essay-title">{{ .Title }}</span>
+              {{ with .Params.deck }}<span class="ns-essay-deck">{{ . }}</span>{{ end }}
+            </a>
+            <span class="ns-essay-meta">
+              {{ .Date.Format "2 Jan" }}
+              {{ with .ReadingTime }}<span class="ns-sep">·</span>{{ . }} min{{ end }}
+            </span>
+          </li>
+        {{ end }}
+      </ol>
+    </section>
+  {{ end }}
+
+</section>
+{{ end }}

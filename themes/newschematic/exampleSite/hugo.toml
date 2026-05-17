@@ -1,0 +1,70 @@
+baseURL = "https://newschematic.org/"
+languageCode = "en-us"
+title = "newschematic"
+theme = "newschematic"
+
+# Preserve the correct structure for essays, projects, plates
+[permalinks]
+  essays   = "/:section/:slug/"
+  projects = "/:section/:slug/"
+  plates   = "/:section/:slug/"
+
+# Pagination is intentionally conservative — newschematic is an archive
+# more than a feed. If the home page groups by year, pagination becomes
+# irrelevant for all but the most prolific writers.
+[pagination]
+  pagerSize = 30
+
+[params]
+  author = "Christopher"
+  description = "Writing on tools, systems, and the craft of building."
+  tagline = "A field guide to building things, by Christopher."
+  # colophon appears in the site foot. HTML allowed.
+  colophon = "Set in Iowan Old Style and IBM Plex Mono. Machine-built with Hugo."
+
+# Primary navigation — mono caps in the masthead
+[[menu.main]]
+  name = "Essays"
+  url = "/essays/"
+  weight = 10
+
+[[menu.main]]
+  name = "Projects"
+  url = "/projects/"
+  weight = 20
+
+[[menu.main]]
+  name = "Plates"
+  url = "/plates/"
+  weight = 30
+
+[[menu.main]]
+  name = "About"
+  url = "/about/"
+  weight = 40
+
+# Foot navigation — secondary links that don't need top billing
+[[menu.foot]]
+  name = "Email"
+  url = "mailto:chris@example.com"
+  weight = 10
+
+[[menu.foot]]
+  name = "GitHub"
+  url = "https://github.com/chrisbodhi"
+  weight = 20
+
+# Markup rendering — raw HTML allowed in markdown for the occasional inline SVG
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+  [markup.highlight]
+    # Syntax highlighting for code blocks in essays about code
+    style = "friendly"
+    noClasses = false
+
+# Output formats — RSS for essays, atom for good measure
+[outputs]
+  home = ["HTML", "RSS"]
+  section = ["HTML", "RSS"]

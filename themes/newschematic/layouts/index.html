@@ -1,0 +1,113 @@
+{{ define "main" }}
+<article class="ns-home-page">
+
+  {{- /* Masthead block: site deck, registration glyph, intro */ -}}
+  <section class="ns-home-hero">
+    <div class="ns-home-hero-inner">
+      <h1 class="ns-home-title">
+        <span>news</span><span class="ns-oxblood ns-italic">chematic</span>
+      </h1>
+
+      {{ with .Site.Params.tagline }}
+        <p class="ns-deck ns-home-tagline">{{ . | safeHTML }}</p>
+      {{ end }}
+
+      {{ with .Content }}
+        <div class="ns-home-intro">{{ . }}</div>
+      {{ end }}
+    </div>
+  </section>
+
+  <div class="ns-hr-oxblood"></div>
+
+  {{- /* Essays — the main current. Grouped by year, newest first. */ -}}
+  {{ $essays := where .Site.RegularPages "Section" "essays" }}
+  {{ if $essays }}
+    <section class="ns-home-section">
+      <header class="ns-section-head">
+        <h2>Essays</h2>
+        <span class="ns-mono ns-sepia">{{ len $essays }} pieces</span>
+      </header>
+
+      {{ range $essays.GroupByDate "2006" }}
+        <div class="ns-essay-group">
+          <div class="ns-essay-group-label">
+            <span class="ns-mono ns-oxblood">{{ .Key }}</span>
+            <span class="ns-essay-group-rule"></span>
+          </div>
+          <ol class="ns-essay-list" start="1">
+            {{ range .Pages }}
+              <li class="ns-essay-item">
+                <a href="{{ .RelPermalink }}" class="ns-essay-link">
+                  <span class="ns-essay-title">{{ .Title }}</span>
+                  {{ with .Params.deck }}
+                    <span class="ns-essay-deck">{{ . }}</span>
+                  {{ end }}
+                </a>
+                <span class="ns-essay-meta">
+                  {{ .Date.Format "2 Jan" }}
+                  {{ with .Params.reading_time | default (.ReadingTime) }}
+                    <span class="ns-sep">·</span><span>{{ . }} min</span>
+                  {{ end }}
+                </span>
+              </li>
+            {{ end }}
+          </ol>
+        </div>
+      {{ end }}
+    </section>
+  {{ end }}
+
+  {{- /* Projects — the workbench. Two-column grid. */ -}}
+  {{ $projects := where .Site.RegularPages "Section" "projects" }}
+  {{ if $projects }}
+    <section class="ns-home-section">
+      <header class="ns-section-head">
+        <h2>Projects</h2>
+        <span class="ns-mono ns-sepia">the workbench</span>
+      </header>
+      <div class="ns-project-grid">
+        {{ range first 6 $projects }}
+          <a href="{{ .RelPermalink }}" class="ns-project-card">
+            <div class="ns-project-card-head">
+              <h3>{{ .Title }}</h3>
+              {{ with .Params.status }}<span class="ns-project-status">{{ . }}</span>{{ end }}
+            </div>
+            {{ with .Params.deck }}<p class="ns-project-deck">{{ . }}</p>{{ end }}
+            {{ with .Params.stack }}
+              <ul class="ns-project-stack">
+                {{ range . }}<li>{{ . }}</li>{{ end }}
+              </ul>
+            {{ end }}
+          </a>
+        {{ end }}
+      </div>
+      {{ if gt (len $projects) 6 }}
+        <p class="ns-section-more"><a href="{{ "/projects/" | relURL }}">All projects →</a></p>
+      {{ end }}
+    </section>
+  {{ end }}
+
+  {{- /* Plates — the figure archive. Compact list. */ -}}
+  {{ $plates := where .Site.RegularPages "Section" "plates" }}
+  {{ if $plates }}
+    <section class="ns-home-section">
+      <header class="ns-section-head">
+        <h2>Plates</h2>
+        <span class="ns-mono ns-sepia">figures &amp; diagrams</span>
+      </header>
+      <ul class="ns-plate-list">
+        {{ range first 8 $plates }}
+          <li>
+            <a href="{{ .RelPermalink }}">
+              <span class="ns-fig">Fig. {{ .Params.fig | default .Date.Format "i" }}</span>
+              <span>{{ .Title }}</span>
+            </a>
+          </li>
+        {{ end }}
+      </ul>
+    </section>
+  {{ end }}
+
+</article>
+{{ end }}

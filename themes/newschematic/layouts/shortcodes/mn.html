@@ -1,0 +1,14 @@
+{{- /*
+  Marginalia shortcode. A short note that floats in the outer margin
+  on wide screens and collapses to an inline indented block on narrow.
+
+  Usage — inline in a paragraph:
+    Text with a note{{< mn >}}This is the note itself.{{< /mn >}} and more text.
+
+  On wide screens the note floats right into the margin gutter. On narrow
+  screens it appears indented immediately after the anchor paragraph.
+*/ -}}
+<span class="ns-mn">
+  <span class="ns-mn-marker" aria-hidden="true">*</span>
+  <span class="ns-mn-note">{{ .Inner | .Page.RenderString }}</span>
+</span>
