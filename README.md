@@ -24,5 +24,4 @@ Built with Hugo!
 ### Deployment
 
 - Push changes to `master` and GitHub Actions will automatically build and deploy
-- The PaperMod theme is automatically fetched during the GitHub Actions workflow
 - Configuration steps are in `.github/workflows/`
