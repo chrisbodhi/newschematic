@@ -21,15 +21,16 @@
   <div class="ns-hr-oxblood"></div>
 
   {{- /* Essays — the main current. Grouped by year, newest first. */ -}}
-  {{ $essays := where .Site.RegularPages "Section" "essays" }}
+  {{ $essays := where .Site.RegularPages "Section" "blog" }}
   {{ if $essays }}
+    {{ $recentEssays := first 6 $essays }}
     <section class="ns-home-section">
       <header class="ns-section-head">
-        <h2>Essays</h2>
+        <h2>Posts</h2>
         <span class="ns-mono ns-sepia">{{ len $essays }} pieces</span>
       </header>
 
-      {{ range $essays.GroupByDate "2006" }}
+      {{ range $recentEssays.GroupByDate "2006" }}
         <div class="ns-essay-group">
           <div class="ns-essay-group-label">
             <span class="ns-mono ns-oxblood">{{ .Key }}</span>
@@ -54,6 +55,9 @@
             {{ end }}
           </ol>
         </div>
+      {{ end }}
+      {{ if gt (len $essays) 6 }}
+        <p class="ns-section-more"><a href="{{ "/blog/" | relURL }}">All blog posts →</a></p>
       {{ end }}
     </section>
   {{ end }}
