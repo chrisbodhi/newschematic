@@ -33,3 +33,5 @@ So, adding `extend_footer.html` to this repo that uses the PaperMod theme allowe
 ```
 
 Check out that tracking pixel! Truly, a hack for the ages.
+
+_Update: 16 May 2026, now implemented with the [New Schematic theme](https://newschematic.org/blog/branding/)_
