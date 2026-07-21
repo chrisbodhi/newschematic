@@ -1112,6 +1112,29 @@ html.ns-dark {
 .ns-list-head { margin-bottom: 2rem; }
 .ns-list-head h1 { font-size: 32px; margin: 0.25rem 0 0.5rem; }
 
+/* ---- 404 page ------------------------------------------------ */
+
+.ns-404 {
+  max-width: 30rem;
+  margin: 4rem auto;
+  padding: 2rem 0;
+  text-align: center;
+}
+.ns-404-mark { color: var(--ns-ink-soft); margin-bottom: 1rem; }
+.ns-404-mark .ns-mark { display: block; margin: 0 auto; }
+.ns-404-code {
+  letter-spacing: 0.2em;
+  color: var(--ns-oxblood);
+  margin: 0 0 0.75rem;
+}
+.ns-404-title { margin: 0 0 0.75rem; }
+.ns-404-message {
+  color: var(--ns-sepia);
+  max-width: none;
+  margin: 0 auto 1.5rem;
+}
+.ns-404-links .ns-sep { margin: 0 0.5em; color: var(--ns-rule); }
+
 /* ---- Responsive -------------------------------------------- */
 
 @media (max-width: 640px) {

@@ -1,0 +1,15 @@
+{{ define "title" }}Page not found · {{ .Site.Title }}{{ end }}
+
+{{ define "main" }}
+<section class="ns-404">
+  <div class="ns-404-mark">{{ partial "mark.html" (dict "size" 72) }}</div>
+  <p class="ns-mono ns-404-code">404</p>
+  <h1 class="ns-404-title">This page has gone missing from the schematic.</h1>
+  <p class="ns-404-message">Whatever you were looking for isn't at this address — or never was.</p>
+  <p class="ns-404-links">
+    <a href="{{ "/" | relURL }}">Home</a>
+    <span class="ns-sep">·</span>
+    <a href="{{ "/blog/" | relURL }}">Blog</a>
+  </p>
+</section>
+{{ end }}
