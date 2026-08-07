@@ -90,4 +90,4 @@ fn main() {
 }
 ```
 
-![hola mundo](/img/gpui-hola.png)
+{{< plate caption="¡hola mundo!, rendered by gpui." src="/img/gpui-hola.png" alt="hola mundo" />}}
