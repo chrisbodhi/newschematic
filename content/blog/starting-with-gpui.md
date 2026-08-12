@@ -1,7 +1,7 @@
 +++
 draft = false 
-categories = ["beginning",]
-tags = ["rust",]
+categories = ["beginning","lessons",]
+tags = ["rust","cargo",]
 comments = false
 showcomments = false
 showpagemeta = true
@@ -10,6 +10,10 @@ date = "2026-08-05T17:35:45-04:00"
 +++
 
 A couple of papercuts when getting started with [gpui](https://gpui.rs), the UI framework powering [Zed](https://zed.dev). These weren't exactly specific to the framework, but more that gpui is a single crate that's part of a monorepo representing an entire product, and its develpment is inexorably tied to Zed's.
+
+{{< mn >}}
+The grander takeaway, regardless of project or ecosystem, is that you'll have a better time if you're pulling different crates/packages from the same source, when they're being developed in tandem.
+{{< /mn >}}
 
 ## Installing from different sources
 
