@@ -1050,6 +1050,13 @@ html.ns-dark {
 .ns-essay-body .ns-plate {
   padding: 1rem 1.25rem;
 }
+.ns-plate img,
+.ns-plate svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
 
 /* ---- Shortcode: break --------------------------------------- */
 
