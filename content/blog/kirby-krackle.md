@@ -9,7 +9,7 @@ title = "The Kirby Krackle"
 date = "2026-09-13T07:35:45-04:00"
 +++
 
-In honor of Jack "The King" Kirby's birthday last month (he'd be 109 years old), here's `krackle.js`, a one-line `script` tag to give every click on every page that signature Kirby Krackle.
+In honor of [Jack "The King" Kirby](https://kirbymuseum.org/biography/)'s birthday last month (he'd be 109 years old), here's `krackle.js`, a one-line `script` tag to give every click on every page that signature Kirby Krackle.
 
 Try it out by clicking anywhere in this page, and then read on for an overview of my process, the questions I abandoned, and what I think matters about making a toy like this.
 
