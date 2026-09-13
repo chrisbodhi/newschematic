@@ -6,7 +6,7 @@ comments = false
 showcomments = false
 showpagemeta = true
 title = "The Kirby Krackle"
-date = "2026-09-13T07:35:45-04:00"
+date = "2026-09-12T07:35:45-04:00"
 +++
 
 In honor of [Jack "The King" Kirby](https://kirbymuseum.org/biography/)'s birthday last month (he'd be 109 years old), here's `krackle.js`, a one-line `script` tag to give every click on every page that signature Kirby Krackle.
@@ -61,6 +61,10 @@ Maybe it's because there's already a feeling of multiplayer-ness in our LLM chat
 
 
 [^1]: My most contrarian take (not really) is that Safari is a fine browser
+
+* * *
+
+Thanks to [Adam Melnyk](https://arm64.ca) for reviewing an earlier draft.
 
 <!-- This snippet adds the Kirby Krackle to only this page on my blog -->
 <script type="module">
