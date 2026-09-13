@@ -11,9 +11,11 @@ date = "2026-09-13T07:35:45-04:00"
 
 In honor of [Jack "The King" Kirby](https://kirbymuseum.org/biography/)'s birthday last month (he'd be 109 years old), here's `krackle.js`, a one-line `script` tag to give every click on every page that signature Kirby Krackle.
 
+{{< plate fig="1" caption="The King in 1992. Photo by Suzy Skaar, via the <a href='https://kirbymuseum.org/free-culture-licensed-jack-kirby-photos/'>Jack Kirby Museum</a>, <a href='https://creativecommons.org/licenses/by-sa/3.0/'>CC BY-SA 3.0</a>." src="https://kirbymuseum.org/wp-content/uploads/2013/10/1992-JackKirby-SuzySkaar-gray-815x1024.jpg" alt="Jack Kirby photographed in 1992" />}}
+
 Try it out by clicking anywhere in this page, and then read on for an overview of my process, the questions I abandoned, and what I think matters about making a toy like this.
 
-{{< plate fig="1" caption="If you have JavaScript disabled, this is what you're missing." src="/img/krackle-hero.gif" alt="A krackle burst on a click, light theme" />}}
+{{< plate fig="2" caption="If you have JavaScript disabled, this is what you're missing." src="/img/krackle-hero.gif" alt="A krackle burst on a click, light theme" />}}
 
 ## First, how to use it
 
@@ -32,7 +34,7 @@ Add it to your HTML with this simple `script` tag:
 
 This library does not depend on any frameworks or other imports. Indeed, both this page and the GitHub pages demo are static HTML sites.
 
-{{< plate fig="2" caption="The negative-flash Krackle for dark themes." src="/img/krackle-dark.gif" alt="Dark mode support for the trend-followers (whom we once called 'hipsters')" />}}
+{{< plate fig="3" caption="The negative-flash Krackle for dark themes." src="/img/krackle-dark.gif" alt="Dark mode support for the trend-followers (whom we once called 'hipsters')" />}}
 
 ## And now, to what matters
 
@@ -47,7 +49,7 @@ It was the naptime on the Fourth of July and I took out my phone to explore the 
 
 As I started iterating in Claude Code on how the mechanism actually _felt_, I realized I couldn't prompt my way to success, that I would have to start tuning parameters by hand to evaluate the impact of changes. I'm more than used to making changes in my editor, popping over to the browser to inspect, going back to my editor, and repeating (_ad nauseam_, even). But, I wanted a tighter feedback loop (I'm greedy), so I had Claude refactor the code to work with a set of defaults for the Krackle config. The code would accept an override driven from changes made to a panel that I also had Claude build. Not knowing what all of the variable names meant, and thinking about sharing my process more broadly, I had Claude write info popups explaining the values' impact to the visualization.
 
-{{< plate fig="3" caption="The Krackle tuner panel, with an info hint expanded." src="/img/krackle-tuner-panel.png" alt="The Krackle tuner panel, with the Ray Count info hint expanded" />}}
+{{< plate fig="4" caption="The Krackle tuner panel, with an info hint expanded." src="/img/krackle-tuner-panel.png" alt="The Krackle tuner panel, with the Ray Count info hint expanded" />}}
 
 Even after I changed enough parameters to create an effect that reminded me less of Spot from "Spider-Man: Into the Spider-Verse," I still wasn't satisfied with the outcome. "Give me two options for on-screen flashes when clicking: white, like lightning; and a negative of the page and its contents." By not trying to emulate directly a static, two-dimensional fixed view medium, and instead exploring the possibilities of the target medium, I was able to get something that better conveyed the feeling of cosmic energy that the King communicated in his art. 
 
