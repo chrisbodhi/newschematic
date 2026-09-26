@@ -179,7 +179,7 @@ class Plan:
     write_blyg_id: bool = False
 
 
-def plan_for_item(item: Item, ledger: dict) -> Plan:
+def plan_for_item(item: Item, ledger: dict, *, write: bool) -> Plan:
     if item.draft:
         return Plan(kind="draft-skip", path=item.path, blyg_id=item.blyg_id,
                      detail="draft: skipped")
@@ -189,6 +189,17 @@ def plan_for_item(item: Item, ledger: dict) -> Plan:
         if "date" not in item.front_matter:
             raise BlygStampError(f"{item.path}: no `date` field to backfill from")
         created = iso8601_utc(parse_date_utc(str(item.front_matter["date"])))
+
+        if not write:
+            # Ids are 128 random bits from a cryptographically strong
+            # source (§5.1) -- generating one here just to print it would
+            # show a real-looking id that a subsequent real run will
+            # never actually produce (there is nothing to make the two
+            # calls agree, nor should there be). Show no id at all rather
+            # than a misleading one.
+            return Plan(kind="new", path=item.path, blyg_id=None,
+                        detail=f"would assign a new id, v1 @ {created}")
+
         new_id = generate_blyg_id()
         entry = {
             "path": item.rel_path,
@@ -224,8 +235,10 @@ def plan_for_item(item: Item, ledger: dict) -> Plan:
         new_entry["changelog"] = entry["changelog"] + [
             {"version": new_version, "at": at, "note": "withdrawn"}
         ]
+        verb = "would withdraw: endcap" if not write else "endcap"
         return Plan(kind="withdraw", path=item.path, blyg_id=item.blyg_id,
-                    detail=f"endcap v{new_version} @ {at}", ledger_entry=new_entry)
+                    detail=f"{verb} v{new_version} @ {at}",
+                    ledger_entry=(new_entry if write else None))
 
     # Return transition: ledger says withdrawn, front matter no longer does.
     if entry["withdrawn"] and not item.withdrawn_flag:
@@ -239,8 +252,10 @@ def plan_for_item(item: Item, ledger: dict) -> Plan:
         new_entry["changelog"] = entry["changelog"] + [
             {"version": new_version, "at": at, "note": "returned"}
         ]
+        verb = "would return:" if not write else ""
         return Plan(kind="return", path=item.path, blyg_id=item.blyg_id,
-                    detail=f"v{new_version} @ {at}", ledger_entry=new_entry)
+                    detail=f"{verb} v{new_version} @ {at}".strip(),
+                    ledger_entry=(new_entry if write else None))
 
     # Steady withdrawn state: never re-hash or re-bump while withdrawn.
     if entry["withdrawn"]:
@@ -261,9 +276,10 @@ def plan_for_item(item: Item, ledger: dict) -> Plan:
     new_entry["changelog"] = entry["changelog"] + [
         {"version": new_version, "at": at, "note": None}
     ]
+    verb = "would bump" if not write else "bump"
     return Plan(kind="bump", path=item.path, blyg_id=item.blyg_id,
-                detail=f"v{entry['version']} -> v{new_version} @ {at}",
-                ledger_entry=new_entry)
+                detail=f"{verb} v{entry['version']} -> v{new_version} @ {at}",
+                ledger_entry=(new_entry if write else None))
 
 
 def run_stamp(content_dir: Path, ledger_path: Path, *, write: bool) -> list[Plan]:
@@ -272,7 +288,7 @@ def run_stamp(content_dir: Path, ledger_path: Path, *, write: bool) -> list[Plan
 
     for path in discover_items(content_dir):
         item = load_item(path, content_dir)
-        plan = plan_for_item(item, ledger)
+        plan = plan_for_item(item, ledger, write=write)
         plans.append(plan)
 
         if not write:
@@ -295,7 +311,12 @@ def run_stamp(content_dir: Path, ledger_path: Path, *, write: bool) -> list[Plan
 
 
 def format_plan(plan: Plan) -> str:
-    id_part = plan.blyg_id or "(none)"
+    if plan.blyg_id is not None:
+        id_part = plan.blyg_id
+    elif plan.kind == "new":
+        id_part = "(pending)"  # assigned on write, not shown in a dry-run/check
+    else:
+        id_part = "(none)"
     return f"[{plan.kind:11s}] {plan.path.name:40s} {id_part}  {plan.detail}"
 
 
@@ -311,7 +332,8 @@ def cmd_stamp(args: argparse.Namespace) -> int:
     for plan in plans:
         print(format_plan(plan))
 
-    print(f"\n{len(plans)} item(s) scanned, {len(changing)} would change.")
+    verb = "changed" if write else "would change"
+    print(f"\n{len(plans)} item(s) scanned, {len(changing)} {verb}.")
 
     if args.check:
         return 1 if changing else 0

@@ -12,6 +12,24 @@
 {{- $base := site.BaseURL -}}
 {{- $ledger := site.Data.blyg.ledger -}}
 
+{{- /*
+  The conformance level actually served, from [params.blyg].level in the
+  site's own config.toml (§3) -- defaults to 1 when unset, since that's
+  what an empty config means for a site that hasn't opted into anything
+  higher. Only 1 is accepted: bumping this without also shipping the
+  corresponding L2+ surfaces (the blogroll, generation provenance
+  disclosure, ...) would be a false conformance claim on the wire, so
+  the build refuses rather than silently emitting a "level" the rest of
+  this module doesn't back up.
+*/ -}}
+{{- $level := 1 -}}
+{{- with site.Params.blyg -}}
+  {{- with .level -}}{{- $level = . -}}{{- end -}}
+{{- end -}}
+{{- if ne $level 1 -}}
+  {{- errorf "blyg: config.toml [params.blyg].level is %v, but modules/hugo-blyg only implements Level 1 -- set it back to 1 until the L2+ surfaces it would claim are actually built" $level -}}
+{{- end -}}
+
 {{- $indexEntries := slice -}}
 {{- $updated := "" -}}
 
@@ -48,7 +66,7 @@
 
 {{- $manifest := dict
   "blyg" "0.2"
-  "level" 1
+  "level" $level
   "generator" "hugo-blyg/0.1.0"
   "site" (printf "%sblyg/" $base)
   "title" site.Title

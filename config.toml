@@ -18,6 +18,18 @@ enableRobotsTXT = true
   defaultTheme = "auto"
   math = false # Set to true in front matter for rendering with MathJax
 
+[params.blyg]
+  # The Blygger conformance level (blygger-spec protocol-v0.2 §3) this
+  # deployment actually serves -- feeds blyg.json's "level" field
+  # (modules/hugo-blyg/layouts/blyg/section.blygmanifest.json).
+  # Level 1 is everything this module currently builds: stable ids,
+  # versioned items, the manifest/feed/archive-index/item-document
+  # surfaces, withdrawal, pins. Keep this at 1 until L2 constructs (the
+  # blogroll, generation provenance disclosure, ...) are actually built
+  # -- bumping it without shipping those would be a false conformance
+  # claim on the wire, and the build refuses anything else.
+  level = 1
+
 [params.profileMode]
   enabled = true
   title = "Christopher Boette"

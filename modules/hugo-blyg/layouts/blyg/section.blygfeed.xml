@@ -47,7 +47,7 @@
         {{- range $entry.changelog -}}
           {{- $events = $events | append (dict
               "id" $id "version" .version "at" .at
-              "kind" "thread" "title" $page.Title "description" $doc.content_html
+              "kind" $doc.kind "title" $page.Title "description" $doc.content_html
               "created" $doc.created
           ) -}}
         {{- end -}}

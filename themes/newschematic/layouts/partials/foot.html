@@ -19,6 +19,12 @@
       {{ with .OutputFormats.Get "rss" }}
         <a href="{{ .Permalink }}" rel="alternate" type="application/rss+xml">RSS</a>
       {{ end }}
+      {{/* content/blyg/_index.md is the only page carrying the blygfeed
+           output format, and it has no HTML representation of its own
+           (JSON/XML surfaces only -- see content/blyg/_index.md), so
+           .OutputFormats.Get "blygfeed" on *this* page is always nil.
+           Link straight to the feed instead. */}}
+      <a href="{{ .Site.BaseURL }}blyg/feed.xml" rel="alternate" type="application/rss+xml">Blyg</a>
     </nav>
   </div>
 </footer>

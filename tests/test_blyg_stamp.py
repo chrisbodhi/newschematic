@@ -227,6 +227,49 @@ class DryRunTests(TmpRepoTestCase):
         stamped = (self.content_dir / "post.md").read_text(encoding="utf-8")
         self.assertNotIn("blyg_id", stamped)
 
+    def test_dry_run_never_generates_an_id(self):
+        # An id is 128 random bits from a cryptographically strong source
+        # (§5.1) -- a dry run must not generate one just to display it,
+        # since a subsequent real run would never produce that same id
+        # and showing one implies a stability that doesn't exist.
+        write_post(
+            self.content_dir, "post.md",
+            'title = "Post"\ndate = "2024-01-01T00:00:00Z"\ndraft = false\n',
+            "Body.\n",
+        )
+        plan = bs.run_stamp(self.content_dir, self.ledger_path, write=False)[0]
+        self.assertIsNone(plan.blyg_id)
+        self.assertIn("(pending)", bs.format_plan(plan))
+
+    def test_dry_run_and_real_run_messages_differ(self):
+        write_post(
+            self.content_dir, "post.md",
+            'title = "Post"\ndate = "2024-01-01T00:00:00Z"\ndraft = false\n',
+            "Body.\n",
+        )
+        dry_plan = bs.run_stamp(self.content_dir, self.ledger_path, write=False)[0]
+        real_plan = bs.run_stamp(self.content_dir, self.ledger_path, write=True)[0]
+        self.assertNotEqual(bs.format_plan(dry_plan), bs.format_plan(real_plan))
+        self.assertTrue(bs.is_valid_blyg_id(real_plan.blyg_id))
+        self.assertIsNone(dry_plan.blyg_id)
+
+    def test_dry_run_bump_and_withdraw_messages_say_would(self):
+        write_post(
+            self.content_dir, "post.md",
+            'title = "Post"\ndate = "2024-01-01T00:00:00Z"\ndraft = false\n',
+            "Body.\n",
+        )
+        bs.run_stamp(self.content_dir, self.ledger_path, write=True)
+        path = self.content_dir / "post.md"
+        path.write_text(
+            path.read_text(encoding="utf-8").replace("Body.", "Edited body."),
+            encoding="utf-8",
+        )
+        plan = bs.run_stamp(self.content_dir, self.ledger_path, write=False)[0]
+        self.assertEqual(plan.kind, "bump")
+        self.assertIn("would bump", plan.detail)
+        self.assertIsNone(plan.ledger_entry)
+
     def test_check_mode_reports_pending_changes(self):
         write_post(
             self.content_dir, "post.md",

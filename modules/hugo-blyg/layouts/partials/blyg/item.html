@@ -14,9 +14,14 @@
               withdrawn, changelog}.
     base   -- the site's base URL, with or without a trailing slash.
 
-  Every item is kind:"thread" with transclusions:[] (Level 1, per
-  docs/blyg/conformance.md's §3 scope note) -- there is no local
-  fragment corpus yet to actually transclude.
+  `kind` comes from the page's own `blyg_kind` front matter ("fragment"
+  or "thread"; defaults to "thread" when absent). Threads always carry
+  transclusions (currently always [] -- there is no local fragment
+  corpus yet for a thread to actually transclude, per
+  docs/blyg/conformance.md's §3 scope note); fragments omit the key
+  entirely (§10.3). `blyg_kind = "withdrawn"` is refused at build time --
+  "withdrawn" is a protocol state this partial derives from the ledger,
+  never an authored kind.
 */ -}}
 {{- $page := .page -}}
 {{- $entry := .ledger -}}
@@ -40,14 +45,18 @@
   {{- $contentHTML = replaceRE "(src|href)=\"/([^/\"])" (printf "${1}=\"%s/${2}" $base) $rawHTML -}}
 {{- end -}}
 
-{{- $kind := "thread" -}}
+{{- $authoredKind := $page.Params.blyg_kind | default "thread" -}}
+{{- $validKinds := slice "fragment" "thread" -}}
+{{- if not (in $validKinds $authoredKind) -}}
+  {{- errorf "blyg: %s has blyg_kind %q -- must be \"fragment\" or \"thread\" (\"withdrawn\" is a protocol state derived from blyg_withdrawn + the ledger, never an authored kind)" $page.File.Filename $authoredKind -}}
+{{- end -}}
+
+{{- $kind := $authoredKind -}}
 {{- if $withdrawn -}}{{- $kind = "withdrawn" -}}{{- end -}}
 
 {{- $lastEntry := index $entry.changelog (sub (len $entry.changelog) 1) -}}
 
-{{- $transclusions := slice -}}
-
-{{- return (dict
+{{- $doc := dict
   "blyg" "0.2"
   "id" $page.Params.blyg_id
   "kind" $kind
@@ -59,6 +68,10 @@
   "content_html" $contentHTML
   "content_hash" $entry.last_hash
   "media" (slice)
-  "transclusions" $transclusions
   "changelog" $entry.changelog
-) -}}
+-}}
+{{- if eq $authoredKind "thread" -}}
+  {{- $doc = merge $doc (dict "transclusions" (slice)) -}}
+{{- end -}}
+
+{{- return $doc -}}

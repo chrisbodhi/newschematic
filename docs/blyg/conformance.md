@@ -12,10 +12,13 @@ proof — see the empirical notes inline where behavior was verified against
 Hugo 0.151.0.
 
 Scope for this repository: New Schematic publishes at Level 1 only, as a
-single-author, non-multiplayer origin. Every item is `kind: "thread"` with
-`"transclusions": []` (§3, §10) — fragments, real transclusion, the
-blogroll (§11), and generation provenance (§5.7) are not exercised yet, so
-their rules are listed for completeness but not all are load-bearing today.
+single-author, non-multiplayer origin. Every item authors its `kind` via
+`blyg_kind` in front matter (`"fragment"` or `"thread"`; defaults to
+`"thread"`), and every thread currently carries `"transclusions": []`
+(§10) — there is no local fragment corpus yet for a thread to actually
+transclude. Real transclusion, the blogroll (§11), and generation
+provenance (§5.7) are not exercised yet, so their rules are listed for
+completeness but not all are load-bearing today.
 
 ## §4 — The publication surface
 
@@ -53,9 +56,16 @@ their rules are listed for completeness but not all are load-bearing today.
       document; older content is withheld unless pinned (§8).
 - [ ] `updated` MUST equal the latest changelog entry's `at`.
 - [ ] `"kind"` is `"fragment"`, `"thread"` (§10), or `"withdrawn"` (§9) at
-      this version. (New Schematic emits `"thread"` exclusively.)
-- [ ] Threads additionally carry `transclusions` (§10.3); New Schematic
-      always emits `"transclusions": []`.
+      this version. Authored via `blyg_kind` in front matter
+      (`modules/hugo-blyg/layouts/partials/blyg/item.html`); the build
+      fails rather than accept anything else, including `"withdrawn"`
+      itself — that value is derived from `blyg_withdrawn` plus the
+      ledger, never something a page authors directly.
+- [ ] Threads carry `transclusions` (§10.3, currently always `[]` — no
+      local fragment corpus yet to transclude); fragments omit the key
+      entirely. Implemented as two different dict shapes, not a
+      placeholder value, since an empty array on a fragment would itself
+      be a spec violation.
 - [ ] `media` entries: a media URL MUST always serve the same bytes once
       published (immutable).
 - [ ] `author`, if present, MUST be accepted with any additional members;
@@ -77,6 +87,11 @@ their rules are listed for completeness but not all are load-bearing today.
 - [ ] `blyg.json` carries `"blyg": "0.2"`, `level`, `generator`, `site`,
       `title`, `feed`, `items`, `updated`; `blogroll` key present only
       when a non-empty blogroll is served (not the case here).
+      `level` comes from `[params.blyg].level` in `config.toml`
+      (defaults to `1`); the build refuses any value other than `1`
+      until this module actually ships the corresponding L2+ surfaces —
+      config can lower ambition, never inflate the conformance claim on
+      the wire.
 - [ ] `items/index.json` lists **every** item ever published — including
       withdrawn items — with no window, ordered by `updated` descending.
 
@@ -162,11 +177,13 @@ their rules are listed for completeness but not all are load-bearing today.
 
 ## §10 — Threads and transclusion
 
-*(New Schematic emits `"transclusions": []` on every item — no local
-fragments exist to transclude yet. Rules kept here for completeness and
-because the grammar is a **permanent protocol surface**: any future post
-containing a bare `![[26-char-id]]` line is a live transclusion directive
-whether or not this repo currently resolves it.)*
+*(Fragments can now be authored via `blyg_kind = "fragment"`, but none
+transclude anything yet — every thread still emits `"transclusions": []`,
+since resolving `![[id]]` directives at publish time isn't built. Rules
+kept here for completeness and because the grammar is a **permanent
+protocol surface**: any future post containing a bare `![[26-char-id]]`
+line is a live transclusion directive whether or not this repo currently
+resolves it.)*
 
 - [ ] Transclusion targets MUST be fragments of the same origin (0.2,
       local-only).

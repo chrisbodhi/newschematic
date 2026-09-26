@@ -110,9 +110,28 @@ who's read Hugo's own RSS template will already expect to see.
   module, decides whether that's a fresh transition (§9 endcap) — this
   module only ever reads the ledger's `withdrawn` flag, it never writes
   it.
+- `blyg_kind = "fragment"` or `"thread"` (defaults to `"thread"` when
+  absent). Threads always carry a `transclusions` array (currently
+  always `[]`); fragments omit the key entirely (§10.3) — this module
+  builds a different dict shape per kind rather than a placeholder
+  value, since an empty `transclusions` on a fragment would itself be a
+  spec violation, not a harmless default. Any other value, including
+  `"withdrawn"`, fails the build: `"withdrawn"` is a wire-level state
+  this module derives from `blyg_withdrawn` plus the ledger, never
+  something a page authors directly.
 - `draft = true` pages are already excluded from `.Pages` by Hugo itself
   under a normal (non-`--buildDrafts`) build; this module does nothing
   special for drafts.
+
+## Conformance level
+
+`blyg.json`'s `"level"` field (§3) comes from the consuming site's own
+`[params.blyg].level`, defaulting to `1` when unset. This module only
+accepts `1` — it fails the build on anything else, since claiming a
+higher level on the wire without actually shipping that level's
+surfaces (the blogroll, generation provenance disclosure, ...) would be
+a false conformance claim, not a preference this module can just defer
+to config.
 
 ## The ledger
 
