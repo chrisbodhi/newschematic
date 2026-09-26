@@ -23,3 +23,6 @@ public/
 resources
 *.lock
 .claude/worktrees/*
+
+__pycache__/
+*.pyc

@@ -1,0 +1,60 @@
+{{- /*
+  Builds blyg.json (manifest, §6.1), items/index.json (archive index,
+  §6.2), and items/{id}.json (one per item, §5) -- the section this runs
+  against is content/blyg/_index.md, served at the blyg origin
+  (baseURL + "blyg/"). One template execution does all three surfaces:
+  the manifest is this template's own primary output (outputFormats
+  .blygmanifest, baseName "blyg", in config.toml), and items/index.json
+  plus each items/{id}.json are fanned out via resources.FromString,
+  which only actually publishes once its result is accessed -- hence the
+  `$_ := $r.RelPermalink` discards below.
+*/ -}}
+{{- $base := site.BaseURL -}}
+{{- $ledger := site.Data.blyg.ledger -}}
+
+{{- $indexEntries := slice -}}
+{{- $updated := "" -}}
+
+{{- range .Pages -}}
+  {{- $page := . -}}
+  {{- $id := $page.Params.blyg_id -}}
+  {{- with $id -}}
+    {{- $entry := index $ledger . -}}
+    {{- if not $entry -}}
+      {{- warnf "blyg: %s carries blyg_id %s with no ledger entry -- skipping from all blyg surfaces until data/blyg/ledger.json is regenerated" $page.File.Filename $id -}}
+    {{- else -}}
+      {{- $doc := partial "blyg/item.html" (dict "page" $page "ledger" $entry "base" $base) -}}
+      {{- $r := resources.FromString (printf "blyg/items/%s.json" $id) ($doc | jsonify) -}}
+      {{- $_ := $r.RelPermalink -}}
+      {{- $indexEntries = $indexEntries | append (dict
+          "id" $id
+          "kind" $doc.kind
+          "created" $doc.created
+          "updated" $doc.updated
+          "version" $doc.version
+      ) -}}
+      {{- if gt $doc.updated $updated -}}{{- $updated = $doc.updated -}}{{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if eq $updated "" -}}
+  {{- /* No items yet: fall back to build time rather than emit "". */ -}}
+  {{- $updated = now.UTC.Format "2006-01-02T15:04:05Z" -}}
+{{- end -}}
+{{- $indexEntries = sort $indexEntries "updated" "desc" -}}
+{{- $idx := resources.FromString "blyg/items/index.json" ((dict "updated" $updated "items" $indexEntries) | jsonify) -}}
+{{- $_ := $idx.RelPermalink -}}
+
+{{- $manifest := dict
+  "blyg" "0.2"
+  "level" 1
+  "generator" "hugo-blyg/0.1.0"
+  "site" (printf "%sblyg/" $base)
+  "title" site.Title
+  "author" (dict "name" site.Params.author)
+  "feed" "feed.xml"
+  "items" "items/index.json"
+  "updated" $updated
+-}}
+{{ $manifest | jsonify }}

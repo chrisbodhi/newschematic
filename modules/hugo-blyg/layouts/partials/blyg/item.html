@@ -1,0 +1,64 @@
+{{- /*
+  Builds one blyg item document (protocol-v0.2 §5) as a Hugo dict, via
+  Hugo's partial-return-value feature -- the caller does:
+
+    {{ $doc := partial "blyg/item.html" (dict "page" $page "ledger" $entry "base" $base) }}
+
+  Inputs:
+    page   -- the content/blyg/*.md Page (kind=page; its own HTML/other
+              output is suppressed by the section's cascade, see
+              content/blyg/_index.md, but .RawContent/.Content/.Params
+              are still fully available).
+    ledger -- this item's entry from data/blyg/ledger.json (as written by
+              scripts/blyg_stamp.py): {path, created, version, last_hash,
+              withdrawn, changelog}.
+    base   -- the site's base URL, with or without a trailing slash.
+
+  Every item is kind:"thread" with transclusions:[] (Level 1, per
+  docs/blyg/conformance.md's §3 scope note) -- there is no local
+  fragment corpus yet to actually transclude.
+*/ -}}
+{{- $page := .page -}}
+{{- $entry := .ledger -}}
+{{- $base := strings.TrimSuffix "/" .base -}}
+{{- $withdrawn := $entry.withdrawn -}}
+
+{{- $contentMD := "" -}}
+{{- $contentHTML := "" -}}
+{{- if not $withdrawn -}}
+  {{- $contentMD = $page.RawContent -}}
+  {{- /*
+    content_html must be self-contained (§7): absolute URLs everywhere.
+    Render hooks alone don't cover this site's shortcodes (plate's src=,
+    skyhook-viz's injected <img>/<script>) -- see docs/blyg/hazards.md --
+    so this rewrites the fully rendered HTML directly. RE2 (Hugo's regex
+    engine) has no lookahead, hence capturing-and-replaying the char
+    after the slash rather than a negative lookahead, to skip
+    protocol-relative "//" URLs without one.
+  */ -}}
+  {{- $rawHTML := printf "%s" $page.Content -}}
+  {{- $contentHTML = replaceRE "(src|href)=\"/([^/\"])" (printf "${1}=\"%s/${2}" $base) $rawHTML -}}
+{{- end -}}
+
+{{- $kind := "thread" -}}
+{{- if $withdrawn -}}{{- $kind = "withdrawn" -}}{{- end -}}
+
+{{- $lastEntry := index $entry.changelog (sub (len $entry.changelog) 1) -}}
+
+{{- $transclusions := slice -}}
+
+{{- return (dict
+  "blyg" "0.2"
+  "id" $page.Params.blyg_id
+  "kind" $kind
+  "origin" (printf "%s/blyg/" $base)
+  "created" $entry.created
+  "updated" $lastEntry.at
+  "version" $entry.version
+  "content_md" $contentMD
+  "content_html" $contentHTML
+  "content_hash" $entry.last_hash
+  "media" (slice)
+  "transclusions" $transclusions
+  "changelog" $entry.changelog
+) -}}
