@@ -2,6 +2,17 @@
   Builds feed.xml (§7): one <item> per publish event across every blyg
   item, newest first, windowed to 50.
 
+  Items have no <title> of their own: the item document schema (§5) has
+  no title field at all -- fragments and threads are microblog-style,
+  not headlined essays -- and content/blyg/*.md's own front-matter
+  title was never anything but a borrowed assumption from the /blog/
+  essay model. <description> alone satisfies RSS 2.0 (an item needs at
+  least one of title/description). The one exception is the withdrawal
+  event, where §7 is normative by name: "its withdrawal event, with
+  title `withdrawn`" -- that literal string stays regardless, and
+  doubles as the required title/description fallback for that entry,
+  since its description is always empty.
+
   This deliberately does NOT set isPlainText on the `blygfeed` output
   format (config.toml) -- it follows Hugo's own embedded rss.xml template
   instead (tpl/tplimpl/embedded/templates/rss.xml in the Hugo source):
@@ -47,7 +58,7 @@
         {{- range $entry.changelog -}}
           {{- $events = $events | append (dict
               "id" $id "version" .version "at" .at
-              "kind" $doc.kind "title" $page.Title "description" $doc.content_html
+              "kind" $doc.kind "description" $doc.content_html
               "created" $doc.created
           ) -}}
         {{- end -}}
@@ -70,7 +81,9 @@
     {{- range $events }}
     <item>
       <guid isPermaLink="false">blyg:{{ .id }}:v{{ .version }}</guid>
+      {{- if eq .kind "withdrawn" }}
       <title>{{ .title }}</title>
+      {{- end }}
       <description>{{ .description | transform.XMLEscape | safeHTML }}</description>
       <pubDate>{{ (time.AsTime .at).UTC.Format "Mon, 02 Jan 2006 15:04:05 GMT" }}</pubDate>
       <blyg:id>{{ .id }}</blyg:id>

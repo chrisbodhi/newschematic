@@ -122,6 +122,14 @@ who's read Hugo's own RSS template will already expect to see.
 - `draft = true` pages are already excluded from `.Pages` by Hugo itself
   under a normal (non-`--buildDrafts`) build; this module does nothing
   special for drafts.
+- `title` is never read. The item document schema (§5) has no title
+  field at all — fragments and threads are microblog-style, not
+  headlined essays — so this module doesn't put one in `feed.xml`
+  either; `<description>` alone satisfies RSS 2.0's "at least one of
+  title/description" rule. The sole exception is the withdrawal event,
+  where §7 is normative by name ("its withdrawal event, with title
+  `withdrawn`") — that literal string is hardcoded, not read from any
+  page.
 
 ## Conformance level
 
