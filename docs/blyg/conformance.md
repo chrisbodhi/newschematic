@@ -114,12 +114,17 @@ their rules are listed for completeness but not all are load-bearing today.
       as an ordinary XML text node instead of wrapping it in CDATA —
       behavior is then minify-invariant and immune to a literal `]]>`
       inside the content breaking a hand-rolled CDATA section.
-- [ ] Every custom output format touching this surface (and `blyg.json`,
-      `items/*.json`) MUST declare `isPlainText = true` in
-      `config.toml`. *(Empirical, load-bearing: without it, Hugo runs the
-      literal template text through `html/template`'s HTML escaper,
-      which corrupts a leading `<?xml …?>` prolog and `<![CDATA[`
-      markers even with zero template actions present.)*
+- [ ] A literal `<?xml …?>` prolog in template text corrupts under
+      Hugo's default `html/template` rendering even with zero template
+      actions present (empirical, against Hugo 0.151.0). `blyg.json`'s
+      output format sets `isPlainText = true` to avoid this entirely
+      (matching Hugo's own built-in JSON output format). `feed.xml`'s
+      does not — it follows Hugo's own embedded `rss.xml` template
+      instead: stay on `html/template`, and mark just the prolog and
+      `content_html` as pre-escaped (`safeHTML`, `transform.XMLEscape`)
+      rather than opting the whole document out of autoescaping. Either
+      way, the constraint is real; only the fix differs by surface. See
+      `modules/hugo-blyg/README.md`.
 
 ## §8 — Pins (`items/{id}/v{n}.json`)
 

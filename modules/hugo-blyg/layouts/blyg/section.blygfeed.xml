@@ -1,13 +1,27 @@
 {{- /*
   Builds feed.xml (§7): one <item> per publish event across every blyg
-  item, newest first, windowed to 50. isPlainText = true on the
-  `blygfeed` output format (config.toml) is load-bearing here -- without
-  it, Hugo runs this literal template text through html/template's HTML
-  escaper, which corrupts the leading <?xml ...?> prolog even though
-  this template has no actions before it (see docs/blyg/conformance.md).
-  content_html is inserted as an escaped XML text node rather than
-  wrapped in CDATA, so behavior doesn't change under --minify and a
-  literal "]]>" inside a post's content can never break the feed.
+  item, newest first, windowed to 50.
+
+  This deliberately does NOT set isPlainText on the `blygfeed` output
+  format (config.toml) -- it follows Hugo's own embedded rss.xml template
+  instead (tpl/tplimpl/embedded/templates/rss.xml in the Hugo source):
+  stay on html/template (the default) and mark the two spots that would
+  otherwise get mangled as pre-escaped, rather than opting the whole
+  document out of autoescaping.
+
+    - The <?xml ...?> prolog is piped through `safeHTML`: a literal
+      "<?xml" in static template text confuses html/template's escaper
+      even with zero actions involved (empirically confirmed against
+      Hugo 0.151.0 -- see docs/blyg/conformance.md), but wrapping it in
+      an action whose output is marked safe sidesteps that entirely.
+    - content_html is escaped with `transform.XMLEscape` (not CDATA --
+      so behavior doesn't change under --minify, and a literal "]]>"
+      inside a post can never break the feed) and then `safeHTML`, so
+      the autoescaper doesn't escape it a second time.
+    - Every other interpolated value (titles, ids, the site's own
+      base URL) is left to html/template's ordinary contextual
+      autoescaping -- correct by default now that the document isn't
+      opted out of it, and one less place to remember to escape by hand.
 */ -}}
 {{- $base := site.BaseURL -}}
 {{- $ledger := site.Data.blyg.ledger -}}
@@ -44,20 +58,20 @@
 
 {{- $events = sort $events "at" "desc" -}}
 {{- $events = first 50 $events -}}
-<?xml version="1.0" encoding="UTF-8"?>
+{{ printf "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" | safeHTML }}
 <rss version="2.0" xmlns:blyg="https://blygger.org/ns/0.1">
   <channel>
-    <title>{{ site.Title | htmlEscape }}</title>
+    <title>{{ site.Title }}</title>
     <link>{{ $base }}blyg/</link>
-    <description>{{ site.Params.description | htmlEscape }}</description>
+    <description>{{ site.Params.description }}</description>
     <lastBuildDate>{{ now.UTC.Format "Mon, 02 Jan 2006 15:04:05 GMT" }}</lastBuildDate>
     <blyg:level>1</blyg:level>
     <blyg:manifest>{{ $manifestURL }}</blyg:manifest>
     {{- range $events }}
     <item>
       <guid isPermaLink="false">blyg:{{ .id }}:v{{ .version }}</guid>
-      <title>{{ .title | htmlEscape }}</title>
-      <description>{{ .description | htmlEscape }}</description>
+      <title>{{ .title }}</title>
+      <description>{{ .description | transform.XMLEscape | safeHTML }}</description>
       <pubDate>{{ (time.AsTime .at).UTC.Format "Mon, 02 Jan 2006 15:04:05 GMT" }}</pubDate>
       <blyg:id>{{ .id }}</blyg:id>
       <blyg:kind>{{ .kind }}</blyg:kind>

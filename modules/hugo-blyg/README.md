@@ -42,7 +42,6 @@ site must add:
     baseName = "blyg"
   [outputFormats.blygfeed]
     mediaType = "application/rss+xml"
-    isPlainText = true          # load-bearing -- see note below
     baseName = "feed"
 ```
 
@@ -71,11 +70,32 @@ have no business running there. The `content/llms.md` /
 `outputs = ['llms']` pattern already used elsewhere in a consuming site
 is the same idiom.
 
-**`isPlainText = true` is not optional.** Without it, Hugo runs the
-literal template text through `html/template`'s HTML escaper — which
-corrupts a leading `<?xml ...?>` prolog and any `<![CDATA[` marker even
-when the template contains no template actions at all. This bit us
-during development; it's now load-bearing, not a style choice.
+**`blygmanifest`'s `isPlainText = true` is not optional.** Without it,
+Hugo runs the literal template text through `html/template`'s HTML
+escaper — which corrupts a leading `<?xml ...?>` prolog and any
+`<![CDATA[` marker even when the template contains no template actions
+at all. This bit us during development; it matches Hugo's own built-in
+JSON output format (`output.JSONFormat` in the Hugo source), which sets
+the same flag for the same reason.
+
+**`blygfeed` deliberately does not set it.** The escaping bug is real,
+but Hugo's own embedded `rss.xml` template (`tpl/tplimpl/embedded/
+templates/rss.xml` in the Hugo source) shows a narrower fix: stay on
+`html/template` (the default), and mark just the two spots that would
+otherwise get mangled as pre-escaped, rather than opting the whole
+document out of autoescaping:
+
+```gotemplate
+{{ printf "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" | safeHTML }}
+...
+<description>{{ .description | transform.XMLEscape | safeHTML }}</description>
+```
+
+`section.blygfeed.xml` follows that idiom. The payoff: every other
+interpolated value (titles, ids, the site's own base URL) gets Hugo's
+ordinary contextual autoescaping automatically — one less place a future
+edit has to remember to escape by hand, and it's what a maintainer
+who's read Hugo's own RSS template will already expect to see.
 
 ## Content contract
 

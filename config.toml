@@ -71,21 +71,27 @@ enableRobotsTXT = true
     suffix = 'md'
 
   # Blyg publisher surfaces (blygger-spec protocol-v0.2, docs/blyg/conformance.md).
-  # isPlainText = true on every one of these is load-bearing: without it, Hugo
-  # runs the literal template text through html/template's HTML escaper, which
-  # corrupts a leading `<?xml ...?>` prolog and `<![CDATA[` markers even when
-  # the template has no template actions at all. Scoped to the blyg section
-  # only, via `outputs = [...]` in content/blyg/_index.md's own front matter
-  # (the same per-page-outputs mechanism content/llms.md already uses) --
-  # never added to [outputs] globally, so /blog/ and other sections are
-  # untouched.
+  # Scoped to the blyg section only, via `outputs = [...]` in
+  # content/blyg/_index.md's own front matter (the same per-page-outputs
+  # mechanism content/llms.md already uses) -- never added to [outputs]
+  # globally, so /blog/ and other sections are untouched.
+  #
+  # blygmanifest sets isPlainText = true, matching Hugo's own built-in JSON
+  # output format (output.JSONFormat in the Hugo source): without it, Hugo
+  # runs the literal template text through html/template's HTML escaper,
+  # which corrupts things like a leading `<?xml ...?>` prolog even with no
+  # template actions present. blygfeed deliberately does NOT set it --
+  # Hugo's own embedded rss.xml template stays on html/template and instead
+  # marks the couple of spots that need it as pre-escaped (`safeHTML`,
+  # `transform.XMLEscape`); modules/hugo-blyg's section.blygfeed.xml follows
+  # that idiom, so every other interpolated value gets Hugo's ordinary
+  # contextual autoescaping for free.
   [outputFormats.blygmanifest]
     mediaType = "application/json"
     isPlainText = true
     baseName = "blyg"
   [outputFormats.blygfeed]
     mediaType = "application/rss+xml"
-    isPlainText = true
     baseName = "feed"
 
 [[menu.main]]
