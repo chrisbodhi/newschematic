@@ -238,7 +238,13 @@ have no title field (§5). It stamps the item, pushes `blyg/issue-N`, and
 opens a PR against the default branch that closes the issue on merge.
 Deploying stays the site's job, on that merge.
 
-It publishes only when the issue is open, carries the label, and was
+An issue is marked for blyg by the label, or — because not every client
+can label an issue as it's filed (GitHub Mobile can't) — by opening it
+with a title that starts with `title-prefix` (`blyg:` by default,
+case-insensitive). The prefix is dropped from the title before it names
+the file and the PR.
+
+It publishes only when the issue is open, is marked for blyg, and was
 filed by the repository owner or a login listed in `authors`. A second
 event for the same issue finds the `blyg/issue-N` branch and stops; on
 any failure it comments on the issue and leaves it open.
@@ -262,6 +268,7 @@ jobs:
         with:
           authors: someone, someone-else   # optional; the owner is always allowed
           label: blyg                      # optional
+          title-prefix: "blyg:"            # optional; "" for label only
           base-branch: main                # optional; defaults to the default branch
 ```
 
