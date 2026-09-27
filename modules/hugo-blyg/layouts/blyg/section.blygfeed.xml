@@ -1,0 +1,110 @@
+{{- /*
+  Builds feed.xml (§7): one <item> per publish event across every blyg
+  item, newest first, windowed to 50.
+
+  Items have no headline of their own: the item document schema (§5) has
+  no title field at all -- fragments and threads are microblog-style,
+  not headlined essays -- so content/blyg/*.md's front-matter title is
+  never read. What <title> does carry is the publish event's changelog
+  note: §7 says an entry for an older publish event "keeps its own
+  blyg:version and note", and the spec's own example puts the note in
+  <title>. Events without a note get no <title>; <description> alone
+  satisfies RSS 2.0. The withdrawal event of a currently-withdrawn item
+  is normative by name -- "its withdrawal event, with title
+  `withdrawn`" -- so that literal string wins over any note.
+
+  Each event's <blyg:kind> is the kind that version actually had (the
+  ledger records it per changelog entry), so an endcap an item has
+  since returned from still reads `withdrawn`.
+
+  This deliberately does NOT set isPlainText on the `blygfeed` output
+  format (config.toml) -- it follows Hugo's own embedded rss.xml template
+  instead (tpl/tplimpl/embedded/templates/rss.xml in the Hugo source):
+  stay on html/template (the default) and mark the two spots that would
+  otherwise get mangled as pre-escaped, rather than opting the whole
+  document out of autoescaping.
+
+    - The <?xml ...?> prolog is piped through `safeHTML`: a literal
+      "<?xml" in static template text confuses html/template's escaper
+      even with zero actions involved (empirically confirmed against
+      Hugo 0.151.0 -- see docs/blyg/conformance.md), but wrapping it in
+      an action whose output is marked safe sidesteps that entirely.
+    - content_html is escaped with `transform.XMLEscape` (not CDATA --
+      so behavior doesn't change under --minify, and a literal "]]>"
+      inside a post can never break the feed) and then `safeHTML`, so
+      the autoescaper doesn't escape it a second time.
+    - Every other interpolated value (titles, ids, the site's own
+      base URL) is left to html/template's ordinary contextual
+      autoescaping -- correct by default now that the document isn't
+      opted out of it, and one less place to remember to escape by hand.
+*/ -}}
+{{- $base := site.BaseURL -}}
+{{- $ledger := site.Data.blyg.ledger -}}
+{{- $manifestURL := printf "%sblyg/blyg.json" $base -}}
+
+{{- $events := slice -}}
+{{- range .Pages -}}
+  {{- $page := . -}}
+  {{- $id := $page.Params.blyg_id -}}
+  {{- with $id -}}
+    {{- $entry := index $ledger . -}}
+    {{- if $entry -}}
+      {{- $doc := partial "blyg/item.html" (dict "page" $page "ledger" $entry "base" $base) -}}
+      {{- if $entry.withdrawn -}}
+        {{- /* Exactly one entry for a withdrawn item; earlier events dropped (§7). */ -}}
+        {{- $last := index $entry.changelog (sub (len $entry.changelog) 1) -}}
+        {{- $events = $events | append (dict
+            "id" $id "version" $last.version "at" $last.at
+            "sort" (printf "%s|%010d" $last.at (int $last.version))
+            "kind" "withdrawn" "title" "withdrawn" "description" ""
+            "created" $doc.created
+        ) -}}
+      {{- else -}}
+        {{- range $entry.changelog -}}
+          {{- $events = $events | append (dict
+              "id" $id "version" .version "at" .at
+              "sort" (printf "%s|%010d" .at (int .version))
+              "kind" (.kind | default $doc.kind) "title" (.note | default "")
+              "description" $doc.content_html
+              "created" $doc.created
+          ) -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* Newest first; a version number breaks same-second ties. */ -}}
+{{- $events = sort $events "sort" "desc" -}}
+{{- $events = first 50 $events -}}
+{{ printf "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" | safeHTML }}
+<rss version="2.0" xmlns:blyg="https://blygger.org/ns/0.1">
+  <channel>
+    <title>{{ site.Title }}</title>
+    <link>{{ $base }}blyg/</link>
+    <description>{{ site.Params.description }}</description>
+    {{- /* The newest publish event, not the build clock: a rebuild with no
+           new events then leaves feed.xml byte-identical, so readers'
+           conditional requests (§12.3) keep getting 304s. */}}
+    {{- with $events }}
+    <lastBuildDate>{{ (time.AsTime (index . 0).at).UTC.Format "Mon, 02 Jan 2006 15:04:05 GMT" }}</lastBuildDate>
+    {{- end }}
+    <blyg:level>1</blyg:level>
+    <blyg:manifest>{{ $manifestURL }}</blyg:manifest>
+    {{- range $events }}
+    <item>
+      <guid isPermaLink="false">blyg:{{ .id }}:v{{ .version }}</guid>
+      {{- with .title }}
+      <title>{{ . }}</title>
+      {{- end }}
+      <description>{{ .description | transform.XMLEscape | safeHTML }}</description>
+      <pubDate>{{ (time.AsTime .at).UTC.Format "Mon, 02 Jan 2006 15:04:05 GMT" }}</pubDate>
+      <blyg:id>{{ .id }}</blyg:id>
+      <blyg:kind>{{ .kind }}</blyg:kind>
+      <blyg:version>{{ .version }}</blyg:version>
+      <blyg:created>{{ .created }}</blyg:created>
+      <blyg:item>{{ $base }}blyg/items/{{ .id }}.json</blyg:item>
+    </item>
+    {{- end }}
+  </channel>
+</rss>
