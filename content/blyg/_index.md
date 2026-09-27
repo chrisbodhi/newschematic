@@ -3,7 +3,7 @@ title = "blyg"
 outputs = ["blygmanifest", "blygfeed"]
 
 # Individual blyg items (fragments/threads under this section) never get
-# their own HTML page in this phase (see docs/blyg/conformance.md) -- only
+# their own HTML page in this phase (see hugo-blyg's docs/conformance.md) -- only
 # the JSON/XML surfaces the protocol requires. `render = "never"` suppresses
 # their output entirely; `list = "always"` keeps them fully enumerable via
 # .Pages from the section-level templates that build blyg.json, feed.xml,

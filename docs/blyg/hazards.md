@@ -23,8 +23,8 @@ the same shortcodes:
    Any blyg pipeline building `content_html` needs a string-level rewrite
    of the fully rendered HTML (`src="/` / `href="/` → absolute, skipping
    already-absolute and protocol-relative `//` URLs) as a safety net
-   alongside markdown render hooks — see `docs/blyg/conformance.md`'s §7
-   entry.
+   alongside markdown render hooks — see the §7 entry in hugo-blyg's
+   [`docs/conformance.md`](https://github.com/chrisbodhi/hugo-blyg/blob/main/docs/conformance.md).
 
 2. A live `<script>` tag or CDN-loaded interactive visualization in a
    post's body rides into `content_html` verbatim (per spec, that's
