@@ -369,12 +369,26 @@ class PinTests(TmpRepoTestCase):
         plans = bs.run_stamp(self.content_dir, self.ledger_path, write=True)
         return plans[0].blyg_id
 
-    def _write_built_item(self, blyg_id: str, version: int):
+    def _write_built_item(self, blyg_id: str, version: int, **extra):
         items_dir = self.public_dir / "blyg" / "items"
         items_dir.mkdir(parents=True, exist_ok=True)
-        (items_dir / f"{blyg_id}.json").write_text(
-            json.dumps({"id": blyg_id, "version": version}), encoding="utf-8"
-        )
+        doc = {
+            "blyg": "0.2",
+            "id": blyg_id,
+            "kind": "thread",
+            "origin": "https://example.org/blyg/",
+            "created": "2024-01-01T00:00:00Z",
+            "updated": "2024-01-01T00:00:00Z",
+            "version": version,
+            "content_md": "Body.\n",
+            "content_html": "<p>Body.</p>\n",
+            "content_hash": bs.content_hash("Body.\n"),
+            "media": [],
+            "transclusions": [],
+            "changelog": [{"version": version, "at": "2024-01-01T00:00:00Z", "note": None}],
+        }
+        doc.update(extra)
+        (items_dir / f"{blyg_id}.json").write_text(json.dumps(doc), encoding="utf-8")
 
     def test_pin_refuses_on_version_mismatch(self):
         blyg_id = self._stamp_once()
@@ -407,8 +421,41 @@ class PinTests(TmpRepoTestCase):
         pinned = self.static_dir / "blyg" / "items" / blyg_id / "v1.json"
         self.assertTrue(pinned.exists())
 
+        # §8's own shape: flat version/at/note/pinned, no changelog,
+        # created, updated, or media key at all -- a pin is not a copy
+        # of the live item document.
+        pin_doc = json.loads(pinned.read_text(encoding="utf-8"))
+        self.assertEqual(pin_doc["version"], 1)
+        self.assertEqual(pin_doc["at"], "2024-01-01T00:00:00Z")
+        self.assertIsNone(pin_doc["note"])
+        self.assertTrue(pin_doc["pinned"])
+        self.assertEqual(pin_doc["content_md"], "Body.\n")
+        for absent in ("changelog", "created", "updated", "media"):
+            self.assertNotIn(absent, pin_doc)
+
         ledger = json.loads(self.ledger_path.read_text(encoding="utf-8"))
         self.assertTrue(ledger[blyg_id]["changelog"][0]["pinned"])
+
+    def test_pin_refuses_a_withdrawn_item(self):
+        blyg_id = self._stamp_once()
+        path = self.content_dir / "post.md"
+        path.write_text(
+            path.read_text(encoding="utf-8").replace("draft = false\n", "draft = false\nblyg_withdrawn = true\n"),
+            encoding="utf-8",
+        )
+        bs.run_stamp(self.content_dir, self.ledger_path, write=True)  # -> v2 endcap
+        self._write_built_item(blyg_id, version=2, kind="withdrawn",
+                                content_md="", content_html="")
+
+        parser = bs.build_parser()
+        args = parser.parse_args([
+            "--ledger-path", str(self.ledger_path),
+            "--public-dir", str(self.public_dir),
+            "--static-dir", str(self.static_dir),
+            "pin", blyg_id,
+        ])
+        with self.assertRaises(bs.BlygStampError):
+            bs.cmd_pin(args)
 
 
 class EndcapShapeTests(unittest.TestCase):

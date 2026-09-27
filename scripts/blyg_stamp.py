@@ -340,6 +340,31 @@ def cmd_stamp(args: argparse.Namespace) -> int:
     return 0
 
 
+def build_pin_document(built: dict, changelog_entry: dict) -> dict:
+    """Shape a pin file (§8) from the live item document plus its own
+    changelog entry. This is NOT a copy of the live document: §8's own
+    example shows version/at/note/pinned as flat top-level fields (never
+    a changelog array), and no created, updated, or media key at all --
+    a pin is a frozen citation of one version, not a live item summary.
+    """
+    doc = {
+        "blyg": built["blyg"],
+        "id": built["id"],
+        "kind": built["kind"],
+        "version": changelog_entry["version"],
+        "at": changelog_entry["at"],
+        "note": changelog_entry["note"],
+        "pinned": True,
+        "origin": built["origin"],
+        "content_md": built["content_md"],
+        "content_html": built["content_html"],
+        "content_hash": built["content_hash"],
+    }
+    if "transclusions" in built:
+        doc["transclusions"] = built["transclusions"]
+    return doc
+
+
 def cmd_pin(args: argparse.Namespace) -> int:
     ledger_path = Path(args.ledger_path)
     public_dir = Path(args.public_dir)
@@ -349,6 +374,12 @@ def cmd_pin(args: argparse.Namespace) -> int:
     entry = ledger.get(args.id)
     if entry is None:
         raise BlygStampError(f"no ledger entry for id {args.id}")
+
+    if entry["withdrawn"]:
+        raise BlygStampError(
+            f"{args.id} is currently withdrawn -- its live version is a §9 "
+            f"endcap, and withdrawal endcaps MUST NOT be pinned (§8 rule 2)"
+        )
 
     built_path = public_dir / "blyg" / "items" / f"{args.id}.json"
     if not built_path.exists():
@@ -363,19 +394,27 @@ def cmd_pin(args: argparse.Namespace) -> int:
             f"{ledger_version!r} for {args.id} -- rebuild the site before pinning"
         )
 
+    changelog_entry = next(
+        (e for e in entry["changelog"] if e["version"] == ledger_version), None
+    )
+    if changelog_entry is None:
+        raise BlygStampError(
+            f"no changelog entry for {args.id} v{ledger_version} -- ledger is inconsistent"
+        )
+
     target_dir = static_dir / "blyg" / "items" / args.id
     target_path = target_dir / f"v{ledger_version}.json"
+    pin_doc = build_pin_document(built, changelog_entry)
 
     print(f"pin {args.id} v{ledger_version} -> {target_path}")
     if args.dry_run:
         return 0
 
     target_dir.mkdir(parents=True, exist_ok=True)
-    target_path.write_bytes(built_path.read_bytes())
+    target_path.write_text(json.dumps(pin_doc, indent=2, sort_keys=True) + "\n",
+                            encoding="utf-8")
 
-    for entry_log in entry["changelog"]:
-        if entry_log["version"] == ledger_version:
-            entry_log["pinned"] = True
+    changelog_entry["pinned"] = True
     save_ledger(ledger_path, ledger)
     return 0
 

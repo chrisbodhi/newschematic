@@ -1,0 +1,10 @@
+# blygger-spec protocol-v0.2 §4: "Public JSON and XML responses SHOULD
+# be served with permissive CORS (Access-Control-Allow-Origin: *);
+# cross-origin reading by other clients depends on it." Every file this
+# module builds under /blyg/ (blyg.json, feed.xml, items/*.json) is one
+# of those two types.
+<IfModule mod_headers.c>
+  <FilesMatch "\.(json|xml)$">
+    Header set Access-Control-Allow-Origin "*"
+  </FilesMatch>
+</IfModule>

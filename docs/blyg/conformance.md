@@ -146,14 +146,26 @@ completeness but not all are load-bearing today.
 - [ ] Once pinned, the file MUST return 200 forever — including after
       withdrawal.
 - [ ] Unpinned versions and unknown ids: 404.
-- [ ] Withdrawal endcaps MUST NOT be pinned.
+- [ ] Withdrawal endcaps MUST NOT be pinned — `blyg_stamp.py pin <id>`
+      refuses outright while the ledger shows the item withdrawn.
 - [ ] Media referenced by any pinned version MUST be retained forever.
-- [ ] Pinned documents carry no `media` array.
+- [ ] Pinned documents carry no `media` array — nor `changelog`,
+      `created`, or `updated`. §8's own example shows a flat
+      `version`/`at`/`note`/`pinned`, not a copy of the live item
+      document's shape; `blyg_stamp.py pin <id>` builds this shape
+      explicitly (`build_pin_document`) rather than copying the built
+      `items/{id}.json` byte-for-byte, which was the actual first-cut
+      bug here — caught by running the full pin lifecycle against a
+      real build rather than trusting the unit tests' fabricated fixture
+      alone.
 - [ ] No route may ever serve an unpinned older version, in any
       representation — a version display MUST NOT offer, imply, or hint
       at access to unpinned history.
 - [ ] `blyg_stamp.py pin <id>` refuses to pin unless the built
       `public/blyg/items/{id}.json` version matches the ledger version.
+      Verified end to end: pinning v1, then bumping to v2, then
+      withdrawing to v3 — the pinned v1 file is untouched by either
+      later change, both in the ledger and in a rebuilt `public/`.
 - [ ] (If pinned pages are ever served) gated exactly like the JSON file;
       content is that version's publish-time `content_html`, verbatim;
       pinned pages MUST NOT appear in `feed.xml`, `items/index.json`, or
