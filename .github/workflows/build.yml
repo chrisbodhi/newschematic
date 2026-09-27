@@ -21,11 +21,15 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Test blyg scripts
-        run: python3 -m unittest discover -s modules/hugo-blyg/tests
+      # The blyg scripts ship inside the hugo-blyg module: run the copy at
+      # the version go.mod pins, the same one the templates come from.
+      - name: Locate hugo-blyg
+        run: |
+          go mod download github.com/chrisbodhi/hugo-blyg
+          echo "BLYG=$(go list -m -f '{{.Dir}}' github.com/chrisbodhi/hugo-blyg)" >> "$GITHUB_ENV"
 
       - name: Check blyg content is stamped
-        run: python3 modules/hugo-blyg/scripts/blyg_stamp.py --check
+        run: python3 "$BLYG/scripts/blyg_stamp.py" --check
 
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v3
@@ -45,4 +49,4 @@ jobs:
         run: hugo --minify
 
       - name: Validate blyg surface
-        run: python3 modules/hugo-blyg/scripts/blyg_validate.py
+        run: python3 "$BLYG/scripts/blyg_validate.py"

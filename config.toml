@@ -21,7 +21,7 @@ enableRobotsTXT = true
 [params.blyg]
   # The Blygger conformance level (blygger-spec protocol-v0.2 §3) this
   # deployment actually serves -- feeds blyg.json's "level" field
-  # (modules/hugo-blyg/layouts/blyg/section.blygmanifest.json).
+  # (hugo-blyg's layouts/blyg/section.blygmanifest.json).
   # Level 1 is what this module builds: stable ids, versioned items, the
   # manifest/feed/archive-index/item-document surfaces, withdrawal, pins.
   # (Generation provenance is also L1 in the spec, but only applies to a
@@ -83,7 +83,8 @@ enableRobotsTXT = true
     isPlainText = true
     suffix = 'md'
 
-  # Blyg publisher surfaces (blygger-spec protocol-v0.2, docs/blyg/conformance.md).
+  # Blyg publisher surfaces (blygger-spec protocol-v0.2; hugo-blyg's
+  # docs/conformance.md).
   # Scoped to the blyg section only, via `outputs = [...]` in
   # content/blyg/_index.md's own front matter (the same per-page-outputs
   # mechanism content/llms.md already uses) -- never added to [outputs]
@@ -96,7 +97,7 @@ enableRobotsTXT = true
   # template actions present. blygfeed deliberately does NOT set it --
   # Hugo's own embedded rss.xml template stays on html/template and instead
   # marks the couple of spots that need it as pre-escaped (`safeHTML`,
-  # `transform.XMLEscape`); modules/hugo-blyg's section.blygfeed.xml follows
+  # `transform.XMLEscape`); hugo-blyg's section.blygfeed.xml follows
   # that idiom, so every other interpolated value gets Hugo's ordinary
   # contextual autoescaping for free.
   [outputFormats.blygmanifest]

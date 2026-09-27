@@ -1,5 +1,5 @@
 # Publishes a blyg fragment from an issue labeled `blyg` or titled
-# `blyg: …`, via the hugo-blyg module's publish-from-issue action (see its
+# `blyg: …`, via hugo-blyg's publish-from-issue action (see its
 # action.yml for the inputs). It opens a PR that closes the issue on merge; that merge's push
 # runs deploy.yml, which builds and validates the site before shipping it.
 #
@@ -29,6 +29,8 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
-      - uses: ./modules/hugo-blyg/publish-from-issue
+      # Keep this tag in step with go.mod's hugo-blyg version: the action
+      # stamps with its own copy of the stamp script.
+      - uses: chrisbodhi/hugo-blyg/publish-from-issue@v0.1.0
         # with:
         #   authors: someone, someone-else   # besides the repo owner
