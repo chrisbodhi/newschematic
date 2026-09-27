@@ -33,12 +33,15 @@ import tomllib
 from dataclasses import dataclass, field
 from pathlib import Path
 
-REPO_ROOT = Path(__file__).resolve().parent.parent
+# The consuming site's root. These scripts ship inside the hugo-blyg module,
+# so every default path is relative to where they're run from -- run them
+# from the site root, as the site's workflows do.
+REPO_ROOT = Path.cwd()
 DEFAULT_CONTENT_DIR = REPO_ROOT / "content" / "blyg"
 DEFAULT_LEDGER_PATH = REPO_ROOT / "data" / "blyg" / "ledger.json"
 DEFAULT_PUBLIC_DIR = REPO_ROOT / "public"
 DEFAULT_STATIC_DIR = REPO_ROOT / "static"
-DEFAULT_PUBLISHED_REF = "origin/master"  # deploy.yml ships every push to master
+DEFAULT_PUBLISHED_REF = "origin/master"  # the branch a site deploys from; see --published-ref
 
 AUTHORED_KINDS = ("fragment", "thread")
 FRAGMENT_SOFT_CAP = 2000  # §5.3: publishers SHOULD cap fragments at 2,000 chars
@@ -584,8 +587,8 @@ def load_published_json(ref: str, path: Path) -> dict:
     if verify.returncode != 0:
         raise BlygStampError(
             f"--amend needs {ref} to tell which versions have shipped, and it "
-            f"doesn't resolve here; `git fetch origin master` first")
-    shown = subprocess.run(["git", "-C", str(REPO_ROOT), "show", f"{ref}:{rel}"],
+            f"doesn't resolve here; fetch it first, or pass --published-ref")
+    shown = subprocess.run(["git", "-C", str(REPO_ROOT), "show", f"{ref}:./{rel}"],
                            capture_output=True, text=True)
     if shown.returncode != 0:
         return {}  # the file didn't exist yet at ref: nothing had shipped

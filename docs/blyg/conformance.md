@@ -5,7 +5,7 @@ Source: [`blygger/blygger-spec`](https://github.com/blygger/blygger-spec)
 
 This is every normative MUST / MUST NOT in §§4–10 (the publish side), turned
 into a checklist, plus the §13 reader rules a validator needs to check
-against. It is the spec against which `scripts/blyg_stamp.py` and the
+against. It is the spec against which `modules/hugo-blyg/scripts/blyg_stamp.py` and the
 `hugo-blyg` module templates (`modules/hugo-blyg/`) are built and reviewed.
 An item checked here means the implementation satisfies it; it is not itself
 proof — see the empirical notes inline where behavior was verified against
@@ -14,13 +14,13 @@ Hugo 0.151.0.
 Three layers enforce this list, and CI runs all three in both `build.yml`
 and `deploy.yml` (the workflow that actually ships):
 
-1. `scripts/blyg_stamp.py --check`, before the build: every source-side
+1. `modules/hugo-blyg/scripts/blyg_stamp.py --check`, before the build: every source-side
    rule (ids, versions, kinds, directives, what may stop being buildable,
    media immutability).
 2. The `hugo-blyg` templates fail the build on a ledger/content mismatch
    (unstamped body edit, unstamped kind change, ledger entry with no page,
    page id with no ledger entry).
-3. `scripts/blyg_validate.py`, after the build: the built `public/blyg/`
+3. `modules/hugo-blyg/scripts/blyg_validate.py`, after the build: the built `public/blyg/`
    checked against this list and against the ledger — above all the
    rendered `content_html`, which only exists after Hugo runs.
 

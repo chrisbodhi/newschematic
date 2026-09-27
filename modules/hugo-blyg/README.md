@@ -102,7 +102,7 @@ who's read Hugo's own RSS template will already expect to see.
 - One Markdown page per item, anywhere under the section that sets
   `outputs`/`cascade` as above.
 - `blyg_id` in front matter, once assigned (a one-time process external
-  to this module — see the consuming site's `scripts/blyg_stamp.py`).
+  to Hugo — see `scripts/blyg_stamp.py` below).
   A page without `blyg_id` is skipped from every blyg surface — lets a
   post exist in the section before it's been stamped. A page whose
   `blyg_id` has no ledger entry, or a ledger entry with no built page,
@@ -153,8 +153,8 @@ only applies to versions that involved generation.
 `data/blyg/ledger.json`, keyed by id, one entry per item:
 `{path, created, version, kind, last_hash, withdrawn, changelog}`, where
 each changelog entry is `{version, at, note, kind, pinned?}`. Produced
-and maintained by the consuming site's own stamp script — this module
-only reads it, via `site.Data.blyg.ledger` (Hugo's standard
+and maintained by `scripts/blyg_stamp.py` — the templates
+only read it, via `site.Data.blyg.ledger` (Hugo's standard
 `data/<path>` → `site.Data.<path>` mapping). `content_hash` in the item
 document is the ledger's `last_hash`; the build re-hashes `.RawContent`
 and fails on any mismatch rather than trusting the two to agree.
@@ -197,7 +197,7 @@ Hugo's regex engine (RE2) has none. The attribute list also covers
 candidate inside `srcset` and `url(...)` in inline styles. This catches shortcode-injected markup and
 ordinary markdown images/links in one pass, so no render hooks are
 needed. Page-relative URLs (`other/page`) can't be rewritten — an item
-has no page of its own to be relative to — so the consuming site's
+has no page of its own to be relative to — so
 `scripts/blyg_validate.py` fails the build on them, and on anything
 else the rewrite can't make self-contained.
 
@@ -210,13 +210,71 @@ own `media/` directory, with a MIME type from the file extension and the
 (e.g. `/img/…`) fails validation: only `media/` files are held
 immutable, and §5.4 requires that of a media URL.
 
+## Scripts
+
+Python 3.11+, standard library only. Hugo ignores `scripts/`, `tests/`
+and `publish-from-issue/` — they aren't module mounts — so they ride
+along with the module without touching the build. Run the scripts from
+the consuming site's root: every default path (`content/blyg/`,
+`data/blyg/`, `public/`, `static/`) is relative to the working directory.
+
+- `scripts/blyg_stamp.py` assigns ids and maintains the ledger. Run it
+  after adding or editing an item; `--check` fails if it would change
+  anything, which is the gate a site's CI runs before `hugo`.
+- `scripts/blyg_validate.py` checks the built `public/blyg/` against the
+  ledger and the spec; a site's CI runs it after `hugo`.
+- `scripts/blyg_from_issue.py` backs the action below.
+
+Tests: `python3 -m unittest discover -s modules/hugo-blyg/tests` (or
+`-s tests` from this directory).
+
+## The publish-from-issue action
+
+`publish-from-issue/action.yml` is a composite GitHub Action that turns
+an issue into a new fragment: the issue body becomes the item body
+(line endings normalized to LF before hashing), and the title only names
+the file (`content/blyg/YYYY-MM-DD-<slug>.md`) and the PR, since items
+have no title field (§5). It stamps the item, pushes `blyg/issue-N`, and
+opens a PR against the default branch that closes the issue on merge.
+Deploying stays the site's job, on that merge.
+
+It publishes only when the issue is open, carries the label, and was
+filed by the repository owner or a login listed in `authors`. A second
+event for the same issue finds the `blyg/issue-N` branch and stops; on
+any failure it comments on the issue and leaves it open.
+
+```yaml
+on:
+  issues:
+    types: [opened, labeled]
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+concurrency:
+  group: blyg-issue-${{ github.event.issue.number }}
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: chrisbodhi/hugo-blyg/publish-from-issue@<ref>   # or ./modules/hugo-blyg/publish-from-issue in-repo
+        with:
+          authors: someone, someone-else   # optional; the owner is always allowed
+          label: blyg                      # optional
+          base-branch: main                # optional; defaults to the default branch
+```
+
+The repository must also allow Actions to open PRs (Settings → Actions →
+General → Workflow permissions → "Allow GitHub Actions to create and
+approve pull requests").
+
 ## Not yet built
 
 Transclusion resolution (§10.2): the stamp script refuses any
 `![[id]]` directive line until it's built, because every directive MUST
 resolve. Also not built: pinned per-version JSON files served from
-`static/blyg/items/{id}/v{n}.json` (the consuming site's
-`blyg_stamp.py pin <id>` writes them; this module doesn't read them
-back), the optional blogroll (§11), generation provenance (§5.7, only
+`static/blyg/items/{id}/v{n}.json` (`scripts/blyg_stamp.py pin <id>`
+writes them; the templates don't read them back), the optional blogroll (§11), generation provenance (§5.7, only
 needed once a version involves generation), and any live HTML permalink
 page for an item (§8.4).

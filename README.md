@@ -25,3 +25,4 @@ Built with Hugo!
 
 - Push changes to `master` and GitHub Actions will automatically build and deploy
 - Configuration steps are in `.github/workflows/`
+- File an issue labeled `blyg` (as the repo owner, or a login listed under `authors` in `.github/workflows/blyg-issue.yml`) to publish a blyg fragment: the body becomes the item, the title only names the file and PR. The Action (`modules/hugo-blyg/publish-from-issue`) opens a PR; merging it deploys and closes the issue
