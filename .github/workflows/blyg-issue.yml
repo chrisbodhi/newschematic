@@ -1,9 +1,11 @@
-# Turns an issue filed by chrisbodhi and labeled `blyg` into a new blyg
-# fragment, opened as a PR against master. The issue body is the item body;
-# the title only names the file and the PR. The PR says "Closes #N", so the
-# issue closes when the PR is merged -- and that merge's push is what runs
-# deploy.yml. (Pushes made with GITHUB_TOKEN never trigger other workflows,
-# which is why this runs build.yml's gates itself before opening the PR.)
+# Turns an issue labeled `blyg` into a new blyg fragment, opened as a PR
+# against master. Only issues filed by the repo owner count, plus any
+# logins listed in the BLYG_AUTHORS repository variable as a JSON array,
+# e.g. ["someone", "someone-else"] (Settings -> Secrets and variables ->
+# Actions -> Variables). The issue body is the item body; the title only
+# names the file and the PR. The PR says "Closes #N", so the issue closes
+# when the PR is merged -- and that merge's push is what runs deploy.yml,
+# which builds and validates the site before shipping it.
 #
 # Needs "Allow GitHub Actions to create and approve pull requests" enabled
 # under Settings -> Actions -> General -> Workflow permissions.
@@ -28,14 +30,13 @@ jobs:
   publish:
     name: Publish blyg fragment
     if: >-
-      github.event.issue.user.login == 'chrisbodhi' &&
+      (github.event.issue.user.login == github.repository_owner ||
+       contains(fromJSON(vars.BLYG_AUTHORS || '[]'), github.event.issue.user.login)) &&
       github.event.issue.state == 'open' &&
       contains(github.event.issue.labels.*.name, 'blyg') &&
       (github.event.action == 'opened' || github.event.label.name == 'blyg')
     runs-on: ubuntu-latest
     env:
-      HUGO_CACHEDIR: /tmp/hugo_cache
-      HUGO_ENV: production
       GH_TOKEN: ${{ github.token }}
       ISSUE_NUMBER: ${{ github.event.issue.number }}
       BRANCH: blyg/issue-${{ github.event.issue.number }}
@@ -67,7 +68,6 @@ jobs:
         if: steps.guard.outputs.skip != 'true'
         run: python3 scripts/blyg_stamp.py
 
-      # The same gates build.yml and deploy.yml run.
       - name: Test blyg scripts
         if: steps.guard.outputs.skip != 'true'
         run: python3 -m unittest discover -s tests
@@ -75,29 +75,6 @@ jobs:
       - name: Check blyg content is stamped
         if: steps.guard.outputs.skip != 'true'
         run: python3 scripts/blyg_stamp.py --check
-
-      - name: Setup Hugo
-        if: steps.guard.outputs.skip != 'true'
-        uses: peaceiris/actions-hugo@v3
-        with:
-          hugo-version: "0.151.0"
-          extended: true
-
-      - uses: actions/cache@v4
-        if: steps.guard.outputs.skip != 'true'
-        with:
-          path: ${{ env.HUGO_CACHEDIR }}
-          key: ${{ runner.os }}-hugomod-${{ hashFiles('**/go.sum') }}
-          restore-keys: |
-            ${{ runner.os }}-hugomod-
-
-      - name: Generate site
-        if: steps.guard.outputs.skip != 'true'
-        run: hugo --minify
-
-      - name: Validate blyg surface
-        if: steps.guard.outputs.skip != 'true'
-        run: python3 scripts/blyg_validate.py
 
       - name: Open the PR
         if: steps.guard.outputs.skip != 'true'
