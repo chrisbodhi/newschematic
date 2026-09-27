@@ -7,12 +7,20 @@ title only names the file -- blyg items have no title field (§5), so it
 never reaches the wire. Stamping (id, ledger entry) is left to
 blyg_stamp.py, exactly as for a hand-written item.
 
+An issue is marked for publishing by its label or, since not every
+client can label an issue as it's filed (GitHub Mobile can't), by a
+title prefix such as `blyg: `, which is dropped from the title.
+
 Usage:
     blyg_from_issue.py check --event PATH [--authors LOGINS] [--label NAME]
+                             [--prefix PREFIX]
         exit 0 if the `issues` event should publish, 1 (printing why)
-        if not: the issue must be open, carry the label, and be filed by
-        the repo owner or one of LOGINS (comma/space separated)
-    blyg_from_issue.py write --event PATH
+        if not: the issue must be open, carry the label or the title
+        prefix, and be filed by the repo owner or one of LOGINS
+        (comma/space separated)
+    blyg_from_issue.py title --event PATH [--prefix PREFIX]
+        print the issue title without the prefix (for the commit and PR)
+    blyg_from_issue.py write --event PATH [--prefix PREFIX]
         write the item from the event's issue, print its path
 """
 
@@ -80,20 +88,40 @@ def parse_logins(value: str) -> set[str]:
     return {login.casefold() for login in re.split(r"[\s,]+", value) if login}
 
 
-def skip_reason(event: dict, *, authors: str, label: str) -> str | None:
+def strip_prefix(title: str, prefix: str) -> str | None:
+    """`title` without a leading `prefix` (case-insensitive, surrounding
+    whitespace ignored), or None if it doesn't start with one. An empty
+    prefix never matches."""
+    prefix = prefix.strip()
+    title = title.strip()
+    if not prefix or not title.casefold().startswith(prefix.casefold()):
+        return None
+    return title[len(prefix):].strip()
+
+
+def publish_title(title: str, prefix: str) -> str:
+    stripped = strip_prefix(title, prefix)
+    return title.strip() if stripped is None else stripped
+
+
+def skip_reason(event: dict, *, authors: str, label: str,
+                prefix: str = "") -> str | None:
     """Why this `issues` event shouldn't publish, or None if it should.
-    Logins and label names compare case-insensitively, as GitHub treats
-    them."""
+    Logins, label names and the title prefix compare case-insensitively,
+    as GitHub treats logins and labels."""
     issue = event["issue"]
     action = event.get("action")
     label = label.casefold()
+    labeled = label in {lab["name"].casefold() for lab in issue.get("labels", [])}
     if action == "labeled":
         if event["label"]["name"].casefold() != label:
             return f"added label {event['label']['name']!r} isn't {label!r}"
-    elif action != "opened":
+    elif action == "opened":
+        if not labeled and strip_prefix(issue["title"], prefix) is None:
+            how = f" or titled {prefix.strip()!r}" if prefix.strip() else ""
+            return f"issue #{issue['number']} isn't labeled {label!r}{how}"
+    else:
         return f"`{action}` events don't publish"
-    if label not in {lab["name"].casefold() for lab in issue.get("labels", [])}:
-        return f"issue #{issue['number']} isn't labeled {label!r}"
     if issue.get("state") != "open":
         return f"issue #{issue['number']} is {issue.get('state')}"
     if "pull_request" in issue:
@@ -106,7 +134,8 @@ def skip_reason(event: dict, *, authors: str, label: str) -> str | None:
 
 
 def cmd_check(args: argparse.Namespace, event: dict) -> int:
-    reason = skip_reason(event, authors=args.authors, label=args.label)
+    reason = skip_reason(event, authors=args.authors, label=args.label,
+                         prefix=args.prefix)
     if reason is not None:
         print(f"skip: {reason}")
         return 1
@@ -116,13 +145,20 @@ def cmd_check(args: argparse.Namespace, event: dict) -> int:
 def cmd_write(args: argparse.Namespace, event: dict) -> int:
     issue = event["issue"]
     try:
-        path = create_item(Path(args.content_dir), title=issue["title"],
+        path = create_item(Path(args.content_dir),
+                           title=publish_title(issue["title"], args.prefix),
                            body=issue.get("body"), number=issue["number"],
                            now=datetime.datetime.now(datetime.timezone.utc))
     except bs.BlygStampError as exc:
         print(f"error: {exc}", file=sys.stderr)
         return 2
     print(path.relative_to(bs.REPO_ROOT) if path.is_relative_to(bs.REPO_ROOT) else path)
+    return 0
+
+
+def cmd_title(args: argparse.Namespace, event: dict) -> int:
+    issue = event["issue"]
+    print(publish_title(issue["title"], args.prefix) or f"blyg fragment from #{issue['number']}")
     return 0
 
 
@@ -136,12 +172,15 @@ def main(argv: list[str] | None = None) -> int:
     check.add_argument("--label", default="blyg")
     write = sub.add_parser("write", help="write the item from the event's issue")
     write.add_argument("--content-dir", default=str(bs.DEFAULT_CONTENT_DIR))
-    for p in (check, write):
+    title = sub.add_parser("title", help="print the issue title without the prefix")
+    for p in (check, title, write):
         p.add_argument("--event", required=True, help="GitHub event payload (GITHUB_EVENT_PATH)")
+        p.add_argument("--prefix", default="",
+                       help="title prefix that marks an issue for publishing, e.g. 'blyg:'")
     args = parser.parse_args(argv)
 
     event = json.loads(Path(args.event).read_text(encoding="utf-8"))
-    return {"check": cmd_check, "write": cmd_write}[args.command](args, event)
+    return {"check": cmd_check, "title": cmd_title, "write": cmd_write}[args.command](args, event)
 
 
 if __name__ == "__main__":

@@ -1,4 +1,6 @@
+import contextlib
 import datetime
+import io
 import json
 import sys
 import tempfile
@@ -106,9 +108,9 @@ class CreateItemTests(unittest.TestCase):
 
 
 def event(action="opened", *, author="owner", labels=("blyg",), state="open",
-          added=None, owner="owner"):
+          added=None, owner="owner", title="A thought"):
     ev = {"action": action,
-          "issue": {"number": 5, "state": state, "user": {"login": author},
+          "issue": {"number": 5, "title": title, "state": state, "user": {"login": author},
                     "labels": [{"name": name} for name in labels]},
           "repository": {"owner": {"login": owner}}}
     if added is not None:
@@ -117,8 +119,8 @@ def event(action="opened", *, author="owner", labels=("blyg",), state="open",
 
 
 class SkipReasonTests(unittest.TestCase):
-    def reason(self, ev, authors="", label="blyg"):
-        return bfi.skip_reason(ev, authors=authors, label=label)
+    def reason(self, ev, authors="", label="blyg", prefix=""):
+        return bfi.skip_reason(ev, authors=authors, label=label, prefix=prefix)
 
     def test_owner_opening_a_labeled_issue_publishes(self):
         self.assertIsNone(self.reason(event()))
@@ -154,6 +156,25 @@ class SkipReasonTests(unittest.TestCase):
         self.assertIsNone(self.reason(ev, label="microblog"))
         self.assertIsNotNone(self.reason(ev))
 
+    def test_prefixed_title_publishes_without_the_label(self):
+        for title in ("blyg: A thought", "BLYG:A thought", "  Blyg:  A thought "):
+            self.assertIsNone(self.reason(event(labels=(), title=title), prefix="blyg:"), title)
+
+    def test_prefix_only_counts_at_the_start(self):
+        self.assertIsNotNone(self.reason(event(labels=(), title="About blyg: things"),
+                                         prefix="blyg:"))
+
+    def test_no_prefix_configured_means_label_only(self):
+        self.assertIsNotNone(self.reason(event(labels=(), title="blyg: A thought")))
+
+    def test_prefixed_title_still_needs_an_allowed_author(self):
+        self.assertIsNotNone(self.reason(event(labels=(), title="blyg: hi", author="someone"),
+                                         prefix="blyg:"))
+
+    def test_prefixed_title_still_needs_an_open_issue(self):
+        self.assertIsNotNone(self.reason(event(labels=(), title="blyg: hi", state="closed"),
+                                         prefix="blyg:"))
+
     def test_check_command_exit_codes(self):
         with tempfile.TemporaryDirectory() as tmp:
             path = Path(tmp) / "event.json"
@@ -163,6 +184,41 @@ class SkipReasonTests(unittest.TestCase):
             self.assertEqual(bfi.main(["check", "--event", str(path)]), 1)
             self.assertEqual(bfi.main(["check", "--event", str(path),
                                        "--authors", "someone"]), 0)
+
+
+
+class TitleTests(unittest.TestCase):
+    def test_strip_prefix(self):
+        self.assertEqual(bfi.strip_prefix("blyg: Pray for me", "blyg:"), "Pray for me")
+        self.assertEqual(bfi.strip_prefix(" BLYG:Pray ", "blyg:"), "Pray")
+        self.assertIsNone(bfi.strip_prefix("Pray for me", "blyg:"))
+        self.assertIsNone(bfi.strip_prefix("blyg: Pray", ""))
+
+    def test_publish_title_falls_back_to_the_whole_title(self):
+        self.assertEqual(bfi.publish_title("Pray for me", "blyg:"), "Pray for me")
+        self.assertEqual(bfi.publish_title("blyg: Pray for me", "blyg:"), "Pray for me")
+
+    def test_write_and_title_commands_drop_the_prefix(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "event.json"
+            ev = event(labels=(), title="blyg: Pray for me")
+            ev["issue"]["body"] = "Body"
+            path.write_text(json.dumps(ev))
+            content_dir = Path(tmp) / "content" / "blyg"
+            self.assertEqual(bfi.main(["write", "--event", str(path), "--prefix", "blyg:",
+                                       "--content-dir", str(content_dir)]), 0)
+            [item] = content_dir.iterdir()
+            self.assertTrue(item.name.endswith("-pray-for-me.md"), item.name)
+
+
+    def test_title_command_never_prints_an_empty_title(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "event.json"
+            path.write_text(json.dumps(event(title="blyg:")))
+            out = io.StringIO()
+            with contextlib.redirect_stdout(out):
+                self.assertEqual(bfi.main(["title", "--event", str(path), "--prefix", "blyg:"]), 0)
+            self.assertEqual(out.getvalue(), "blyg fragment from #5\n")
 
 
 if __name__ == "__main__":

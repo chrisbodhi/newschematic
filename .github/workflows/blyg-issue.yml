@@ -1,6 +1,6 @@
-# Publishes a blyg fragment from an issue labeled `blyg`, via the
-# hugo-blyg module's publish-from-issue action (see its action.yml for the
-# inputs). It opens a PR that closes the issue on merge; that merge's push
+# Publishes a blyg fragment from an issue labeled `blyg` or titled
+# `blyg: …`, via the hugo-blyg module's publish-from-issue action (see its
+# action.yml for the inputs). It opens a PR that closes the issue on merge; that merge's push
 # runs deploy.yml, which builds and validates the site before shipping it.
 #
 # Needs "Allow GitHub Actions to create and approve pull requests" enabled

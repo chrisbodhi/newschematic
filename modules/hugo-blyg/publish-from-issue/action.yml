@@ -1,9 +1,10 @@
 name: Publish blyg fragment from issue
 description: >-
-  Turns an issue labeled for blyg into a new, stamped blyg fragment and
-  opens a PR that closes the issue on merge. The issue body is the item
-  body; the title only names the file and the PR (blyg items have no
-  title field, §5).
+  Turns an issue marked for blyg (by label, or by a title prefix for
+  clients that can't label, like GitHub Mobile) into a new, stamped blyg
+  fragment and opens a PR that closes the issue on merge. The issue body
+  is the item body; the title, minus the prefix, only names the file and
+  the PR (blyg items have no title field, §5).
 
 # Call it from a workflow on `issues: [opened, labeled]`, after
 # actions/checkout of the branch the PR should target, with `contents`,
@@ -21,6 +22,12 @@ inputs:
   label:
     description: The label that marks an issue for publishing.
     default: blyg
+  title-prefix:
+    description: >-
+      A title prefix that also marks an issue for publishing when it's
+      opened, case-insensitive, and is dropped from the title. Empty
+      means the label only.
+    default: "blyg:"
   base-branch:
     description: Branch the PR targets. Defaults to the repository's default branch.
     default: ""
@@ -37,7 +44,7 @@ outputs:
     value: ${{ steps.pr.outputs.blyg-id }}
   path:
     description: The new item's content file.
-    value: ${{ steps.pr.outputs.path }}
+    value: ${{ steps.item.outputs.path }}
   pr-url:
     description: The opened PR.
     value: ${{ steps.pr.outputs.pr-url }}
@@ -56,15 +63,18 @@ runs:
       env:
         AUTHORS: ${{ inputs.authors }}
         LABEL: ${{ inputs.label }}
+        PREFIX: ${{ inputs.title-prefix }}
         BRANCH: blyg/issue-${{ github.event.issue.number }}
       run: |
         status=0
         python3 "$GITHUB_ACTION_PATH/../scripts/blyg_from_issue.py" check \
-          --event "$GITHUB_EVENT_PATH" --authors "$AUTHORS" --label "$LABEL" || status=$?
+          --event "$GITHUB_EVENT_PATH" --authors "$AUTHORS" --label "$LABEL" \
+          --prefix "$PREFIX" || status=$?
         [ "$status" -eq 1 ] && exit 0  # not for us; the reason is printed above
         [ "$status" -eq 0 ] || exit "$status"
         # Filing an issue with the label already set fires both `opened` and
-        # `labeled`; whichever runs second finds this branch and stops.
+        # `labeled` (as does labeling a prefixed one later); whichever runs
+        # second finds this branch and stops.
         if git ls-remote --exit-code --heads origin "$BRANCH" > /dev/null; then
           echo "skip: $BRANCH already exists"
           exit 0
@@ -75,12 +85,20 @@ runs:
       id: item
       if: steps.check.outputs.go == 'true'
       shell: bash
+      env:
+        PREFIX: ${{ inputs.title-prefix }}
       run: |
         scripts="$GITHUB_ACTION_PATH/../scripts"
-        file=$(python3 "$scripts/blyg_from_issue.py" write --event "$GITHUB_EVENT_PATH")
+        file=$(python3 "$scripts/blyg_from_issue.py" write --event "$GITHUB_EVENT_PATH" \
+          --prefix "$PREFIX")
+        title=$(python3 "$scripts/blyg_from_issue.py" title --event "$GITHUB_EVENT_PATH" \
+          --prefix "$PREFIX")
         python3 "$scripts/blyg_stamp.py"
         python3 "$scripts/blyg_stamp.py" --check
-        echo "path=$file" >> "$GITHUB_OUTPUT"
+        {
+          echo "path=$file"
+          echo "title=$title"
+        } >> "$GITHUB_OUTPUT"
 
     - name: Open the PR
       id: pr
@@ -89,7 +107,7 @@ runs:
       env:
         GH_TOKEN: ${{ inputs.token }}
         ISSUE_NUMBER: ${{ github.event.issue.number }}
-        ISSUE_TITLE: ${{ github.event.issue.title }}
+        ISSUE_TITLE: ${{ steps.item.outputs.title }}
         BRANCH: blyg/issue-${{ github.event.issue.number }}
         BASE: ${{ inputs.base-branch || github.event.repository.default_branch }}
         FILE: ${{ steps.item.outputs.path }}
@@ -132,4 +150,5 @@ runs:
         gh issue comment "$ISSUE_NUMBER" --body
         "Couldn't publish this as a blyg fragment. The issue stays open; see
         $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID for the error.
-        To retry, delete the \`$BRANCH\` branch if it was pushed, then remove and re-add the $LABEL label."
+        To retry, delete the \`$BRANCH\` branch if it was pushed, then remove and re-add the $LABEL label
+        (or file it again as a new issue)."
