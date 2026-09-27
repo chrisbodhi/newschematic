@@ -11,6 +11,19 @@ An item checked here means the implementation satisfies it; it is not itself
 proof — see the empirical notes inline where behavior was verified against
 Hugo 0.151.0.
 
+Three layers enforce this list, and CI runs all three in both `build.yml`
+and `deploy.yml` (the workflow that actually ships):
+
+1. `scripts/blyg_stamp.py --check`, before the build: every source-side
+   rule (ids, versions, kinds, directives, what may stop being buildable,
+   media immutability).
+2. The `hugo-blyg` templates fail the build on a ledger/content mismatch
+   (unstamped body edit, unstamped kind change, ledger entry with no page,
+   page id with no ledger entry).
+3. `scripts/blyg_validate.py`, after the build: the built `public/blyg/`
+   checked against this list and against the ledger — above all the
+   rendered `content_html`, which only exists after Hugo runs.
+
 Scope for this repository: New Schematic publishes at Level 1 only, as a
 single-author, non-multiplayer origin. Every item authors its `kind` via
 `blyg_kind` in front matter (`"fragment"` or `"thread"`; defaults to
@@ -32,11 +45,20 @@ completeness but not all are load-bearing today.
 - [ ] `items/{id}.json` MUST return 404 for unknown ids and never-published
       drafts.
 - [ ] `items/{id}.json` MUST return 200 permanently once the item has ever
-      been published — including after withdrawal.
+      been published — including after withdrawal. Anything that would make
+      Hugo stop building a ledgered item is refused by `blyg_stamp.py`:
+      `draft = true`, a future `date`/`publishDate`, an `expiryDate`, a
+      deleted file, or two files claiming one id. The build fails on a
+      ledger entry with no page too, as a backstop. (Before first stamp,
+      a draft or future-dated post is simply unpublished and is skipped.)
 - [ ] `items/{id}/v{n}.json` MUST return 404 unless version n of item id is
       pinned, and MUST return 200 permanently once it is.
+- [ ] Publishers MUST serve `media/…` for media referenced by items:
+      `static/blyg/media/`, tracked in `data/blyg/media.json`.
 - [ ] All protocol timestamps MUST be ISO 8601 UTC (`…Z`), except the
       RFC 822 dates inside `feed.xml`.
+- [ ] (SHOULD) Permissive CORS on JSON/XML: `static/blyg/.htaccess`
+      (the deploy target is Apache).
 
 ## §5 — The item document (`items/{id}.json`)
 
@@ -51,23 +73,40 @@ completeness but not all are load-bearing today.
       file's post-front-matter bytes exactly, including leading/trailing
       newlines and a missing final newline — safe to hash directly.)*
 - [ ] `version` MUST be a positive integer, incremented by exactly 1 per
-      publish event. Draft saves are invisible to the protocol.
+      publish event. Draft saves are invisible to the protocol. By default
+      every stamp run that changes something bumps, which can only
+      over-count (a version nobody saw), never rewrite one somebody may
+      have. `blyg_stamp.py --amend` checks the ledger at `origin/master`
+      (what `deploy.yml` last shipped). It rewrites the latest version in
+      place, or reverts it, while that version hasn't shipped, so iterating
+      on a branch doesn't burn versions. It never rewrites a shipped or
+      pinned version. Run `git fetch origin master` first: a stale ref
+      makes shipped versions look unshipped.
 - [ ] Only the **latest** version's content is served in the item
       document; older content is withheld unless pinned (§8).
 - [ ] `updated` MUST equal the latest changelog entry's `at`.
 - [ ] `"kind"` is `"fragment"`, `"thread"` (§10), or `"withdrawn"` (§9) at
-      this version. Authored via `blyg_kind` in front matter
-      (`modules/hugo-blyg/layouts/partials/blyg/item.html`); the build
-      fails rather than accept anything else, including `"withdrawn"`
-      itself — that value is derived from `blyg_withdrawn` plus the
-      ledger, never something a page authors directly.
+      this version. Authored via `blyg_kind` in front matter, but served
+      from the **ledger**: a kind change changes the document, so
+      `blyg_stamp.py` records it as a new version, and the build fails if
+      the page and ledger disagree. Anything other than fragment/thread,
+      including `"withdrawn"` itself, is refused — that value is derived
+      from `blyg_withdrawn` plus the ledger, never authored.
+- [ ] (SHOULD) Fragments capped at 2,000 characters of `content_md`
+      (§5.3): `blyg_stamp.py` warns past it but still publishes — the cap
+      is a publisher-side SHOULD, not a wire rule.
 - [ ] Threads carry `transclusions` (§10.3, currently always `[]` — no
       local fragment corpus yet to transclude); fragments omit the key
       entirely. Implemented as two different dict shapes, not a
       placeholder value, since an empty array on a fragment would itself
       be a spec violation.
 - [ ] `media` entries: a media URL MUST always serve the same bytes once
-      published (immutable).
+      published (immutable). Every file under `static/blyg/media/` is
+      hashed into `data/blyg/media.json`, and `blyg_stamp.py` refuses to
+      let a tracked file change or disappear. `media` lists what the
+      rendered HTML embeds from there (url, mime, alt). Embedding anything
+      else from the origin (e.g. `/img/…`, which carries no immutability
+      promise) fails `blyg_validate.py`.
 - [ ] `author`, if present, MUST be accepted with any additional members;
       clients that store/re-emit item JSON MUST carry it verbatim, never
       synthesized or rewritten.
@@ -88,10 +127,10 @@ completeness but not all are load-bearing today.
       `title`, `feed`, `items`, `updated`; `blogroll` key present only
       when a non-empty blogroll is served (not the case here).
       `level` comes from `[params.blyg].level` in `config.toml`
-      (defaults to `1`); the build refuses any value other than `1`
-      until this module actually ships the corresponding L2+ surfaces —
-      config can lower ambition, never inflate the conformance claim on
-      the wire.
+      (defaults to `1`); the build refuses any value other than `1`. L2's
+      constructs (stub metadata, nesting, `forked_from`, webmention)
+      arrive with 0.3 and none are built. The blogroll never changes the
+      level, and generation provenance is L1.
 - [ ] `items/index.json` lists **every** item ever published — including
       withdrawn items — with no window, ordered by `updated` descending.
 
@@ -100,8 +139,14 @@ completeness but not all are load-bearing today.
 - [ ] RSS 2.0 with the `blyg:` namespace `https://blygger.org/ns/0.1`
       (a permanent, opaque wire token — never tracks the protocol
       version).
-- [ ] One `<item>` per publish event, newest first; window bounded
-      (RECOMMENDED 50).
+- [ ] One `<item>` per publish event, newest first (version breaks
+      same-second ties); window bounded (RECOMMENDED 50).
+- [ ] An entry keeps its own `blyg:version` **and note**: the note is the
+      entry's `<title>` (as in the spec's example); no note, no `<title>`.
+      `<blyg:kind>` is the kind that version had, from the ledger.
+- [ ] `lastBuildDate` is the newest event's time, not the build clock, so
+      an unchanged feed stays byte-identical for conditional requests
+      (§12.3).
 - [ ] GUIDs are per-version: `blyg:{id}:v{n}`, `isPermaLink="false"`.
 - [ ] Entries render the item's **latest** content — a feed entry for an
       older publish event keeps its own `blyg:version`/note but its
@@ -112,6 +157,11 @@ completeness but not all are load-bearing today.
 - [ ] Pinning emits no feed event.
 - [ ] `<description>` HTML MUST be self-contained: absolute media URLs,
       no dependence on the origin's stylesheets or scripts.
+      The rewrite in `item.html` absolutizes root-relative URLs in any URL
+      attribute (either quote style), `srcset`, and inline-style `url()`;
+      `blyg_validate.py` fails the build on anything left non-absolute
+      (page-relative links included) and on origin-hosted scripts or
+      stylesheets. In-document `#anchors` (footnotes) are allowed.
       *(Empirical note: goldmark render hooks alone are not sufficient
       here — two of this site's shortcodes, `plate` with `src=` and
       `skyhook-viz`, inject `<img>`/`<script>` with root-relative URLs
@@ -148,6 +198,9 @@ completeness but not all are load-bearing today.
 - [ ] Unpinned versions and unknown ids: 404.
 - [ ] Withdrawal endcaps MUST NOT be pinned — `blyg_stamp.py pin <id>`
       refuses outright while the ledger shows the item withdrawn.
+- [ ] Pins are irrevocable, so `--dry-run` must never write one: it is
+      honored before or after the `pin` subcommand (a subparser default
+      used to silently override the global flag).
 - [ ] Media referenced by any pinned version MUST be retained forever.
 - [ ] Pinned documents carry no `media` array — nor `changelog`,
       `created`, or `updated`. §8's own example shows a flat
@@ -185,17 +238,20 @@ completeness but not all are load-bearing today.
 - [ ] Withdrawal is reversible: a later publish event (vN+1, with the
       item's authored kind) is the item returning under the same id.
 - [ ] A ledger entry whose backing file is missing on disk is a hard
-      error — `blyg_stamp.py` must never silently drop it.
+      error — `blyg_stamp.py` never silently drops it, and the build fails
+      on it too.
 
 ## §10 — Threads and transclusion
 
-*(Fragments can now be authored via `blyg_kind = "fragment"`, but none
-transclude anything yet — every thread still emits `"transclusions": []`,
-since resolving `![[id]]` directives at publish time isn't built. Rules
-kept here for completeness and because the grammar is a **permanent
-protocol surface**: any future post containing a bare `![[26-char-id]]`
-line is a live transclusion directive whether or not this repo currently
-resolves it.)*
+*(Resolving `![[id]]` directives at publish time isn't built, so every
+thread emits `"transclusions": []` — and because the grammar is a
+**permanent protocol surface** and every directive MUST resolve,
+`blyg_stamp.py` refuses to publish any body containing a directive line
+(outside fenced code, where it is inert text), and refuses the reserved
+`![[id@vN]]` form outright. `blyg_validate.py` re-checks built
+`content_md` for both. Resolution needs publish-time snapshots stored in
+the ledger — re-resolving on every Hugo build would change a thread's
+`content_html` without a version bump, breaking §10.4.)*
 
 - [ ] Transclusion targets MUST be fragments of the same origin (0.2,
       local-only).
@@ -222,6 +278,15 @@ resolves it.)*
 - [ ] No auto-pin: `transclusions[].version` may name a version with no
       fetchable per-version file.
 
+## §12 — Resolution (publisher-facing SHOULD)
+
+- [ ] The blyg mounts at `/blyg/`, away from the pages people share, so
+      every page's `<head>` carries `<link rel="blyg"
+      href="https://newschematic.org/blyg/">` (§12.1 step 4) — the origin
+      base URL, not the manifest. Without it, resolving the home page
+      would depend on the step-5 `/blyg/` probe, which publishers MUST
+      NOT rely on.
+
 ## §13 — Reader conformance (informs the validator, not the publisher)
 
 Kept here because §13 is what a validator checks a publisher's output
@@ -240,6 +305,9 @@ Kept here because §13 is what a validator checks a publisher's output
       duration must be able to recover losslessly from the index alone.
 - [ ] Version numbers, never timestamps, drive rollup — our `version`
       counter must never skip or regress across a publish.
+- [ ] Same version, different content is a stealth edit (§13.3): the
+      build re-hashes every body against the ledger, and `deploy.yml` runs
+      `--check`, so an unstamped edit can't ship.
 - [ ] A fetched document whose `version` is lower than a previously
       observed version is a protocol violation by us — `blyg_stamp.py`'s
       idempotency and monotonic versioning (§5.2) exist specifically to

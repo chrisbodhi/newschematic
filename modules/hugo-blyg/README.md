@@ -103,55 +103,71 @@ who's read Hugo's own RSS template will already expect to see.
   `outputs`/`cascade` as above.
 - `blyg_id` in front matter, once assigned (a one-time process external
   to this module — see the consuming site's `scripts/blyg_stamp.py`).
-  A page without `blyg_id` is skipped from every blyg surface (with a
-  build warning), not an error — lets a post exist in the section before
-  it's been stamped.
+  A page without `blyg_id` is skipped from every blyg surface — lets a
+  post exist in the section before it's been stamped. A page whose
+  `blyg_id` has no ledger entry, or a ledger entry with no built page,
+  fails the build: either would silently turn a published
+  `items/{id}.json` into a 404, and §4 says it MUST stay 200 forever.
 - `blyg_withdrawn = true` marks it withdrawn; the ledger, not this
   module, decides whether that's a fresh transition (§9 endcap) — this
   module only ever reads the ledger's `withdrawn` flag, it never writes
   it.
 - `blyg_kind = "fragment"` or `"thread"` (defaults to `"thread"` when
-  absent). Threads always carry a `transclusions` array (currently
-  always `[]`); fragments omit the key entirely (§10.3) — this module
-  builds a different dict shape per kind rather than a placeholder
-  value, since an empty `transclusions` on a fragment would itself be a
-  spec violation, not a harmless default. Any other value, including
-  `"withdrawn"`, fails the build: `"withdrawn"` is a wire-level state
-  this module derives from `blyg_withdrawn` plus the ledger, never
-  something a page authors directly.
-- `draft = true` pages are already excluded from `.Pages` by Hugo itself
-  under a normal (non-`--buildDrafts`) build; this module does nothing
-  special for drafts.
+  absent). The item document's `kind` comes from the **ledger**, and the
+  build fails if the page disagrees: a kind change changes the document,
+  so it is a publish event that needs a version bump (§5.2), which only
+  the stamp script can record. Threads always carry a `transclusions`
+  array (currently always `[]`); fragments omit the key entirely
+  (§10.3). Any other value, including `"withdrawn"`, fails the build:
+  `"withdrawn"` is a wire-level state this module derives from the
+  ledger, never something a page authors directly.
+- The body's SHA-256 must equal the ledger's `last_hash`, or the build
+  fails. Shipping an unstamped edit would be a same-version stealth
+  edit (§13.3).
+- `draft = true`, a future `date`/`publishDate`, or an `expiryDate`
+  would each make Hugo drop the page. Before an item is first stamped
+  that just means "not published yet"; after, it would 404 a published
+  item, so the stamp script refuses it and the build fails on the
+  orphaned ledger entry. Withdrawal is the only exit (§9).
 - `title` is never read. The item document schema (§5) has no title
   field at all — fragments and threads are microblog-style, not
-  headlined essays — so this module doesn't put one in `feed.xml`
-  either; `<description>` alone satisfies RSS 2.0's "at least one of
-  title/description" rule. The sole exception is the withdrawal event,
-  where §7 is normative by name ("its withdrawal event, with title
-  `withdrawn`") — that literal string is hardcoded, not read from any
-  page.
+  headlined essays. A feed entry's `<title>` is that publish event's
+  changelog **note**, when it has one: §7 says an entry "keeps its own
+  `blyg:version` and note", and the spec's own example carries the note
+  in `<title>`. The withdrawal event of a currently-withdrawn item is
+  titled `withdrawn`, literally, as §7 requires by name.
 
 ## Conformance level
 
 `blyg.json`'s `"level"` field (§3) comes from the consuming site's own
 `[params.blyg].level`, defaulting to `1` when unset. This module only
-accepts `1` — it fails the build on anything else, since claiming a
-higher level on the wire without actually shipping that level's
-surfaces (the blogroll, generation provenance disclosure, ...) would be
-a false conformance claim, not a preference this module can just defer
-to config.
+accepts `1` — it fails the build on anything else. L2's real constructs
+(stub metadata, thread nesting, `forked_from`, webmention) arrive with
+protocol 0.3 and none are built, so a higher level would be a false
+conformance claim. Note the blogroll is optional at *every* level and
+never changes the level, and generation provenance (§5.7) is L1 — it
+only applies to versions that involved generation.
 
 ## The ledger
 
 `data/blyg/ledger.json`, keyed by id, one entry per item:
-`{path, created, version, last_hash, withdrawn, changelog}`. Produced
+`{path, created, version, kind, last_hash, withdrawn, changelog}`, where
+each changelog entry is `{version, at, note, kind, pinned?}`. Produced
 and maintained by the consuming site's own stamp script — this module
 only reads it, via `site.Data.blyg.ledger` (Hugo's standard
 `data/<path>` → `site.Data.<path>` mapping). `content_hash` in the item
-document is always the ledger's `last_hash`, never recomputed at build
-time, since the two are guaranteed byte-identical by construction (the
-stamp script hashes `.RawContent`-equivalent bytes the same way this
-module reads `.RawContent` itself).
+document is the ledger's `last_hash`; the build re-hashes `.RawContent`
+and fails on any mismatch rather than trusting the two to agree.
+
+The per-changelog `kind` is ledger-private: it lets `feed.xml` label
+every past publish event with the kind that version really had (an
+endcap an item has since returned from still reads `withdrawn`). The
+item document's `changelog` is rebuilt from the §5.2 members only
+(`version`, `at`, `note`, `pinned`).
+
+`data/blyg/media.json` maps every file under `static/blyg/media/` to its
+SHA-256. The stamp script refuses any change to or deletion of a tracked
+file, because a published media URL MUST always serve the same bytes (§5.4).
 
 ## The `resources.FromString` fan-out gotcha
 
@@ -173,17 +189,34 @@ hooks on the markdown image/link AST aren't enough on their own if the
 consuming site has shortcodes that inject raw HTML with root-relative
 URLs outside those AST nodes entirely (a real case in the site this was
 built for — see its `docs/blyg/hazards.md`). `item.html` instead rewrites
-the *fully rendered* HTML string directly: `(src|href)="/([^/"])` →
-`${1}="{base}/${2}`, using a captured "not another slash" character
-instead of a negative lookahead, because Hugo's regex engine (RE2) has
-none. This catches shortcode-injected markup and ordinary markdown
-images/links in one pass, so no render hooks are needed.
+the *fully rendered* HTML string directly — in essence
+`(src|href|…)=(["'])/([^/"'])` → `${1}=${2}{base}/${3}`, using a captured
+"not another slash" character instead of a negative lookahead, because
+Hugo's regex engine (RE2) has none. The attribute list also covers
+`poster`, `cite`, `action` and friends, and two more passes handle every
+candidate inside `srcset` and `url(...)` in inline styles. This catches shortcode-injected markup and
+ordinary markdown images/links in one pass, so no render hooks are
+needed. Page-relative URLs (`other/page`) can't be rewritten — an item
+has no page of its own to be relative to — so the consuming site's
+`scripts/blyg_validate.py` fails the build on them, and on anything
+else the rewrite can't make self-contained.
+
+## Media
+
+`media` (§5.4) lists every object the rendered HTML embeds (`img`,
+`source`, `video`, `audio`: `src`, `poster`, `srcset`) from the origin's
+own `media/` directory, with a MIME type from the file extension and the
+`alt` text when there is one. Embedding anything else from the origin
+(e.g. `/img/…`) fails validation: only `media/` files are held
+immutable, and §5.4 requires that of a media URL.
 
 ## Not yet built
 
-Real fragments/transclusion, pinned per-version JSON files served from
+Transclusion resolution (§10.2): the stamp script refuses any
+`![[id]]` directive line until it's built, because every directive MUST
+resolve. Also not built: pinned per-version JSON files served from
 `static/blyg/items/{id}/v{n}.json` (the consuming site's
 `blyg_stamp.py pin <id>` writes them; this module doesn't read them
-back), the blogroll (§11), generation provenance (§5.7), and any live
-HTML permalink page for an item (§8.4) — all Level 1-adjacent but not
-exercised by this site yet.
+back), the optional blogroll (§11), generation provenance (§5.7, only
+needed once a version involves generation), and any live HTML permalink
+page for an item (§8.4).

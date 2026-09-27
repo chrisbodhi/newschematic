@@ -10,67 +10,148 @@
               content/blyg/_index.md, but .RawContent/.Content/.Params
               are still fully available).
     ledger -- this item's entry from data/blyg/ledger.json (as written by
-              scripts/blyg_stamp.py): {path, created, version, last_hash,
-              withdrawn, changelog}.
+              scripts/blyg_stamp.py): {path, created, version, kind,
+              last_hash, withdrawn, changelog}.
     base   -- the site's base URL, with or without a trailing slash.
 
-  `kind` comes from the page's own `blyg_kind` front matter ("fragment"
-  or "thread"; defaults to "thread" when absent). Threads always carry
-  transclusions (currently always [] -- there is no local fragment
-  corpus yet for a thread to actually transclude, per
-  docs/blyg/conformance.md's §3 scope note); fragments omit the key
-  entirely (§10.3). `blyg_kind = "withdrawn"` is refused at build time --
-  "withdrawn" is a protocol state this partial derives from the ledger,
-  never an authored kind.
+  `kind` comes from the ledger, never straight from front matter: a
+  kind change is a publish event (it changes the document, so it needs
+  a version bump, §5.2), and only scripts/blyg_stamp.py can record one.
+  The page's `blyg_kind` ("fragment" or "thread", default "thread") must
+  agree with the ledger or the build fails -- same for the body, whose
+  SHA-256 must match the ledger's `last_hash` -- so an unstamped edit can
+  never ship as a same-version stealth edit (§13.3). "withdrawn" is a
+  protocol state derived from the ledger, never an authored kind.
+  Threads always carry transclusions (currently always [] --
+  scripts/blyg_stamp.py refuses any `![[id]]` directive until
+  resolution is built); fragments omit the key entirely (§10.3).
 */ -}}
 {{- $page := .page -}}
 {{- $entry := .ledger -}}
 {{- $base := strings.TrimSuffix "/" .base -}}
+{{- $origin := printf "%s/blyg/" $base -}}
 {{- $withdrawn := $entry.withdrawn -}}
+{{- $file := $page.File.Filename -}}
+
+{{- $authoredKind := $page.Params.blyg_kind | default "thread" -}}
+{{- if not (in (slice "fragment" "thread") $authoredKind) -}}
+  {{- errorf "blyg: %s has blyg_kind %q -- must be \"fragment\" or \"thread\" (\"withdrawn\" is a protocol state derived from blyg_withdrawn + the ledger, never an authored kind)" $file $authoredKind -}}
+{{- end -}}
+{{- if not $entry.kind -}}
+  {{- errorf "blyg: ledger entry %s has no kind -- rerun scripts/blyg_stamp.py" $page.Params.blyg_id -}}
+{{- end -}}
+{{- if and (not $withdrawn) (ne $authoredKind $entry.kind) -}}
+  {{- errorf "blyg: %s says blyg_kind %q but the ledger has %q -- a kind change is a new version; run scripts/blyg_stamp.py" $file $authoredKind $entry.kind -}}
+{{- end -}}
 
 {{- $contentMD := "" -}}
 {{- $contentHTML := "" -}}
+{{- $media := slice -}}
 {{- if not $withdrawn -}}
   {{- $contentMD = $page.RawContent -}}
+  {{- $hash := printf "sha256:%s" (crypto.SHA256 $contentMD) -}}
+  {{- if ne $hash $entry.last_hash -}}
+    {{- errorf "blyg: %s body hashes to %s but the ledger says %s -- run scripts/blyg_stamp.py before building (shipping this would be a same-version stealth edit, §13.3)" $file $hash $entry.last_hash -}}
+  {{- end -}}
   {{- /*
     content_html must be self-contained (§7): absolute URLs everywhere.
     Render hooks alone don't cover this site's shortcodes (plate's src=,
     skyhook-viz's injected <img>/<script>) -- see docs/blyg/hazards.md --
-    so this rewrites the fully rendered HTML directly. RE2 (Hugo's regex
+    so this rewrites the fully rendered HTML directly: every
+    root-relative URL attribute (either quote style), every candidate
+    inside srcset, and url(...) in inline styles. RE2 (Hugo's regex
     engine) has no lookahead, hence capturing-and-replaying the char
     after the slash rather than a negative lookahead, to skip
-    protocol-relative "//" URLs without one.
+    protocol-relative "//" URLs without one. Page-relative URLs can't be
+    rewritten at all (items have no page of their own to be relative
+    to); scripts/blyg_validate.py fails the build on any that remain.
   */ -}}
-  {{- $rawHTML := printf "%s" $page.Content -}}
-  {{- $contentHTML = replaceRE "(src|href)=\"/([^/\"])" (printf "${1}=\"%s/${2}" $base) $rawHTML -}}
+  {{- $html := printf "%s" $page.Content -}}
+  {{- $html = replaceRE `(\s(?:src|href|poster|cite|action|formaction|data|background|longdesc))=(["'])/([^/"'])` (printf "${1}=${2}%s/${3}" $base) $html -}}
+  {{- $html = replaceRE `url\((["']?)/([^/"')])` (printf "url(${1}%s/${2}" $base) $html -}}
+  {{- range findRESubmatch `\ssrcset=(["'])([^"']*)["']` $html -}}
+    {{- $value := index . 2 -}}
+    {{- $fixed := replaceRE `(^|,)(\s*)/([^/])` (printf "${1}${2}%s/${3}" $base) $value -}}
+    {{- if ne $fixed $value -}}
+      {{- $html = replace $html (index . 0) (replace (index . 0) $value $fixed) -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $contentHTML = $html -}}
+
+  {{- /*
+    media (§5.4): every embedded object this version's HTML loads from
+    the origin's own media/ directory, whose files scripts/blyg_stamp.py
+    holds immutable. Embedded media from anywhere else fails
+    scripts/blyg_validate.py -- nothing else carries the immutability
+    promise.
+  */ -}}
+  {{- $mimes := dict
+    ".png" "image/png" ".jpg" "image/jpeg" ".jpeg" "image/jpeg" ".gif" "image/gif"
+    ".webp" "image/webp" ".avif" "image/avif" ".svg" "image/svg+xml"
+    ".mp4" "video/mp4" ".webm" "video/webm" ".mp3" "audio/mpeg" ".ogg" "audio/ogg"
+    ".m4a" "audio/mp4" ".wav" "audio/wav" ".pdf" "application/pdf"
+  -}}
+  {{- $seen := slice -}}
+  {{- range findRE `<(?:img|source|video|audio)\b[^>]*>` $html -}}
+    {{- $tag := . -}}
+    {{- $alt := "" -}}
+    {{- $hasAlt := false -}}
+    {{- range findRESubmatch `\salt=["']([^"']*)["']` $tag 1 -}}
+      {{- $alt = index . 1 | htmlUnescape -}}{{- $hasAlt = true -}}
+    {{- end -}}
+    {{- $urls := slice -}}
+    {{- range findRESubmatch `\s(?:src|poster)=["']([^"']+)["']` $tag -}}
+      {{- $urls = $urls | append (index . 1) -}}
+    {{- end -}}
+    {{- range findRESubmatch `\ssrcset=["']([^"']*)["']` $tag -}}
+      {{- range split (index . 1) "," -}}
+        {{- with index (split (trim . " \t\n") " ") 0 -}}{{- $urls = $urls | append . -}}{{- end -}}
+      {{- end -}}
+    {{- end -}}
+    {{- range $urls -}}
+      {{- $u := . | htmlUnescape -}}
+      {{- if and (hasPrefix $u (printf "%smedia/" $origin)) (not (in $seen $u)) -}}
+        {{- $seen = $seen | append $u -}}
+        {{- $rel := strings.TrimPrefix $origin $u -}}
+        {{- $m := dict "url" $rel "mime" (index $mimes (lower (path.Ext $rel)) | default "application/octet-stream") -}}
+        {{- if $hasAlt -}}{{- $m = merge $m (dict "alt" $alt) -}}{{- end -}}
+        {{- $media = $media | append $m -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
 {{- end -}}
 
-{{- $authoredKind := $page.Params.blyg_kind | default "thread" -}}
-{{- $validKinds := slice "fragment" "thread" -}}
-{{- if not (in $validKinds $authoredKind) -}}
-  {{- errorf "blyg: %s has blyg_kind %q -- must be \"fragment\" or \"thread\" (\"withdrawn\" is a protocol state derived from blyg_withdrawn + the ledger, never an authored kind)" $page.File.Filename $authoredKind -}}
-{{- end -}}
-
-{{- $kind := $authoredKind -}}
+{{- $kind := $entry.kind -}}
 {{- if $withdrawn -}}{{- $kind = "withdrawn" -}}{{- end -}}
 
-{{- $lastEntry := index $entry.changelog (sub (len $entry.changelog) 1) -}}
+{{- /*
+  The ledger's changelog entries also record each version's kind (so
+  feed.xml can label past events correctly); that's ledger-private, so
+  the wire changelog is rebuilt from the §5.2 members only.
+*/ -}}
+{{- $changelog := slice -}}
+{{- range $entry.changelog -}}
+  {{- $c := dict "version" .version "at" .at "note" .note -}}
+  {{- if .pinned -}}{{- $c = merge $c (dict "pinned" true) -}}{{- end -}}
+  {{- $changelog = $changelog | append $c -}}
+{{- end -}}
+{{- $lastEntry := index $changelog (sub (len $changelog) 1) -}}
 
 {{- $doc := dict
   "blyg" "0.2"
   "id" $page.Params.blyg_id
   "kind" $kind
-  "origin" (printf "%s/blyg/" $base)
+  "origin" $origin
   "created" $entry.created
   "updated" $lastEntry.at
   "version" $entry.version
   "content_md" $contentMD
   "content_html" $contentHTML
   "content_hash" $entry.last_hash
-  "media" (slice)
-  "changelog" $entry.changelog
+  "media" $media
+  "changelog" $changelog
 -}}
-{{- if eq $authoredKind "thread" -}}
+{{- if eq $entry.kind "thread" -}}
   {{- $doc = merge $doc (dict "transclusions" (slice)) -}}
 {{- end -}}
 
