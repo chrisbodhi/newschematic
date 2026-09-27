@@ -1,11 +1,7 @@
-# Turns an issue labeled `blyg` into a new blyg fragment, opened as a PR
-# against master. Only issues filed by the repo owner count, plus any
-# logins listed in the BLYG_AUTHORS repository variable as a JSON array,
-# e.g. ["someone", "someone-else"] (Settings -> Secrets and variables ->
-# Actions -> Variables). The issue body is the item body; the title only
-# names the file and the PR. The PR says "Closes #N", so the issue closes
-# when the PR is merged -- and that merge's push is what runs deploy.yml,
-# which builds and validates the site before shipping it.
+# Publishes a blyg fragment from an issue labeled `blyg`, via the
+# hugo-blyg module's publish-from-issue action (see its action.yml for the
+# inputs). It opens a PR that closes the issue on merge; that merge's push
+# runs deploy.yml, which builds and validates the site before shipping it.
 #
 # Needs "Allow GitHub Actions to create and approve pull requests" enabled
 # under Settings -> Actions -> General -> Workflow permissions.
@@ -29,84 +25,10 @@ concurrency:
 jobs:
   publish:
     name: Publish blyg fragment
-    if: >-
-      (github.event.issue.user.login == github.repository_owner ||
-       contains(fromJSON(vars.BLYG_AUTHORS || '[]'), github.event.issue.user.login)) &&
-      github.event.issue.state == 'open' &&
-      contains(github.event.issue.labels.*.name, 'blyg') &&
-      (github.event.action == 'opened' || github.event.label.name == 'blyg')
     runs-on: ubuntu-latest
-    env:
-      GH_TOKEN: ${{ github.token }}
-      ISSUE_NUMBER: ${{ github.event.issue.number }}
-      BRANCH: blyg/issue-${{ github.event.issue.number }}
-
     steps:
       - uses: actions/checkout@v5
-        with:
-          ref: master
 
-      - name: Skip if this issue already has a blyg branch
-        id: guard
-        run: |
-          if git ls-remote --exit-code --heads origin "$BRANCH" > /dev/null; then
-            echo "$BRANCH already exists; not publishing #$ISSUE_NUMBER again."
-            echo "skip=true" >> "$GITHUB_OUTPUT"
-          fi
-
-      - name: Setup Python
-        if: steps.guard.outputs.skip != 'true'
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-
-      - name: Write the item from the issue
-        if: steps.guard.outputs.skip != 'true'
-        run: python3 scripts/blyg_from_issue.py --event "$GITHUB_EVENT_PATH"
-
-      - name: Stamp it
-        if: steps.guard.outputs.skip != 'true'
-        run: python3 scripts/blyg_stamp.py
-
-      - name: Test blyg scripts
-        if: steps.guard.outputs.skip != 'true'
-        run: python3 -m unittest discover -s tests
-
-      - name: Check blyg content is stamped
-        if: steps.guard.outputs.skip != 'true'
-        run: python3 scripts/blyg_stamp.py --check
-
-      - name: Open the PR
-        if: steps.guard.outputs.skip != 'true'
-        env:
-          ISSUE_TITLE: ${{ github.event.issue.title }}
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git switch -c "$BRANCH"
-          git add content/blyg data/blyg
-          file=$(git diff --cached --name-only --diff-filter=A -- content/blyg)
-          id=$(sed -n 's/^blyg_id = "\(.*\)"$/\1/p' "$file")
-          git commit -q -F - <<EOF
-          $ISSUE_TITLE
-
-          Closes #$ISSUE_NUMBER
-          EOF
-          git push -u origin "$BRANCH"
-          pr=$(gh pr create --base master --head "$BRANCH" --title "$ISSUE_TITLE" --body-file - <<EOF
-          New blyg fragment \`$id\` at \`$file\`, from #$ISSUE_NUMBER.
-
-          Merging deploys it and closes the issue.
-
-          Closes #$ISSUE_NUMBER
-          EOF
-          )
-          gh issue comment "$ISSUE_NUMBER" --body "Opened $pr for blyg fragment \`$id\`. Merging it publishes this and closes the issue."
-
-      - name: Report failure on the issue
-        if: failure()
-        run: >-
-          gh issue comment "$ISSUE_NUMBER" --body
-          "Couldn't publish this as a blyg fragment. The issue stays open; see
-          $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID for the error.
-          To retry, delete the \`$BRANCH\` branch if it was pushed, then remove and re-add the blyg label."
+      - uses: ./modules/hugo-blyg/publish-from-issue
+        # with:
+        #   authors: someone, someone-else   # besides the repo owner

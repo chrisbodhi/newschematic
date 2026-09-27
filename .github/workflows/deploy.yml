@@ -33,7 +33,7 @@ jobs:
           python-version: "3.11"
 
       - name: Check blyg content is stamped
-        run: python3 scripts/blyg_stamp.py --check
+        run: python3 modules/hugo-blyg/scripts/blyg_stamp.py --check
 
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v3
@@ -53,7 +53,7 @@ jobs:
         run: hugo --minify
 
       - name: Validate blyg surface
-        run: python3 scripts/blyg_validate.py
+        run: python3 modules/hugo-blyg/scripts/blyg_validate.py
 
       - name: Deploy
         env:

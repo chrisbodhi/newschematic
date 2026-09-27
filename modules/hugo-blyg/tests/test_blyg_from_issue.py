@@ -92,7 +92,7 @@ class CreateItemTests(unittest.TestCase):
         event = self.root / "event.json"
         event.write_text(json.dumps({"issue": {"number": 3, "title": "From the event",
                                                 "body": "Body\r\n"}}))
-        self.assertEqual(bfi.main(["--event", str(event),
+        self.assertEqual(bfi.main(["write", "--event", str(event),
                                    "--content-dir", str(self.content_dir)]), 0)
         [path] = self.content_dir.iterdir()
         self.assertTrue(path.name.endswith("-from-the-event.md"))
@@ -100,8 +100,69 @@ class CreateItemTests(unittest.TestCase):
     def test_main_reports_an_empty_body(self):
         event = self.root / "event.json"
         event.write_text(json.dumps({"issue": {"number": 3, "title": "t", "body": None}}))
-        self.assertEqual(bfi.main(["--event", str(event),
+        self.assertEqual(bfi.main(["write", "--event", str(event),
                                    "--content-dir", str(self.content_dir)]), 2)
+
+
+
+def event(action="opened", *, author="owner", labels=("blyg",), state="open",
+          added=None, owner="owner"):
+    ev = {"action": action,
+          "issue": {"number": 5, "state": state, "user": {"login": author},
+                    "labels": [{"name": name} for name in labels]},
+          "repository": {"owner": {"login": owner}}}
+    if added is not None:
+        ev["label"] = {"name": added}
+    return ev
+
+
+class SkipReasonTests(unittest.TestCase):
+    def reason(self, ev, authors="", label="blyg"):
+        return bfi.skip_reason(ev, authors=authors, label=label)
+
+    def test_owner_opening_a_labeled_issue_publishes(self):
+        self.assertIsNone(self.reason(event()))
+
+    def test_owner_adding_the_label_publishes(self):
+        self.assertIsNone(self.reason(event("labeled", added="blyg")))
+
+    def test_adding_some_other_label_does_not(self):
+        self.assertIsNotNone(self.reason(event("labeled", labels=("blyg", "bug"), added="bug")))
+
+    def test_unlabeled_issue_does_not(self):
+        self.assertIsNotNone(self.reason(event(labels=("bug",))))
+
+    def test_other_actions_do_not(self):
+        for action in ("edited", "closed", "reopened", "unlabeled"):
+            self.assertIsNotNone(self.reason(event(action)), action)
+
+    def test_closed_issue_does_not(self):
+        self.assertIsNotNone(self.reason(event("labeled", added="blyg", state="closed")))
+
+    def test_strangers_do_not(self):
+        self.assertIsNotNone(self.reason(event(author="someone")))
+
+    def test_listed_authors_do_in_any_separator_or_case(self):
+        for authors in ("someone", "a, Someone", "a\nsomeone\n", "a someone"):
+            self.assertIsNone(self.reason(event(author="SomeOne"), authors=authors), authors)
+
+    def test_the_owner_stays_allowed_alongside_listed_authors(self):
+        self.assertIsNone(self.reason(event(), authors="someone"))
+
+    def test_label_is_configurable_and_case_insensitive(self):
+        ev = event("labeled", labels=("Microblog",), added="Microblog")
+        self.assertIsNone(self.reason(ev, label="microblog"))
+        self.assertIsNotNone(self.reason(ev))
+
+    def test_check_command_exit_codes(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "event.json"
+            path.write_text(json.dumps(event()))
+            self.assertEqual(bfi.main(["check", "--event", str(path)]), 0)
+            path.write_text(json.dumps(event(author="someone")))
+            self.assertEqual(bfi.main(["check", "--event", str(path)]), 1)
+            self.assertEqual(bfi.main(["check", "--event", str(path),
+                                       "--authors", "someone"]), 0)
 
 
 if __name__ == "__main__":

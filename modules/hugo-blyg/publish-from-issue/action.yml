@@ -1,0 +1,135 @@
+name: Publish blyg fragment from issue
+description: >-
+  Turns an issue labeled for blyg into a new, stamped blyg fragment and
+  opens a PR that closes the issue on merge. The issue body is the item
+  body; the title only names the file and the PR (blyg items have no
+  title field, §5).
+
+# Call it from a workflow on `issues: [opened, labeled]`, after
+# actions/checkout of the branch the PR should target, with `contents`,
+# `pull-requests` and `issues` write permissions. The repository also needs
+# "Allow GitHub Actions to create and approve pull requests" enabled
+# (Settings -> Actions -> General -> Workflow permissions). Run from the
+# site root: every path is relative to it.
+
+inputs:
+  authors:
+    description: >-
+      Logins allowed to publish besides the repository owner, separated
+      by commas, spaces or newlines. Empty means the owner only.
+    default: ""
+  label:
+    description: The label that marks an issue for publishing.
+    default: blyg
+  base-branch:
+    description: Branch the PR targets. Defaults to the repository's default branch.
+    default: ""
+  token:
+    description: Token for pushing the branch, opening the PR and commenting on the issue.
+    default: ${{ github.token }}
+
+outputs:
+  published:
+    description: '"true" when a PR was opened.'
+    value: ${{ steps.pr.outputs.published == 'true' }}
+  blyg-id:
+    description: The new item's blyg id.
+    value: ${{ steps.pr.outputs.blyg-id }}
+  path:
+    description: The new item's content file.
+    value: ${{ steps.pr.outputs.path }}
+  pr-url:
+    description: The opened PR.
+    value: ${{ steps.pr.outputs.pr-url }}
+
+runs:
+  using: composite
+  steps:
+    - name: Setup Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.11"
+
+    - name: Check the issue should publish
+      id: check
+      shell: bash
+      env:
+        AUTHORS: ${{ inputs.authors }}
+        LABEL: ${{ inputs.label }}
+        BRANCH: blyg/issue-${{ github.event.issue.number }}
+      run: |
+        status=0
+        python3 "$GITHUB_ACTION_PATH/../scripts/blyg_from_issue.py" check \
+          --event "$GITHUB_EVENT_PATH" --authors "$AUTHORS" --label "$LABEL" || status=$?
+        [ "$status" -eq 1 ] && exit 0  # not for us; the reason is printed above
+        [ "$status" -eq 0 ] || exit "$status"
+        # Filing an issue with the label already set fires both `opened` and
+        # `labeled`; whichever runs second finds this branch and stops.
+        if git ls-remote --exit-code --heads origin "$BRANCH" > /dev/null; then
+          echo "skip: $BRANCH already exists"
+          exit 0
+        fi
+        echo "go=true" >> "$GITHUB_OUTPUT"
+
+    - name: Write and stamp the item
+      id: item
+      if: steps.check.outputs.go == 'true'
+      shell: bash
+      run: |
+        scripts="$GITHUB_ACTION_PATH/../scripts"
+        file=$(python3 "$scripts/blyg_from_issue.py" write --event "$GITHUB_EVENT_PATH")
+        python3 "$scripts/blyg_stamp.py"
+        python3 "$scripts/blyg_stamp.py" --check
+        echo "path=$file" >> "$GITHUB_OUTPUT"
+
+    - name: Open the PR
+      id: pr
+      if: steps.check.outputs.go == 'true'
+      shell: bash
+      env:
+        GH_TOKEN: ${{ inputs.token }}
+        ISSUE_NUMBER: ${{ github.event.issue.number }}
+        ISSUE_TITLE: ${{ github.event.issue.title }}
+        BRANCH: blyg/issue-${{ github.event.issue.number }}
+        BASE: ${{ inputs.base-branch || github.event.repository.default_branch }}
+        FILE: ${{ steps.item.outputs.path }}
+      run: |
+        id=$(sed -n 's/^blyg_id = "\(.*\)"$/\1/p' "$FILE")
+        git config user.name "github-actions[bot]"
+        git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+        git switch -c "$BRANCH"
+        git add -- "$FILE" data/blyg
+        git commit -q -F - <<EOF
+        $ISSUE_TITLE
+
+        Closes #$ISSUE_NUMBER
+        EOF
+        git push -u origin "$BRANCH"
+        pr=$(gh pr create --base "$BASE" --head "$BRANCH" --title "$ISSUE_TITLE" --body-file - <<EOF
+        New blyg fragment \`$id\` at \`$FILE\`, from #$ISSUE_NUMBER.
+
+        Merging deploys it and closes the issue.
+
+        Closes #$ISSUE_NUMBER
+        EOF
+        )
+        gh issue comment "$ISSUE_NUMBER" --body "Opened $pr for blyg fragment \`$id\`. Merging it publishes this and closes the issue."
+        {
+          echo "published=true"
+          echo "blyg-id=$id"
+          echo "pr-url=$pr"
+        } >> "$GITHUB_OUTPUT"
+
+    - name: Report failure on the issue
+      if: failure() && steps.check.outputs.go == 'true'
+      shell: bash
+      env:
+        GH_TOKEN: ${{ inputs.token }}
+        ISSUE_NUMBER: ${{ github.event.issue.number }}
+        BRANCH: blyg/issue-${{ github.event.issue.number }}
+        LABEL: ${{ inputs.label }}
+      run: >-
+        gh issue comment "$ISSUE_NUMBER" --body
+        "Couldn't publish this as a blyg fragment. The issue stays open; see
+        $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID for the error.
+        To retry, delete the \`$BRANCH\` branch if it was pushed, then remove and re-add the $LABEL label."
