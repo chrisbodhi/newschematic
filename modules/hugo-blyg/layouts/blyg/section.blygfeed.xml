@@ -2,16 +2,20 @@
   Builds feed.xml (§7): one <item> per publish event across every blyg
   item, newest first, windowed to 50.
 
-  Items have no <title> of their own: the item document schema (§5) has
+  Items have no headline of their own: the item document schema (§5) has
   no title field at all -- fragments and threads are microblog-style,
-  not headlined essays -- and content/blyg/*.md's own front-matter
-  title was never anything but a borrowed assumption from the /blog/
-  essay model. <description> alone satisfies RSS 2.0 (an item needs at
-  least one of title/description). The one exception is the withdrawal
-  event, where §7 is normative by name: "its withdrawal event, with
-  title `withdrawn`" -- that literal string stays regardless, and
-  doubles as the required title/description fallback for that entry,
-  since its description is always empty.
+  not headlined essays -- so content/blyg/*.md's front-matter title is
+  never read. What <title> does carry is the publish event's changelog
+  note: §7 says an entry for an older publish event "keeps its own
+  blyg:version and note", and the spec's own example puts the note in
+  <title>. Events without a note get no <title>; <description> alone
+  satisfies RSS 2.0. The withdrawal event of a currently-withdrawn item
+  is normative by name -- "its withdrawal event, with title
+  `withdrawn`" -- so that literal string wins over any note.
+
+  Each event's <blyg:kind> is the kind that version actually had (the
+  ledger records it per changelog entry), so an endcap an item has
+  since returned from still reads `withdrawn`.
 
   This deliberately does NOT set isPlainText on the `blygfeed` output
   format (config.toml) -- it follows Hugo's own embedded rss.xml template
@@ -51,6 +55,7 @@
         {{- $last := index $entry.changelog (sub (len $entry.changelog) 1) -}}
         {{- $events = $events | append (dict
             "id" $id "version" $last.version "at" $last.at
+            "sort" (printf "%s|%010d" $last.at (int $last.version))
             "kind" "withdrawn" "title" "withdrawn" "description" ""
             "created" $doc.created
         ) -}}
@@ -58,7 +63,9 @@
         {{- range $entry.changelog -}}
           {{- $events = $events | append (dict
               "id" $id "version" .version "at" .at
-              "kind" $doc.kind "description" $doc.content_html
+              "sort" (printf "%s|%010d" .at (int .version))
+              "kind" (.kind | default $doc.kind) "title" (.note | default "")
+              "description" $doc.content_html
               "created" $doc.created
           ) -}}
         {{- end -}}
@@ -67,7 +74,8 @@
   {{- end -}}
 {{- end -}}
 
-{{- $events = sort $events "at" "desc" -}}
+{{- /* Newest first; a version number breaks same-second ties. */ -}}
+{{- $events = sort $events "sort" "desc" -}}
 {{- $events = first 50 $events -}}
 {{ printf "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" | safeHTML }}
 <rss version="2.0" xmlns:blyg="https://blygger.org/ns/0.1">
@@ -75,14 +83,19 @@
     <title>{{ site.Title }}</title>
     <link>{{ $base }}blyg/</link>
     <description>{{ site.Params.description }}</description>
-    <lastBuildDate>{{ now.UTC.Format "Mon, 02 Jan 2006 15:04:05 GMT" }}</lastBuildDate>
+    {{- /* The newest publish event, not the build clock: a rebuild with no
+           new events then leaves feed.xml byte-identical, so readers'
+           conditional requests (§12.3) keep getting 304s. */}}
+    {{- with $events }}
+    <lastBuildDate>{{ (time.AsTime (index . 0).at).UTC.Format "Mon, 02 Jan 2006 15:04:05 GMT" }}</lastBuildDate>
+    {{- end }}
     <blyg:level>1</blyg:level>
     <blyg:manifest>{{ $manifestURL }}</blyg:manifest>
     {{- range $events }}
     <item>
       <guid isPermaLink="false">blyg:{{ .id }}:v{{ .version }}</guid>
-      {{- if eq .kind "withdrawn" }}
-      <title>{{ .title }}</title>
+      {{- with .title }}
+      <title>{{ . }}</title>
       {{- end }}
       <description>{{ .description | transform.XMLEscape | safeHTML }}</description>
       <pubDate>{{ (time.AsTime .at).UTC.Format "Mon, 02 Jan 2006 15:04:05 GMT" }}</pubDate>

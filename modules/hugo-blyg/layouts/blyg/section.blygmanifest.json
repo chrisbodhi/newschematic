@@ -16,11 +16,11 @@
   The conformance level actually served, from [params.blyg].level in the
   site's own config.toml (§3) -- defaults to 1 when unset, since that's
   what an empty config means for a site that hasn't opted into anything
-  higher. Only 1 is accepted: bumping this without also shipping the
-  corresponding L2+ surfaces (the blogroll, generation provenance
-  disclosure, ...) would be a false conformance claim on the wire, so
-  the build refuses rather than silently emitting a "level" the rest of
-  this module doesn't back up.
+  higher. Only 1 is accepted: L2's constructs (stub metadata, thread
+  nesting, forked_from, webmention) arrive with protocol 0.3 and this
+  module builds none of them, so any higher "level" would be a false
+  conformance claim on the wire. (The blogroll is optional at every
+  level and never changes it; generation provenance is L1.)
 */ -}}
 {{- $level := 1 -}}
 {{- with site.Params.blyg -}}
@@ -32,6 +32,7 @@
 
 {{- $indexEntries := slice -}}
 {{- $updated := "" -}}
+{{- $built := slice -}}
 
 {{- range .Pages -}}
   {{- $page := . -}}
@@ -39,8 +40,9 @@
   {{- with $id -}}
     {{- $entry := index $ledger . -}}
     {{- if not $entry -}}
-      {{- warnf "blyg: %s carries blyg_id %s with no ledger entry -- skipping from all blyg surfaces until data/blyg/ledger.json is regenerated" $page.File.Filename $id -}}
+      {{- errorf "blyg: %s carries blyg_id %s with no ledger entry -- run scripts/blyg_stamp.py (an id without a ledger entry would silently drop out of every blyg surface)" $page.File.Filename $id -}}
     {{- else -}}
+      {{- $built = $built | append $id -}}
       {{- $doc := partial "blyg/item.html" (dict "page" $page "ledger" $entry "base" $base) -}}
       {{- $r := resources.FromString (printf "blyg/items/%s.json" $id) ($doc | jsonify) -}}
       {{- $_ := $r.RelPermalink -}}
@@ -53,6 +55,19 @@
       ) -}}
       {{- if gt $doc.updated $updated -}}{{- $updated = $doc.updated -}}{{- end -}}
     {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /*
+  §4/§6.2: every item ever published keeps items/{id}.json and its
+  index row forever. A ledger entry with no built page (file deleted,
+  turned into a draft, future-dated, expired) would silently 404, so it
+  fails the build instead. scripts/blyg_stamp.py refuses all of these
+  too; this is the build-side backstop.
+*/ -}}
+{{- range $id, $_ := $ledger -}}
+  {{- if not (in $built $id) -}}
+    {{- errorf "blyg: ledger entry %s (%s) has no built page -- published items MUST stay 200 forever (§4); restore it, and withdraw it with blyg_withdrawn = true if it should go" $id .path -}}
   {{- end -}}
 {{- end -}}
 

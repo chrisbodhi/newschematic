@@ -22,12 +22,13 @@ enableRobotsTXT = true
   # The Blygger conformance level (blygger-spec protocol-v0.2 §3) this
   # deployment actually serves -- feeds blyg.json's "level" field
   # (modules/hugo-blyg/layouts/blyg/section.blygmanifest.json).
-  # Level 1 is everything this module currently builds: stable ids,
-  # versioned items, the manifest/feed/archive-index/item-document
-  # surfaces, withdrawal, pins. Keep this at 1 until L2 constructs (the
-  # blogroll, generation provenance disclosure, ...) are actually built
-  # -- bumping it without shipping those would be a false conformance
-  # claim on the wire, and the build refuses anything else.
+  # Level 1 is what this module builds: stable ids, versioned items, the
+  # manifest/feed/archive-index/item-document surfaces, withdrawal, pins.
+  # (Generation provenance is also L1 in the spec, but only applies to a
+  # version that involved generation -- none here. The blogroll is
+  # optional at every level and never changes the level.) L2's real
+  # constructs -- stub metadata, thread nesting, forked_from, webmention
+  # -- arrive with protocol 0.3, so the build refuses anything but 1.
   level = 1
 
 [params.profileMode]

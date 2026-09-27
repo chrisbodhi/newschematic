@@ -25,6 +25,12 @@
     <link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .Permalink }}" title="{{ $.Site.Title }}">
   {{ end -}}
 
+  {{- /* Blygger resolution (blygger-spec protocol-v0.2 §12.1 step 4): the
+         blyg mounts at /blyg/, away from the pages people share, so every
+         page points readers at its origin -- the href is the origin base
+         URL, not the manifest file. */}}
+  <link rel="blyg" href="{{ "blyg/" | absURL }}">
+
   {{- /* The site's stylesheet. Hugo pipes it through asset processing if possible. */ -}}
   {{ $css := resources.Get "css/newschematic.css" }}
   {{ if hugo.IsProduction }}

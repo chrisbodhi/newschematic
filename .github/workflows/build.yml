@@ -21,6 +21,9 @@ jobs:
         with:
           python-version: "3.11"
 
+      - name: Test blyg scripts
+        run: python3 -m unittest discover -s tests
+
       - name: Check blyg content is stamped
         run: python3 scripts/blyg_stamp.py --check
 
@@ -40,3 +43,6 @@ jobs:
 
       - name: Generate site
         run: hugo --minify
+
+      - name: Validate blyg surface
+        run: python3 scripts/blyg_validate.py

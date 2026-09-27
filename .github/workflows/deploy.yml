@@ -24,6 +24,17 @@ jobs:
       - name: Adding Known Hosts
         run: ssh-keyscan -H ${{ secrets.DH_HOST }} >> ~/.ssh/known_hosts
 
+      # The same blyg gates as build.yml: this workflow is what actually
+      # ships, so an unstamped push straight to master must fail here too
+      # rather than deploy a same-version stealth edit (§13.3).
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Check blyg content is stamped
+        run: python3 scripts/blyg_stamp.py --check
+
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v3
         with:
@@ -40,6 +51,9 @@ jobs:
 
       - name: Generate site
         run: hugo --minify
+
+      - name: Validate blyg surface
+        run: python3 scripts/blyg_validate.py
 
       - name: Deploy
         env:
