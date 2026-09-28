@@ -31,6 +31,6 @@ jobs:
 
       # Keep this tag in step with go.mod's hugo-blyg version: the action
       # stamps with its own copy of the stamp script.
-      - uses: chrisbodhi/hugo-blyg/publish-from-issue@v0.1.0
+      - uses: chrisbodhi/hugo-blyg/publish-from-issue@v0.2.0
         # with:
         #   authors: someone, someone-else   # besides the repo owner
