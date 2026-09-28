@@ -1,6 +1,6 @@
 +++
 title = "blyg"
-outputs = ["blygmanifest", "blygfeed"]
+outputs = ["blygmanifest", "blygfeed", "html"]
 
 # Individual blyg items (fragments/threads under this section) never get
 # their own HTML page in this phase (see hugo-blyg's docs/conformance.md) -- only
