@@ -30,5 +30,21 @@
     "path": "content/blyg/2026-09-27-testing-the-title-prefix.md",
     "version": 1,
     "withdrawn": false
+  },
+  "7rkf671vh5dbbd43x7sga09cgm": {
+    "changelog": [
+      {
+        "at": "2026-09-28T01:36:50Z",
+        "kind": "fragment",
+        "note": null,
+        "version": 1
+      }
+    ],
+    "created": "2026-09-28T01:36:50Z",
+    "kind": "fragment",
+    "last_hash": "sha256:18375e1a424f8654f2fe82da1dc70f805d162fe0a590873d0baa807736e0b7eb",
+    "path": "content/blyg/2026-09-28-still-delicious.md",
+    "version": 1,
+    "withdrawn": false
   }
 }
