@@ -1,0 +1,13 @@
+{
+  "at": "2026-09-28T16:05:00Z",
+  "blyg": "0.2",
+  "content_hash": "sha256:f15074599878898613508ddc784f7d2a926272b86b2d0f072489fc7cc4dc121d",
+  "content_html": "<p>A test fragment that gets pinned and then withdrawn. Its endcap should\nsay so, still cite the pin, and show no stepper.</p>\n",
+  "content_md": "A test fragment that gets pinned and then withdrawn. Its endcap should\nsay so, still cite the pin, and show no stepper.\n",
+  "id": "3y7brf27mhdg7rs37qz4sm3871",
+  "kind": "fragment",
+  "note": null,
+  "origin": "https://newschematic.org/blyg/",
+  "pinned": true,
+  "version": 1
+}

@@ -31,6 +31,134 @@
     "version": 1,
     "withdrawn": false
   },
+  "0v5wamhxd15az0w9dtcv0p03gp": {
+    "changelog": [
+      {
+        "at": "2026-09-28T16:15:00Z",
+        "kind": "thread",
+        "note": null,
+        "version": 1
+      }
+    ],
+    "created": "2026-09-28T16:15:00Z",
+    "kind": "thread",
+    "last_hash": "sha256:d6226d389149696157f956ee2a3f015c65d62f6c6c1b7b72c11e62bb460c2fa7",
+    "path": "content/blyg/2026-09-28-test-opens-with-quote.md",
+    "transclusions": [
+      {
+        "content_hash": "sha256:18375e1a424f8654f2fe82da1dc70f805d162fe0a590873d0baa807736e0b7eb",
+        "content_md": "It's not quite a vanilla Emacs config, more like vanillin -- similar in color, smell, and taste to the natural version, but it's made from an industrial byproduct of the wood pulping process.\n",
+        "id": "7rkf671vh5dbbd43x7sga09cgm",
+        "line": 1,
+        "version": 1
+      }
+    ],
+    "version": 1,
+    "withdrawn": false
+  },
+  "1yqe09s989fx63v5nwacev85sg": {
+    "changelog": [
+      {
+        "at": "2026-09-28T16:10:00Z",
+        "kind": "thread",
+        "note": null,
+        "version": 1
+      }
+    ],
+    "created": "2026-09-28T16:10:00Z",
+    "kind": "thread",
+    "last_hash": "sha256:d7967c4c3b69430757d57f39c3e2304660f1f21353efc561b5cd250357bbd547",
+    "path": "content/blyg/2026-09-28-test-quoting-thread.md",
+    "transclusions": [
+      {
+        "content_hash": "sha256:069fdcd53e3ad99c3d6f5b50d7b1e4feddcad0402b992cd94ca58b9a8f76d191",
+        "content_md": "Testing hugo-blyg's version stepper on the real theme. This is the\nthird version, live but unpinned: there's no `v3/` page, and once a v4\nships no page offers this text at all (only pins are forever).\n\nA second paragraph, so a body swap is easy to spot: this one says v3.\n",
+        "id": "2xq94f5faet03epfa7nkxv4sd8",
+        "line": 6,
+        "version": 3
+      }
+    ],
+    "version": 1,
+    "withdrawn": false
+  },
+  "2xq94f5faet03epfa7nkxv4sd8": {
+    "changelog": [
+      {
+        "at": "2026-09-28T16:00:00Z",
+        "kind": "fragment",
+        "note": null,
+        "pinned": true,
+        "version": 1
+      },
+      {
+        "at": "2026-09-28T16:49:54Z",
+        "kind": "fragment",
+        "note": "Tightened, and pinned again",
+        "pinned": true,
+        "version": 2
+      },
+      {
+        "at": "2026-09-28T16:49:55Z",
+        "kind": "fragment",
+        "note": "Third pass, not pinned",
+        "version": 3
+      }
+    ],
+    "created": "2026-09-28T16:00:00Z",
+    "kind": "fragment",
+    "last_hash": "sha256:069fdcd53e3ad99c3d6f5b50d7b1e4feddcad0402b992cd94ca58b9a8f76d191",
+    "path": "content/blyg/2026-09-28-test-stepper-fragment.md",
+    "version": 3,
+    "withdrawn": false
+  },
+  "305mrzgwbx790252fcsvtssh1n": {
+    "changelog": [
+      {
+        "at": "2026-09-28T16:20:00Z",
+        "kind": "thread",
+        "note": null,
+        "version": 1
+      }
+    ],
+    "created": "2026-09-28T16:20:00Z",
+    "kind": "thread",
+    "last_hash": "sha256:8fef3a0a04f86191d09483a4363a8974806965df7ec278725305113f0f06a366",
+    "path": "content/blyg/2026-09-28-test-long-thread.md",
+    "transclusions": [
+      {
+        "content_hash": "sha256:83a6d6fb063b3ee2d6fc32ed45ba0a7ce9b095287c4b254f956880a2d5d364bc",
+        "content_md": "Something about the onset of fall, with the temperatures changing and the overcast sky, makes me want to mainline Gibson while tinkering on possible future states.\n",
+        "id": "059f4ss0kfwzjtcfmjg8gpncz0",
+        "line": 8,
+        "version": 1
+      }
+    ],
+    "version": 1,
+    "withdrawn": false
+  },
+  "3y7brf27mhdg7rs37qz4sm3871": {
+    "changelog": [
+      {
+        "at": "2026-09-28T16:05:00Z",
+        "kind": "fragment",
+        "note": null,
+        "pinned": true,
+        "version": 1
+      },
+      {
+        "at": "2026-09-28T16:49:55Z",
+        "kind": "withdrawn",
+        "note": "withdrawn",
+        "version": 2
+      }
+    ],
+    "created": "2026-09-28T16:05:00Z",
+    "kind": "fragment",
+    "last_hash": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "path": "content/blyg/2026-09-28-test-withdrawn-fragment.md",
+    "version": 2,
+    "withdrawn": true
+  },
   "717gfbk4r8sez7hqs1hc0jtd5j": {
     "changelog": [
       {

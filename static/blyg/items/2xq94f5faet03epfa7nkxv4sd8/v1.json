@@ -1,0 +1,13 @@
+{
+  "at": "2026-09-28T16:00:00Z",
+  "blyg": "0.2",
+  "content_hash": "sha256:0ca8ad5f8e1d65e4d63f816d77752c20d277b4d7f82e03f96511bf590f2ca5b5",
+  "content_html": "<p>Testing hugo-blyg&rsquo;s version stepper on the real theme (this lives on a\nbranch that never merges). This is the first version, and it&rsquo;s pinned,\nso its page at <code>v1/</code> stays up whatever happens next.</p>\n<p>A second paragraph, so a body swap is easy to spot: this one says v1.</p>\n",
+  "content_md": "Testing hugo-blyg's version stepper on the real theme (this lives on a\nbranch that never merges). This is the first version, and it's pinned,\nso its page at `v1/` stays up whatever happens next.\n\nA second paragraph, so a body swap is easy to spot: this one says v1.\n",
+  "id": "2xq94f5faet03epfa7nkxv4sd8",
+  "kind": "fragment",
+  "note": null,
+  "origin": "https://newschematic.org/blyg/",
+  "pinned": true,
+  "version": 1
+}
