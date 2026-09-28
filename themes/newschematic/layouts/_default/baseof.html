@@ -18,7 +18,10 @@
   {{ with .Description | default .Summary }}<meta property="og:description" content="{{ . | plainify | truncate 180 }}">{{ end }}
   {{ with .Permalink }}<meta property="og:url" content="{{ . }}">{{ end }}
 
-  <link rel="canonical" href="{{ .Permalink }}">
+  {{- /* A blyg pinned page is canonical to its item's live page (blygger-spec
+         protocol-v0.2 §8.4 rule 3); hugo-blyg carries that URL as
+         .Params.blyg_canonical. Every other page is its own. */}}
+  <link rel="canonical" href="{{ .Params.blyg_canonical | default .Permalink }}">
 
   {{- /* RSS for the home page and section listings */ -}}
   {{ range .AlternativeOutputFormats -}}
