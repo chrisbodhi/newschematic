@@ -1,4 +1,20 @@
 {
+  "059f4ss0kfwzjtcfmjg8gpncz0": {
+    "changelog": [
+      {
+        "at": "2026-09-28T13:59:32Z",
+        "kind": "fragment",
+        "note": null,
+        "version": 1
+      }
+    ],
+    "created": "2026-09-28T13:59:32Z",
+    "kind": "fragment",
+    "last_hash": "sha256:83a6d6fb063b3ee2d6fc32ed45ba0a7ce9b095287c4b254f956880a2d5d364bc",
+    "path": "content/blyg/2026-09-28-tuned-to-a-dead-channel.md",
+    "version": 1,
+    "withdrawn": false
+  },
   "0j9ky9btwh7awq88c2q53mz7b6": {
     "changelog": [
       {
