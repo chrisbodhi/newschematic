@@ -1,4 +1,20 @@
 {
+  "03rq24yvb47dtjr54rfwzk70k8": {
+    "changelog": [
+      {
+        "at": "2026-09-28T21:04:14Z",
+        "kind": "fragment",
+        "note": null,
+        "version": 1
+      }
+    ],
+    "created": "2026-09-28T21:04:14Z",
+    "kind": "fragment",
+    "last_hash": "sha256:c7152d38d260ee1b902cb27485202d7ec9d128a5107dbad05f3d746bbdae0ca0",
+    "path": "content/blyg/2026-09-28-it-s-more-sturdy-than-duct-tape.md",
+    "version": 1,
+    "withdrawn": false
+  },
   "059f4ss0kfwzjtcfmjg8gpncz0": {
     "changelog": [
       {
