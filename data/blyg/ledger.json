@@ -47,6 +47,22 @@
     "version": 1,
     "withdrawn": false
   },
+  "5szk2v9e3amsepy8hn186k702k": {
+    "changelog": [
+      {
+        "at": "2026-09-29T19:59:06Z",
+        "kind": "fragment",
+        "note": null,
+        "version": 1
+      }
+    ],
+    "created": "2026-09-29T19:59:06Z",
+    "kind": "fragment",
+    "last_hash": "sha256:deb9e597cb50428e0063c2e4470d0e5824b2a47815e1fc79df92edb101bbd612",
+    "path": "content/blyg/2026-09-29-it-s-michaelmas.md",
+    "version": 1,
+    "withdrawn": false
+  },
   "717gfbk4r8sez7hqs1hc0jtd5j": {
     "changelog": [
       {
