@@ -47,6 +47,22 @@
     "version": 1,
     "withdrawn": false
   },
+  "2k1p2km9mm635k679h63mke7dh": {
+    "changelog": [
+      {
+        "at": "2026-10-01T02:24:51Z",
+        "kind": "fragment",
+        "note": null,
+        "version": 1
+      }
+    ],
+    "created": "2026-10-01T02:24:51Z",
+    "kind": "fragment",
+    "last_hash": "sha256:939418a0a71a1e5fee810fbe58b0889841590b5ed001c6bb6c59bc6ee99e0991",
+    "path": "content/blyg/2026-10-01-where-we-supposed-to-learn-then.md",
+    "version": 1,
+    "withdrawn": false
+  },
   "5szk2v9e3amsepy8hn186k702k": {
     "changelog": [
       {
