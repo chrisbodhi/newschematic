@@ -79,6 +79,22 @@
     "version": 1,
     "withdrawn": false
   },
+  "4cyp3nbr10v416yzcas11edb00": {
+    "changelog": [
+      {
+        "at": "2026-10-01T16:14:32Z",
+        "kind": "fragment",
+        "note": null,
+        "version": 1
+      }
+    ],
+    "created": "2026-10-01T16:14:32Z",
+    "kind": "fragment",
+    "last_hash": "sha256:ea134087ec8e625d0223de45e2ab99674af60956b6d51c84bd519bda5e2f8dd1",
+    "path": "content/blyg/2026-10-01-shake-rattle-and-roll.md",
+    "version": 1,
+    "withdrawn": false
+  },
   "5szk2v9e3amsepy8hn186k702k": {
     "changelog": [
       {
