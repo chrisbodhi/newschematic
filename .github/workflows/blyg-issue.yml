@@ -9,7 +9,7 @@ name: Publish blyg from issue
 
 on:
   issues:
-    types: [opened, labeled]
+    types: [opened, reopened, labeled]
 
 permissions:
   contents: write
