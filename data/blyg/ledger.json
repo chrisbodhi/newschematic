@@ -111,6 +111,22 @@
     "version": 1,
     "withdrawn": false
   },
+  "4rf2c8djaekjw6d0wfz21jmvn9": {
+    "changelog": [
+      {
+        "at": "2026-10-09T13:54:42Z",
+        "kind": "fragment",
+        "note": null,
+        "version": 1
+      }
+    ],
+    "created": "2026-10-09T13:54:42Z",
+    "kind": "fragment",
+    "last_hash": "sha256:b7d7b1460d76dfc1f151271598330c3ca9fb833340fd2b8e1d29d424c88c08c9",
+    "path": "content/blyg/2026-10-09-shipping-one-of-these-is-the-real-morale-improver.md",
+    "version": 1,
+    "withdrawn": false
+  },
   "5szk2v9e3amsepy8hn186k702k": {
     "changelog": [
       {
