@@ -143,6 +143,22 @@
     "version": 1,
     "withdrawn": false
   },
+  "61ftrv0tzk34pzd613dzyhnnd7": {
+    "changelog": [
+      {
+        "at": "2026-10-10T13:34:44Z",
+        "kind": "fragment",
+        "note": null,
+        "version": 1
+      }
+    ],
+    "created": "2026-10-10T13:34:44Z",
+    "kind": "fragment",
+    "last_hash": "sha256:fcb72d31ebadd3ac3f52730f17fd3c758ed7059c861cf8b061bd6eba8e8df4a9",
+    "path": "content/blyg/2026-10-10-next-a-frontend.md",
+    "version": 1,
+    "withdrawn": false
+  },
   "717gfbk4r8sez7hqs1hc0jtd5j": {
     "changelog": [
       {
