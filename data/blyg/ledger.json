@@ -47,6 +47,31 @@
     "version": 1,
     "withdrawn": false
   },
+  "0jqhexcn50q82s24wkagyv4z72": {
+    "changelog": [
+      {
+        "at": "2026-10-11T21:26:59Z",
+        "kind": "thread",
+        "note": null,
+        "version": 1
+      }
+    ],
+    "created": "2026-10-11T21:26:59Z",
+    "kind": "thread",
+    "last_hash": "sha256:21d9da85c5472497710cf7ec74d6b7d304ac9ec42e9b441007981f5da1f65960",
+    "path": "content/blyg/2026-10-11-redo-for-93.md",
+    "transclusions": [
+      {
+        "content_hash": "sha256:fa38b6da1c169e8997db149ca2a8d4bc0d1a359dd4414bf53a90a22a891c4f2a",
+        "content_md": "With a few tweaks of some exiting systems, GitHub can easily turn into a write-only Blygger client.\n",
+        "id": "0j9ky9btwh7awq88c2q53mz7b6",
+        "line": 3,
+        "version": 1
+      }
+    ],
+    "version": 1,
+    "withdrawn": false
+  },
   "250dg8a7z2vesmwjcsa16gr51w": {
     "changelog": [
       {
