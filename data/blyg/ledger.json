@@ -72,6 +72,22 @@
     "version": 1,
     "withdrawn": false
   },
+  "1nep97w66bwx9jbmxzpmxns6x9": {
+    "changelog": [
+      {
+        "at": "2026-10-12T16:48:35Z",
+        "kind": "fragment",
+        "note": null,
+        "version": 1
+      }
+    ],
+    "created": "2026-10-12T16:48:35Z",
+    "kind": "fragment",
+    "last_hash": "sha256:2a30ed6d4e1948b661137984f8cb3910d8b1adb1df2892a10ed180b80346f0ff",
+    "path": "content/blyg/2026-10-12-there-s-a-middle-path-i-just-know-it.md",
+    "version": 1,
+    "withdrawn": false
+  },
   "250dg8a7z2vesmwjcsa16gr51w": {
     "changelog": [
       {
