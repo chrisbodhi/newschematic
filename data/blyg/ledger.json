@@ -168,6 +168,22 @@
     "version": 1,
     "withdrawn": false
   },
+  "5bzctq8hpvs8d12ae8vwfyb97t": {
+    "changelog": [
+      {
+        "at": "2026-10-16T21:05:57Z",
+        "kind": "fragment",
+        "note": null,
+        "version": 1
+      }
+    ],
+    "created": "2026-10-16T21:05:57Z",
+    "kind": "fragment",
+    "last_hash": "sha256:3149dc9e6cfd243ed26fdfc1f506552d8d75f40188f312e8c66059892b05d86d",
+    "path": "content/blyg/2026-10-16-wrote-a-thread-instead.md",
+    "version": 1,
+    "withdrawn": false
+  },
   "5szk2v9e3amsepy8hn186k702k": {
     "changelog": [
       {
