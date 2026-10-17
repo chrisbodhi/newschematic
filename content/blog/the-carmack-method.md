@@ -17,4 +17,4 @@ showpagemeta = true
 
 &mdash; ["Smart Guy Productivity Pitfalls", Book of Hook](http://bookofhook.blogspot.com/2013/03/smart-guy-productivity-pitfalls.html)
 
-I got through three CD's over the weekend. Parenting.
+I got through three CDs over the weekend. Parenting.

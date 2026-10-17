@@ -26,7 +26,7 @@ I started looking into Browserify and Webpack as two potential ways to load Java
 
 To share the code between projects, I started with a new Github repo that would contain the JavaScript code in a structure that mimicked the Rails directory. Also in that repo, we'd have a `gemspec` file and a `package.json`, so that we could point both apps at the same repo, and they would just pull what they needed. We'd have a single source to update and maintain, which addressed the main requirement for this part of the project.
 
-In need of a good name for this repo, I consulted various thesarauses and online sources. I ended up calling the repo `gempm`. You know, like npm for gems. And Node.js modules. _I'll show myself out._
+In need of a good name for this repo, I consulted various thesauruses and online sources. I ended up calling the repo `gempm`. You know, like npm for gems. And Node.js modules. _I'll show myself out._
 
 ## Implementation
 
@@ -74,7 +74,7 @@ To test out the first part of the concept, I had to get the gem into my Rails ap
 
 Next, in the Node.js app:
 
-- Run `npm install --save path/to/gempm`, which copies the `gempm` code to the Node.js app's `node_modules` directotry
+- Run `npm install --save path/to/gempm`, which copies the `gempm` code to the Node.js app's `node_modules` directory
 - To confirm, start the Node.js REPL, `require` the `gempm` package, and invoke the `testing` function.
 
 #### Almost There
@@ -103,11 +103,11 @@ Also, having to create build processes instead of just requiring a file creates 
 
 Lastly, because we use CircleCI for building our apps, we had to jump through some hurdles to [allow Circle access to more than one private repo on GitHub](https://circleci.com/docs/github-security-ssh-keys/#machine-user-keys) for building the Node.js app. For the Rails app, though, we're able to simply cache the latest version of the gem with `bundle package --all` before committing.
 
-All of these inconveniences, though, are fairly minor when considering the pains associated with attempting to maintain the same code aross projects, rather than just a version number. 
+All of these inconveniences, though, are fairly minor when considering the pains associated with attempting to maintain the same code across projects, rather than just a version number. 
 
 ## Plans for the Future
 
-One thing to explore as our engineering department moves to new architectures is how to apply lessons learned from this project to other efforts. This might look like something techincal&mdash;a generator that creates a directory structure and skeleton files&mdash;or it may simply be an extension of this blog post for guiding other engineers around hurdles in building a shared JavaScript library.
+One thing to explore as our engineering department moves to new architectures is how to apply lessons learned from this project to other efforts. This might look like something technical&mdash;a generator that creates a directory structure and skeleton files&mdash;or it may simply be an extension of this blog post for guiding other engineers around hurdles in building a shared JavaScript library.
 
 
 

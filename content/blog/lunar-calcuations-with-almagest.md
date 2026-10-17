@@ -17,7 +17,7 @@ A momentum-exchange tether in lunar orbit can deliver a payload to low earth orb
 
 * * *
 
-For a payload of 100 kg (about the weight of an average refridgerator), we need a delta-v of [] km/s to go from a low lunar orbit to low earth orbit. Currently, that means we have to schlep enough fuel from here to there to come back here again, about [] kg of [whatever fuel from last time]. This doesn't even account for the extra mass of the bigger rocket we need to transport that fuel. With a momentum-exchange tether in a lunar orbit, that delta-v for our payload is already ready and parked in orbit, waiting to send us regolith for study, [processed resources](that company getting helium-3), or even an astronaut. Let's see how what size tether system we need in place for this payload.
+For a payload of 100 kg (about the weight of an average refrigerator), we need a delta-v of [] km/s to go from a low lunar orbit to low earth orbit. Currently, that means we have to schlep enough fuel from here to there to come back here again, about [] kg of [whatever fuel from last time]. This doesn't even account for the extra mass of the bigger rocket we need to transport that fuel. With a momentum-exchange tether in a lunar orbit, that delta-v for our payload is already ready and parked in orbit, waiting to send us regolith for study, [processed resources](that company getting helium-3), or even an astronaut. Let's see how what size tether system we need in place for this payload.
 
 [maths maths maths]
 

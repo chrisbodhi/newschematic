@@ -31,7 +31,7 @@ In considering the potential of one's efficacy, we must consider environment as 
 
 * * *
 
-What happens when one of the variables of the environment changes to such levels that a significant portion of the population becomes effected? When productivity drops with the regularity of the weather whiplashing from freezing to hot? When our capacity to hold more than two thoughts in our minds diminishes, do we do anything to address the underlying causes, or do we just resign ourselves to taking a third allergy drug and churning out mediocre work for stretches of ~~days~~ weeks? And does this wide-spread diminshing of our collective capabilities signal a limit to the growth that Austin will be able to support, or a limit to the amount of important work that we will be able to complete here?
+What happens when one of the variables of the environment changes to such levels that a significant portion of the population becomes effected? When productivity drops with the regularity of the weather whiplashing from freezing to hot? When our capacity to hold more than two thoughts in our minds diminishes, do we do anything to address the underlying causes, or do we just resign ourselves to taking a third allergy drug and churning out mediocre work for stretches of ~~days~~ weeks? And does this wide-spread diminishing of our collective capabilities signal a limit to the growth that Austin will be able to support, or a limit to the amount of important work that we will be able to complete here?
 
 I don't pretend to know the answers to any of the questions, but one thing I do know is that even though we work in zeros and ones, we don't exist apart from our environment.
 

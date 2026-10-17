@@ -11,7 +11,7 @@ showpagemeta = true
 
 <p><em>It wasn&rsquo;t difficult, but like they say, blog about what would have helped your previous self.</em></p>
 
-<p>Presumbaly, you&rsquo;re here because you have a rad bot you built using <a href="https://github.com/howdyai/botkit" target="_blank">Botkit</a>, and you&rsquo;re looking for a bit of guidance on getting it out of your local environment and into the real world using <a href="https://www.heroku.com/" target="_blank">Heroku</a>.</p>
+<p>Presumably, you&rsquo;re here because you have a rad bot you built using <a href="https://github.com/howdyai/botkit" target="_blank">Botkit</a>, and you&rsquo;re looking for a bit of guidance on getting it out of your local environment and into the real world using <a href="https://www.heroku.com/" target="_blank">Heroku</a>.</p>
 
 <p><img src="https://dl.dropboxusercontent.com/u/3648990/gifs/bots.gif" alt="bots-gif"/></p>
 

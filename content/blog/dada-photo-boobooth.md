@@ -27,7 +27,7 @@ Initial ideas for how to rework the project included QR codes, gif uploads, app 
 
 <img src="/img/bathroom-selfie.jpg" alt="Bathroom selfie via Complex magazine" />
 
-From this point on, the piece largely became a question of how to craft the setting. I picked up a bathroom vanity and sink from the [ReStore](https://www.austinhabitat.org/restore), and bought some new cabinet handles. Toothbrush, soap, ear swabs, and lotion all came from various [LOT 2046](https://lot2046.com) packages. Adam scavanged a stand for the monitor and created a wonderfully-constrasting backdrop to further imbue the concrete feeling of a sense of place.
+From this point on, the piece largely became a question of how to craft the setting. I picked up a bathroom vanity and sink from the [ReStore](https://www.austinhabitat.org/restore), and bought some new cabinet handles. Toothbrush, soap, ear swabs, and lotion all came from various [LOT 2046](https://lot2046.com) packages. Adam scavenged a stand for the monitor and created a wonderfully-contrasting backdrop to further imbue the concrete feeling of a sense of place.
 
 For the digital part of our work, we went back to Processing from [p5.js](https://p5js.org/). The benefits were too good to pass up: direct access to the camera via an official library, a packaged executable for the show days, and the IDE <sup><a href="/blog/dada-photo-boobooth#2">2</a><span id="return-2" /></sup>. The most technical challenge we encountered was how to mirror the drawing of pixels on the screen, in order to more accurately mimic the bathroom experience; this simply became a matter of subtracting the position of the pixel in the X-axis from width of the screen.
 
@@ -41,4 +41,4 @@ In the end, the Dada Photo Boo-booth became an exercise in the best kind of code
 
 <span id="1">1</span>: The Javascript implementation of the app has a tendency to crash with a seg fault, so why not just spin up a few instances of the app behind a load balancer and deliberately restart each one after it completes its task? <a href="blog/dada-photo-boobooth#return-1">🔙</a>
 
-<span id="2">2</span>: Presumbly, we also picked up some performance gains, but we didn't take measurements to back up any claims. <a href="blog/dada-photo-boobooth#return-2">🔙</a>
+<span id="2">2</span>: Presumably, we also picked up some performance gains, but we didn't take measurements to back up any claims. <a href="blog/dada-photo-boobooth#return-2">🔙</a>

@@ -44,7 +44,7 @@ In this cyberpunk world, that resume could read like this:
       ╚══════════════════════════════════════════════════════════════════════╝
 ```
 
-It's a terse reading of a career, maybe even scant. Its width is optimized for the screen, not for the letter-page width. Editing the thing is finicky, but brainless. In the document, there are some plain-text URL's, but no affordances for hyperlinks, like HTML. Maybe it's served over `plain/text` or maybe it's on Gopher. Maybe it ends on a message board or a listserv or Usenet. Content-wise, "nuance" doesn't even get a passing thought.
+It's a terse reading of a career, maybe even scant. Its width is optimized for the screen, not for the letter-page width. Editing the thing is finicky, but brainless. In the document, there are some plain-text URLs, but no affordances for hyperlinks, like HTML. Maybe it's served over `plain/text` or maybe it's on Gopher. Maybe it ends on a message board or a listserv or Usenet. Content-wise, "nuance" doesn't even get a passing thought.
 
 But, we ended up with smartphones, eye-drugs aren't mainstream, and we're on the verge of letting a million-million agents bloom. What does a resume look like in the next year, when agents are out sourcing leads for recruiters or evaluating candidates for fit, in squishy ways? What do the agents do for a field where "taste" means "I've seen enough cuts of jibs to know who's going to succeed in this kind of role"?
 
@@ -59,7 +59,7 @@ Yeah, thorny.
 >Displays GitHub, LinkedIn and Twitter profiles with minimal attribution information.
 >Trying to improve your hiring practices and increase diversity at your workplace? Reduce room for unconscious bias when reviewing job candidates' online materials.
 
-Almost a decade ago, I submitted a PR to this Chrome extension that helped hide some identifiable information about users on web platforms. It's strange that we want people to put up pictures of themselves on platforms like GitHub, but then let ourselves be influenced how they look, rather than the work that is also directly in front of us (I guess this is why there's been a proliferation of anime pfp's). Anyway, I opened the PR, got feedback from a passerby, made some changes, and then silence from the maintainer. I don't remember if this is the first time this has happened to me, but it was only a little annoying.
+Almost a decade ago, I submitted a PR to this Chrome extension that helped hide some identifiable information about users on web platforms. It's strange that we want people to put up pictures of themselves on platforms like GitHub, but then let ourselves be influenced how they look, rather than the work that is also directly in front of us (I guess this is why there's been a proliferation of anime pfps). Anyway, I opened the PR, got feedback from a passerby, made some changes, and then silence from the maintainer. I don't remember if this is the first time this has happened to me, but it was only a little annoying.
 
 It seems like that this vision could now be realized, but I fear that the people who would be most onboard with a maximally-useful version of this browser extension would be h o r r i f i e d that an LLM helped them find their next hire. Is there nothing to do for them?
 

@@ -20,7 +20,7 @@ showpagemeta = true
 <p>That&rsquo;s what it looks like, but it&rsquo;s really not. In reality, it&rsquo;s a way of asking the JSX transpiler to later create some HTML that looks like it. A small distinction, yes, but for some reason, learning that distinction helped assuage some concerns.</p>
 
 <blockquote>
-  <p>&ldquo;Faceook, grrr!&rdquo;</p>
+  <p>&ldquo;Facebook, grrr!&rdquo;</p>
 </blockquote>
 
 <p>Nothing will change this. I take solace in the fact that FB—as a self-serving organization that treats its users as cattle—will one day go the way of AOL, who once thought they ruled the internet. [Note the lack of disparagement for the individuals involved with the company.]</p>

@@ -11,7 +11,7 @@ showpagemeta = true
 
 <p>Day 4 at MakerSquare.</p>
 <p>Started with explanations of why and how things happen here, which is always awesome. I like to understand thought processes and how decisions are made, especially related to design [speaking in the broadest sense of the word].</p>
-<p>We were reminded of the Three Pillars to be instilled in us: teamwork, independence, and a love of problem solving. All noble qualities. This reminds me - I need to see if there&rsquo;s a Twitter account that automatically sends out quotes from Stoic philosphers. If not, well, I&rsquo;ll add it to the to-do list.</p>
+<p>We were reminded of the Three Pillars to be instilled in us: teamwork, independence, and a love of problem solving. All noble qualities. This reminds me - I need to see if there&rsquo;s a Twitter account that automatically sends out quotes from Stoic philosophers. If not, well, I&rsquo;ll add it to the to-do list.</p>
 <p>[Blast. Lost 20 minutes looking for Twitter accounts.]</p>
 <p>Anyway, front-end. Introduction to Bootstrap and Foundation: Mind. Blown. In my earlier self-education, I had come across frameworks and dismissed them as convoluted and less hardcore than hand-coding CSS.</p>
 <p>I&rsquo;ve been a fool.</p>
