@@ -232,6 +232,22 @@
     "version": 1,
     "withdrawn": false
   },
+  "7ckrze9xsvsw55847wg2hzyypk": {
+    "changelog": [
+      {
+        "at": "2026-10-24T12:08:30Z",
+        "kind": "fragment",
+        "note": null,
+        "version": 1
+      }
+    ],
+    "created": "2026-10-24T12:08:30Z",
+    "kind": "fragment",
+    "last_hash": "sha256:55ce517e17d4744e7f09eef1a77ff432cbaeeac0fcb01f30eb551d93280b28ac",
+    "path": "content/blyg/2026-10-24-need-to-ship-blygd-first.md",
+    "version": 1,
+    "withdrawn": false
+  },
   "7rkf671vh5dbbd43x7sga09cgm": {
     "changelog": [
       {
