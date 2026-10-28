@@ -136,6 +136,31 @@
     "version": 1,
     "withdrawn": false
   },
+  "468kkjjvp11w5xw5wb4fgc3b84": {
+    "changelog": [
+      {
+        "at": "2026-10-28T13:07:45Z",
+        "kind": "thread",
+        "note": null,
+        "version": 1
+      }
+    ],
+    "created": "2026-10-28T13:07:45Z",
+    "kind": "thread",
+    "last_hash": "sha256:317903751bfdc5bf599a1107cc53cb31e67f7162751f459c5e381e14b6da4731",
+    "path": "content/blyg/2026-10-28-one-bite-at-a-time.md",
+    "transclusions": [
+      {
+        "content_hash": "sha256:b7d7b1460d76dfc1f151271598330c3ca9fb833340fd2b8e1d29d424c88c08c9",
+        "content_md": "New projects will continue to start until morale improves. \n\n- CLI tool for internal work systems\n- Emacs plugin using said CLI tool\n- Pi Pico hello world with modules\n- Headless Blygger backend as a (free) service\n",
+        "id": "4rf2c8djaekjw6d0wfz21jmvn9",
+        "line": 1,
+        "version": 1
+      }
+    ],
+    "version": 1,
+    "withdrawn": false
+  },
   "4cyp3nbr10v416yzcas11edb00": {
     "changelog": [
       {
