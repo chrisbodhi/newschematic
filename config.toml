@@ -19,11 +19,11 @@ enableRobotsTXT = true
   math = false # Set to true in front matter for rendering with MathJax
 
 [params.blyg]
-  # The Blygger conformance level (blygger-spec protocol-v0.3 §3) this
+  # The Blygger conformance level (blygger-spec protocol-v0.4 §3) this
   # deployment claims -- feeds blyg.json's "level" field (hugo-blyg's
   # layouts/blyg/section.blygmanifest.json). Level 1 is the single-origin
   # protocol: stable ids, versioned items, the manifest/feed/archive-
-  # index/item-document surfaces, withdrawal, pins. hugo-blyg 0.3 also
+  # index/item-document surfaces, withdrawal, pins. hugo-blyg 0.4 also
   # accepts 2: L2 asks only that the L2 constructs a publisher emits
   # follow its rules (page, nested quotes' closure check), and it never
   # quotes another origin, stubs or forks. (The blogroll is optional at
@@ -82,7 +82,7 @@ enableRobotsTXT = true
     isPlainText = true
     suffix = 'md'
 
-  # Blyg publisher surfaces (blygger-spec protocol-v0.3; hugo-blyg's
+  # Blyg publisher surfaces (blygger-spec protocol-v0.4; hugo-blyg's
   # docs/conformance.md).
   # Scoped to the blyg section only, via `outputs = [...]` in
   # content/blyg/_index.md's own front matter (the same per-page-outputs
