@@ -136,6 +136,22 @@
     "version": 1,
     "withdrawn": false
   },
+  "2y1hpkwsmtjzmt6b6yvarmkjzr": {
+    "changelog": [
+      {
+        "at": "2026-11-20T18:25:55Z",
+        "kind": "fragment",
+        "note": null,
+        "version": 1
+      }
+    ],
+    "created": "2026-11-20T18:25:55Z",
+    "kind": "fragment",
+    "last_hash": "sha256:d751448b657dbba19652f070c68f28953628575522164a69b122628e43ee36d4",
+    "path": "content/blyg/2026-11-20-from-the-dev-hackathon-kickoff.md",
+    "version": 1,
+    "withdrawn": false
+  },
   "468kkjjvp11w5xw5wb4fgc3b84": {
     "changelog": [
       {
