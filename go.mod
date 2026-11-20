@@ -2,4 +2,4 @@ module github.com/chrisbodhi/newschematic
 
 go 1.24.7
 
-require github.com/chrisbodhi/hugo-blyg v0.3.2
+require github.com/chrisbodhi/hugo-blyg v0.4.0
