@@ -273,6 +273,22 @@
     "version": 1,
     "withdrawn": false
   },
+  "7aw5f1e8vcbe5e21j7kfj6ax6k": {
+    "changelog": [
+      {
+        "at": "2026-11-22T02:32:31Z",
+        "kind": "fragment",
+        "note": null,
+        "version": 1
+      }
+    ],
+    "created": "2026-11-22T02:32:31Z",
+    "kind": "fragment",
+    "last_hash": "sha256:065d5320d733dcfc71f1092188969550241ecb8296f4f35c41613e0e4925f024",
+    "path": "content/blyg/2026-11-22-making-claims.md",
+    "version": 1,
+    "withdrawn": false
+  },
   "7ckrze9xsvsw55847wg2hzyypk": {
     "changelog": [
       {
